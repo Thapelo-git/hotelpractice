@@ -6,7 +6,8 @@ import Separator from '../onbording/Separator.jsx';
 import data from '../onbording/Data.jsx';
 import {Display} from '../utils'
 import Flatbutton from '../styles/button.jsx';
-
+import { FONTS } from '../styles/Font.jsx';
+import COLORS from '../styles/Colors.jsx'
 const pageStyle=isActive=>
 isActive
 ?styles.page
@@ -40,6 +41,7 @@ const Pagination=({index})=>{
             backgroundColor="#0225A1"
             barStyle="light-content"
             />
+            {/* <Text style={{fontFamily:FONTS.SemiBold,}}>WELCOME</Text> */}
             <Separator height={StatusBar.currentHeight}/>
             <Separator height={Display.setHeight(8)}/>
             <View style={styles.WelcomeListContainer}> 
@@ -96,9 +98,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding:20,
+        // backgroundColor:'#4A1DD6'
       },
       WelcomeListContainer:{
-        height:Display.setHeight(70)
+        height:Display.setHeight(75),
+        // width:Display.setWidth(95)
       },
      pageContainer:{
       flexDirection:'row',

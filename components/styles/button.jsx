@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native'
 
-const Flatbutton = ({text,onPress}) => {
+const Flatbutton = ({text,onPress,style}) => {
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} style={style}>
             <View style={styles.buttonstyle}>
             <Text style={styles.buttonText}>{text}</Text>
             </View>

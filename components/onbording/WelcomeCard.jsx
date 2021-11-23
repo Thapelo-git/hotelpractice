@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         width:Display.setWidth(90),
-        height:Display.setHeight(70)
+        height:Display.setHeight(70),
+        // backgroundColor:'#4A1DD6'
     },
     image:{
         height:Display.setHeight(60),
