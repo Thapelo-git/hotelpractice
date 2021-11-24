@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View ,Image, TextInput, TouchableOpacity, } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View ,Image, TextInput, TouchableOpacity, FlatList, Dimensions,ImageBackground } from 'react-native'
 import { COLORS } from '../styles/Colors'
 import { ScrollView } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Hotels from '../onbording/Hotels'
+const {width}=Dimensions.get("screen")
+const cardWidth =width/2 - 20
 const HomeScreen = () => {
     const [ selectedBtnIndex,setSelectedBtnIndex] = useState(0);
     const Btn =[
@@ -32,6 +35,22 @@ const HomeScreen = () => {
             ))}
         </ScrollView>
     }
+    const Card =({_image,_price})=>{
+        return(<View style={styles.cardContainer}>
+            <View style={{alignItems:'center'}}>
+                <ImageBackground source={_image}
+                style={{marginVertical:5,height:210,width:cardWidth}}
+                resizeMode="contain">
+                    <View style={{backgroundColor:'#fff',width:cardWidth,height:50,
+                borderTopLeftRadius:70,marginTop:160}}>
+                    <Text style={{marginHorizontal:10}}>{_price}</Text>
+                    </View>
+                    
+                </ImageBackground>
+                
+            </View>
+        </View>)
+    }
     return (
     <SafeAreaView style={{flex:1 ,backgroundColor:COLORS.white}}>
         <View style={styles.header}>
@@ -58,6 +77,14 @@ const HomeScreen = () => {
         <View>
             <ListBtn/>
         </View>
+        <FlatList
+        horizontal 
+         showsHorizontalScrollIndicator={false}
+        //showsVerticalScrollIndicator={false}
+        // numColumns={2}
+        data={Hotels}
+        renderItem={({item})=><Card {...item}/>}
+        />
         </SafeAreaView>
     )
 }
@@ -97,5 +124,16 @@ const styles = StyleSheet.create({
     },
     card:{
        height:220, 
+    },
+    cardContainer:{
+        height:220,
+        width:cardWidth/1,
+        marginBottom:20,
+        marginHorizontal:10,
+        marginTop:5,
+        borderRadius:15,
+        elevation:13,
+        backgroundColor:COLORS.white
+
     }
 })

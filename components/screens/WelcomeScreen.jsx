@@ -59,7 +59,7 @@ const Pagination=({index})=>{
             renderItem={({item})=> <WelcomeCard {...item}/>}
             />
             </View> 
-           
+          
             
             <Pagination index={welcomeListIndex}/>
             <View style={{height:30}}></View>
@@ -75,7 +75,7 @@ const Pagination=({index})=>{
               </TouchableOpacity> */}
             </View>
             
-                
+           
                 
                 
                      

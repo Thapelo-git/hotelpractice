@@ -4,6 +4,7 @@ import { Display } from '../utils'
 
 const WelcomeCard = ({_title,_description,_image}) => {
     return (
+        // 
         <View style={styles.container}>
             
             <Image style={styles.image} source={_image} 
