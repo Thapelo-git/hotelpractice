@@ -41,9 +41,9 @@ const HomeScreen = () => {
                 <ImageBackground source={_image}
                 style={{marginVertical:5,height:210,width:cardWidth}}
                 resizeMode="contain">
-                    <View style={{backgroundColor:'#fff',width:cardWidth,height:50,
-                borderTopLeftRadius:70,marginTop:160}}>
-                    <Text style={{marginHorizontal:10}}>{_price}</Text>
+                    <View style={{backgroundColor:'#fff',width:'90%',height:50,
+                borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:10}}>
+                    <Text style={{marginHorizontal:10,marginStart:80}}>{_price}</Text>
                     </View>
                     
                 </ImageBackground>
