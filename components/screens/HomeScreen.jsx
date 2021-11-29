@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import Hotels from '../onbording/Hotels'
 const {width}=Dimensions.get("screen")
 const cardWidth =width/2 - 20
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const [ selectedBtnIndex,setSelectedBtnIndex] = useState(0);
     const Btn =[
         {id:'1',name:'Recomended'},
@@ -35,21 +35,24 @@ const HomeScreen = () => {
             ))}
         </ScrollView>
     }
-    const Card =({_image,_price})=>{
-        return(<View style={styles.cardContainer}>
+    const Card =({Hotels})=>{
+        return(
+        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',Hotels)}>
+        <View style={styles.cardContainer}>
             <View style={{alignItems:'center'}}>
-                <ImageBackground source={_image}
+                <ImageBackground source={Hotels._image}
                 style={{marginVertical:5,height:210,width:cardWidth}}
                 resizeMode="contain">
-                    <View style={{backgroundColor:'#fff',width:'90%',height:50,
-                borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:10}}>
-                    <Text style={{marginHorizontal:10,marginStart:80}}>{_price}</Text>
+                    <View style={{backgroundColor:'#fff',width:'93%',height:50,
+                borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:6}}>
+                    <Text style={{marginHorizontal:10,marginStart:80}}>{Hotels._price}</Text>
                     </View>
                     
                 </ImageBackground>
                 
             </View>
-        </View>)
+        </View>
+        </TouchableOpacity>)
     }
     return (
     <SafeAreaView style={{flex:1 ,backgroundColor:COLORS.white}}>
@@ -78,12 +81,12 @@ const HomeScreen = () => {
             <ListBtn/>
         </View>
         <FlatList
+        keyExtractor={(_,key)=>key.toString()}
         horizontal 
          showsHorizontalScrollIndicator={false}
-        //showsVerticalScrollIndicator={false}
-        // numColumns={2}
+        
         data={Hotels}
-        renderItem={({item})=><Card {...item}/>}
+        renderItem={({item})=><Card Hotels={item}/>}
         />
         </SafeAreaView>
     )

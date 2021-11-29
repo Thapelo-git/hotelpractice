@@ -6,17 +6,33 @@ import { FONTS } from '../styles/Font'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Checkbox } from 'react-native-paper'
 import { COLORS } from '../styles/Colors'
+import * as yup from 'yup'
+import { Formik } from 'formik'
 const SignIn = ({navigation}) => {
     const [isSelected,setSelection]=useState(false)
     const [isPasswordShow,setPasswordShow]=useState(false)
+    const ReviewSchem =yup.object({
+        email:yup.string().required().min(6),
+        password:yup.string().required().min(6),
+    })
     return (
         <SafeAreaView>
             <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
         <View style={styles.container}>
             <Text style={{fontFamily:FONTS.extraBold,fontWeight:'bold',fontSize:30,
         color:COLORS.theme}}>Login</Text>
+        <Formik 
+        initialValues={{email:'',password:''}}
+        validationSchema={ReviewSchem}
+        onSubmit={(values,action)=>{
+            action.resetForm()
+            Submit(values)
+        }}
+        >
+            {(props)=>(
+        
             <KeyboardAwareScrollView
-             style={styles.innerContainer}>
+             >
         <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='email'
@@ -28,9 +44,13 @@ const SignIn = ({navigation}) => {
              style={styles.inputs}
              placeholder='Enter Email'
              keyboardType='email-address'
+             onChangeText={props.handleChange('email')}
+             value={props.values.email}
+             onBlur={props.handleBlur('email')}
              />
         
         </View>
+        <Text style={{color:'red'}}>{props.touched.email && props.errors.email}</Text>
         <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='lock'
@@ -43,6 +63,9 @@ const SignIn = ({navigation}) => {
             secureTextEntry={isPasswordShow? false :true}
              style={styles.inputs}
              placeholder='Enter Password'
+             onChangeText={props.handleChange('password')}
+             value={props.values.password}
+             onBlur={props.handleBlur('password')}
              />
          <Icon name={isPasswordShow?'eye-off':"eye"}
             style={{color:'black',textAlign:'center',
@@ -50,6 +73,7 @@ const SignIn = ({navigation}) => {
            onPress={()=>setPasswordShow(!isPasswordShow)} />
             </View>
         </View>
+        <Text style={{color:'red'}}>{props.touched.password && props.errors.password}</Text>
         <View style={styles.forgetPasswordContainer}>
         <View style={styles.toggleContainer}>
         <Checkbox
@@ -71,6 +95,7 @@ const SignIn = ({navigation}) => {
             </View>
             </View>
             </KeyboardAwareScrollView>
+            )}</Formik>
         </View>
         </ImageBackground>
         </SafeAreaView>

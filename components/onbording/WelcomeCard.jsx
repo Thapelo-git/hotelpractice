@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
     image:{
         height:Display.setHeight(60),
         width:Display.setWidth(80),
-        borderRadius:10
+        // borderRadius:10,
+        borderTopRightRadius:60,
+        borderBottomLeftRadius:60
     },
     titleText:{
         fontSize:22,

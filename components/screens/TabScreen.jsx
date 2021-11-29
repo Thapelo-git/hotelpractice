@@ -9,6 +9,23 @@ import HistoryScreen from './HistoryScreen';
 import Bookings from './Bookings';
 import ProfileScreen from './ProfileScreen';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HotelDetails from './HotelDetails';
+import GalleryScreen from './GalleryScreen';
+
+const Stack = createNativeStackNavigator();
+const combineHotel=()=> {
+  return (
+    
+    
+    <Stack.Navigator>
+    <Stack.Screen name="HomeScreen" options = {{headerShown :false}} component={HomeScreen} />
+      <Stack.Screen name="Hotel Details"  component={HotelDetails} />
+      <Stack.Screen name="GalleryScreen"  component={GalleryScreen} />
+    </Stack.Navigator>
+  
+  )}
     const Tab = createMaterialBottomTabNavigator();
 const TabScreen = () => {
     return (
@@ -17,7 +34,7 @@ const TabScreen = () => {
         activeColor="#fff"
        
         >
-            <Tab.Screen name="HomeScreen" component={HomeScreen}
+            <Tab.Screen name="HomeScreen" component={combineHotel}
             options={{
                 tabBarLabel:'Home',
                 tarBarColor:COLORS.theme,

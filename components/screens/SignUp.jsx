@@ -5,15 +5,30 @@ import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { FONTS } from '../styles/Font'
+import { Formik } from 'formik'
+import * as yup from 'yup'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const SignUp = ({navigation}) => {
     const [isPasswordShow,setPasswordShow]=useState(false)
+    const ReviewSchem=yup.object({
+        name:yup.string().required().min(2),
+        phonenumber:yup.string().required().min(10).max(10),
+        email:yup.string().required().min(6),
+        password:yup.string().required().min(6),
+        confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
+    })
     return (
         <SafeAreaView>
              <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
              <View style={styles.container}>
             <Text style={{fontFamily:FONTS.extraBold,fontWeight:'bold',fontSize:30,
         color:COLORS.theme}}>Register</Text>
+        <Formik
+        initialValues={{name:'',phonenumber:'',email:'',password:'',confirmpassword:''}}
+        validationSchema={ReviewSchem}
+        >
+
+        {(props)=>(
          <KeyboardAwareScrollView
              style={styles.innerContainer}>
                            <View style={styles.inputContainer}>
@@ -26,10 +41,13 @@ const SignUp = ({navigation}) => {
             <TextInput
              style={styles.inputs}
              placeholder='Enter Last Name'
-             
+             onChangeText={props.handleChange('name')}
+             value={props.values.name}
+             onBlur={props.handleBlur('name')}
              />
         
         </View>
+        <Text style={{color:'red',marginTop:-10}}>{props.touched.name && props.errors.name}</Text>
                  <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='phone'
@@ -41,9 +59,13 @@ const SignUp = ({navigation}) => {
              style={styles.inputs}
              placeholder='Enter Phone Number'
              keyboardType='numeric'
+             onChangeText={props.handleChange('phonenumber')}
+             value={props.values.phonenumber}
+             onBlur={props.handleBlur('phonenumber')}
              />
         
         </View>
+        <Text style={{color:'red',marginTop:-15}}>{props.touched.phonenumber && props.errors.phonenumber}</Text>
         <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='email'
@@ -55,9 +77,13 @@ const SignUp = ({navigation}) => {
              style={styles.inputs}
              placeholder='Enter Email'
              keyboardType='email-address'
+             onChangeText={props.handleChange('email')}
+             value={props.values.email}
+             onBlur={props.handleBlur('email')}
              />
         
         </View>
+        <Text style={{color:'red',marginTop:-15}}>{props.touched.email && props.errors.email}</Text>
         <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='lock'
@@ -70,6 +96,9 @@ const SignUp = ({navigation}) => {
             secureTextEntry={isPasswordShow? false :true}
              style={styles.inputs}
              placeholder='Enter Password'
+             onChangeText={props.handleChange('password')}
+             value={props.values.password}
+             onBlur={props.handleBlur('password')}
              />
          <Icon name={isPasswordShow?'eye-off':"eye"}
             style={{color:'black',textAlign:'center',
@@ -77,6 +106,7 @@ const SignUp = ({navigation}) => {
            onPress={()=>setPasswordShow(!isPasswordShow)} />
             </View>
         </View>
+        <Text style={{color:'red',marginTop:-15}}>{props.touched.password && props.errors.password}</Text>
         <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='lock'
@@ -89,6 +119,9 @@ const SignUp = ({navigation}) => {
             secureTextEntry={isPasswordShow? false :true}
              style={styles.inputs}
              placeholder='Confirm Password'
+             onChangeText={props.handleChange('confirmpassword')}
+             value={props.values.confirmpassword}
+             onBlur={props.handleBlur('confirmpassword')}
              />
          <Icon name={isPasswordShow?'eye-off':"eye"}
             style={{color:'black',textAlign:'center',
@@ -96,6 +129,7 @@ const SignUp = ({navigation}) => {
            onPress={()=>setPasswordShow(!isPasswordShow)} />
             </View>
         </View>
+        <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
             <Flatbutton text='REGISTER' />
@@ -106,6 +140,7 @@ const SignUp = ({navigation}) => {
             </View>
             </View>
             </KeyboardAwareScrollView>
+            )}</Formik>
         </View>
         </ImageBackground>
         </SafeAreaView>
@@ -143,7 +178,7 @@ const styles = StyleSheet.create({
     inputContainer:{
         borderRadius:30,
         height:48,
-        marginVertical:12,
+        marginVertical:10,
         flexDirection:'row',
         alignItems:'center',
         backgroundColor:'#fff',
