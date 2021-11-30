@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { FlatList, Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, ImageBackground, StyleSheet, Text, View ,TouchableOpacity} from 'react-native'
 
 
 const GalleryScreen = ({route}) => {
@@ -21,18 +21,20 @@ const GalleryScreen = ({route}) => {
             temp=galaryArr.filter((img,index)=>index!==myIndex)
         }
         const getBackgroundImg=()=>{
+            
             setBackImg(galaryArr[myIndex])
         }
         changeImg()
         getBackgroundImg()
         setMyGalary(temp)
+        
     },[myIndex])
 
     const list = route.params
-    const Gallery=({pic})=>(
-        // <ImageBackground source={}>
+    const Gallery=({pic,_index})=>(
+         <TouchableOpacity onPress={()=>setMyIndex(_index)}>
         <Image source={pic} style={{height:120,width:120}}/>
-        // </ImageBackground>
+         </TouchableOpacity>
     )
     return (
         <ImageBackground source={backImg} style={{flex:1}}>
@@ -40,8 +42,8 @@ const GalleryScreen = ({route}) => {
             <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={myGalary}
-            renderItem={({item})=><Gallery pic={item} />}/>
+            data={galaryArr}
+            renderItem={({item,index})=><Gallery pic={item} _index={index} />}/>
             
         </ImageBackground>
     )
