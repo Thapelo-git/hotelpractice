@@ -19,7 +19,8 @@ const combineHotel=()=> {
   return (
     
     
-    <Stack.Navigator>
+    <Stack.Navigator
+    initialRouteName="HomeScreen">
     <Stack.Screen name="HomeScreen" options = {{headerShown :false}} component={HomeScreen} />
       <Stack.Screen name="Hotel Details"  component={HotelDetails} />
       <Stack.Screen name="GalleryScreen"  component={GalleryScreen} />
@@ -30,7 +31,7 @@ const combineHotel=()=> {
 const TabScreen = () => {
     return (
         <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="HomeScreen"
         activeColor="#fff"
        
         >

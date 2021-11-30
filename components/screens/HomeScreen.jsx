@@ -37,7 +37,7 @@ const HomeScreen = ({navigation}) => {
     }
     const Card =({Hotels})=>{
         return(
-        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',Hotels)}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels})}>
         <View style={styles.cardContainer}>
             <View style={{alignItems:'center'}}>
                 <ImageBackground source={Hotels._image}

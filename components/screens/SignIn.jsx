@@ -87,7 +87,7 @@ const SignIn = ({navigation}) => {
         onPress={()=>navigation.navigate('ForgetPassword')}>ForgetPassword</Text>
         </View>
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='LOGIN' onPress={()=>navigation.navigate('Dashboard')} />
+            <Flatbutton text='LOGIN' onPress={()=>navigation.navigate('HomeTap')} />
             <View style={styles.signupContainer}>
                <Text style={styles.accountText}>Don't have account?</Text>
                <Text style={styles.signupText}

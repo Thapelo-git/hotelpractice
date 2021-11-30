@@ -14,13 +14,13 @@ export default function App() {
   return (
     
     <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="HomeTap">
       {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
       <Stack.Screen name="WelcomeScreen" options = {{headerShown :false}} component={WelcomeScreen} />
       <Stack.Screen name="SignIn"  component={SignIn} />
       <Stack.Screen name="SignUp"  component={SignUp} />
       <Stack.Screen name="ForgetPassword"  component={ForgetPassword} />
-      <Stack.Screen name="Dashboard" options = {{headerShown :false}} component={TabScreen} />
+      <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   );
