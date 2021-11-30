@@ -8,6 +8,7 @@ const GalleryScreen = ({route}) => {
      const galaryArr=route.params.galary
     const index=route.params.index
     const [myGalary,setMyGalary]=useState(0);
+    const [backImg,setBackImg]=useState()
     const [myIndex,setMyIndex]=useState(index);
 
    
@@ -15,27 +16,34 @@ const GalleryScreen = ({route}) => {
 
     useEffect(()=>{
         var temp=[]
+        
         const changeImg=()=>{
             temp=galaryArr.filter((img,index)=>index!==myIndex)
         }
+        const getBackgroundImg=()=>{
+            setBackImg(galaryArr[myIndex])
+        }
         changeImg()
+        getBackgroundImg()
         setMyGalary(temp)
     },[myIndex])
 
     const list = route.params
     const Gallery=({pic})=>(
+        // <ImageBackground source={}>
         <Image source={pic} style={{height:120,width:120}}/>
+        // </ImageBackground>
     )
     return (
-        <View>
-            <ImageBackground source={}>
+        <ImageBackground source={backImg} style={{flex:1}}>
+           
             <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
             data={myGalary}
             renderItem={({item})=><Gallery pic={item} />}/>
-            </ImageBackground>
-        </View>
+            
+        </ImageBackground>
     )
 }
 

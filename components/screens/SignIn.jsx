@@ -84,7 +84,7 @@ const SignIn = ({navigation}) => {
         
         </View>
         <Text style={styles.forgetPasswordText}
-        onPress={()=>navigation.navigate('ForgetPassword')}>ForgetPassword</Text>
+        onPress={()=>navigation.navigate('ForgetPassword')}>Forget Password</Text>
         </View>
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
             <Flatbutton text='LOGIN' onPress={()=>navigation.navigate('HomeTap')} />
