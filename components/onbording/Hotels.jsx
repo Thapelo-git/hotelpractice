@@ -5,9 +5,9 @@ const Hotels=[
         _location:'Polokwane',
         _image:require('../images/hotel6.jpg'),
         Aminities:['fastfood','pool',
-            'wifi'],
+            'wifi','tv'],
         innerimages:[require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
-        require('../images/bathroom1.jpg')]
+        require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
     },
     {
         _id:'2',
@@ -15,9 +15,9 @@ const Hotels=[
         _location:'Durban',
         _image:require('../images/hotel3.jpg'),
         Aminities:['fastfood','pool',
-            'wifi'],
+            'wifi','tv'],
         innerimages:[require('../images/bed3.jpg'),require('../images/sitting2.jpg'),
-        require('../images/bathroom2.jpg')]
+        require('../images/bathroom2.jpg'),require('../images/balcony1.jpg')]
     },
     {
         _id:'3',
@@ -25,9 +25,9 @@ const Hotels=[
         _location:'cape town',
        _image:require('../images/hotel4.jpg'),
        Aminities:['fastfood','pool',
-            'wifi'],
-       innerimages:[require('../images/bed4.jpg'),require('../images/sitting3.jpg'),
-        require('../images/bathroom3.jpg')]
+            'wifi','tv'],
+       innerimages:[require('../images/bed4.jpg'),require('../images/sitting4.jpg'),
+        require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')]
     },
     {
         _id:'4',
@@ -35,9 +35,9 @@ const Hotels=[
         _location:'Thornhill',
        _image:require('../images/hotel2.jpg'),
        Aminities:['fastfood','pool',
-            'wifi'],
+            'wifi','tv'],
        innerimages:[require('../images/bed5.jpg'),require('../images/sitting4.jpg'),
-       require('../images/bathroom4.jpg')]
+       require('../images/bathroom4.jpg'),require('../images/balcony8.jpg')]
     },
 ]
 export default Hotels

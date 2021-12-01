@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View ,Image, TextInput, TouchableOpacity, FlatList, Dimensions,ImageBackground } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View ,Image, TextInput, TouchableOpacity,
+     FlatList, Dimensions,ImageBackground,StatusBar } from 'react-native'
 import { COLORS } from '../styles/Colors'
 import { ScrollView } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -19,7 +20,8 @@ const HomeScreen = ({navigation}) => {
         showsHorizontalScrollIndicator={false} style={styles.btnListContainer}>
             {Btn.map((category,index)=>(
                 <TouchableOpacity key={index} activeOpacity={0.8}
-                onPress={()=> setSelectedBtnIndex(index)}>
+                onPress={()=> setSelectedBtnIndex(index)} style={{alignItems:'center',justifyContent:'center'
+                ,}}>
                 <View style={{
                     backgroundColor:selectedBtnIndex == index
                     ?COLORS.theme
@@ -27,7 +29,7 @@ const HomeScreen = ({navigation}) => {
                     ...styles.categoryBtn,
                 }}>
                     <Text style={{
-                        fontSize:15,fontWeight:'bold',marginLeft:10,
+                        fontSize:15,fontWeight:'bold',
                         color:selectedBtnIndex == index?COLORS.white :COLORS.theme
                     }}>{category.name}</Text>
                 </View>
@@ -43,7 +45,7 @@ const HomeScreen = ({navigation}) => {
                 <ImageBackground source={Hotels._image}
                 style={{marginVertical:5,height:210,width:cardWidth}}
                 resizeMode="contain">
-                    <View style={{backgroundColor:'#fff',width:'93%',height:50,
+                    <View style={{backgroundColor: 'rgba(50, 50, 50, 0.8)',width:'93%',height:50,
                 borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:6}}>
                     <Text style={{marginHorizontal:10,marginStart:80}}>{Hotels._price}</Text>
                     </View>
@@ -56,6 +58,10 @@ const HomeScreen = ({navigation}) => {
     }
     return (
     <SafeAreaView style={{flex:1 ,backgroundColor:COLORS.white}}>
+         <StatusBar
+            backgroundColor="#0225A1"
+            barStyle="light-content"
+            />
         <View style={styles.header}>
             <View style={{flexDirection:'row'}}>
                 <Image source={require('../images/profile.jpg')}
@@ -121,6 +127,7 @@ const styles = StyleSheet.create({
       width:120,
       borderRadius:30,
       alignItems:'center',
+      justifyContent:'center',
       paddingHorizontal:5,
       flexDirection:'row',
 

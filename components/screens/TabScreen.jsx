@@ -13,21 +13,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HotelDetails from './HotelDetails';
 import GalleryScreen from './GalleryScreen';
-
+const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-const combineHotel=()=> {
+function combineHotel(){
   return (
     
     
     <Stack.Navigator
-    initialRouteName="HomeScreen">
+    >
     <Stack.Screen name="HomeScreen" options = {{headerShown :false}} component={HomeScreen} />
-      <Stack.Screen name="Hotel Details"  component={HotelDetails} />
-      <Stack.Screen name="GalleryScreen"  component={GalleryScreen} />
+      <Stack.Screen name="Hotel Details" options = {{headerShown :false}} component={HotelDetails} />
+      <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
     </Stack.Navigator>
   
   )}
-    const Tab = createMaterialBottomTabNavigator();
+    
 const TabScreen = () => {
     return (
         <Tab.Navigator
@@ -35,7 +35,7 @@ const TabScreen = () => {
         activeColor="#fff"
        
         >
-            <Tab.Screen name="HomeScreen" component={combineHotel}
+            <Tab.Screen name="HomeScreen" component={HomeScreen}
             options={{
                 tabBarLabel:'Home',
                 tarBarColor:COLORS.theme,
@@ -48,7 +48,7 @@ const TabScreen = () => {
                 tabBarIcon:({color}) =>
             <FontAwesome name="history" color={color} size={26}/>}}/>
            
-            <Tab.Screen name="Bookings" component={Bookings}
+            <Tab.Screen name="Bookings" component={combineHotel}
             options={{
                 tabBarLabel:'Bookings',
                 tarBarColor:COLORS.theme,
