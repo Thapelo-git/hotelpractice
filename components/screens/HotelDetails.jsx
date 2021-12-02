@@ -62,9 +62,13 @@ const HotelDetails = ({ navigation, route }) => {
         <ImageBackground source={list._image} style={{ width: "100%", height: "100%" }} >
         <View style={styles.headerContainer} 
             >
-               
+               <View style={{backgroundColor: 'white',
+opacity: 0.7,width:30,
+      height:30,justifyContent:'center',alignItems:'center',
+      borderRadius:10,}}>
                <Feather name="arrow-left" size={30} color='#fff'
              onPress={()=>navigation.goBack()} /> 
+             </View>
             <Text style={styles.headerTitle}></Text>
             </View>
         </ImageBackground>
@@ -126,4 +130,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
   },
+  headerContainer:{
+    top:10,
+    
+
+  }
 });
