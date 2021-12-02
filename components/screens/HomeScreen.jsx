@@ -9,6 +9,7 @@ const {width}=Dimensions.get("screen")
 const cardWidth =width/2 - 20
 const HomeScreen = ({navigation}) => {
     const [ selectedBtnIndex,setSelectedBtnIndex] = useState(0);
+    const [ selectedHotelIndex,setSelectedHotelIndex] = useState(0);
     const Btn =[
         {id:'1',name:'Recomended'},
         {id:'2',name:'Popular'},
@@ -18,7 +19,7 @@ const HomeScreen = ({navigation}) => {
     const ListBtn =()=>{
         return <ScrollView horizontal 
         showsHorizontalScrollIndicator={false} style={styles.btnListContainer}>
-            {Btn.map((category,index)=>(
+            {Hotels.map((category,index)=>(
                 <TouchableOpacity key={index} activeOpacity={0.8}
                 onPress={()=> setSelectedBtnIndex(index)} style={{alignItems:'center',justifyContent:'center'
                 ,}}>
@@ -44,6 +45,26 @@ const HomeScreen = ({navigation}) => {
             <View style={{alignItems:'center'}}>
                 <ImageBackground source={Hotels._image}
                 style={{marginVertical:5,height:210,width:cardWidth}}
+                resizeMode="contain">
+                    <View style={{backgroundColor: 'white',
+opacity: 0.7,width:'93%',height:50,
+                borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:6}}>
+                    <Text style={{marginHorizontal:10,marginStart:80}}>{Hotels._price}</Text>
+                    </View>
+                    
+                </ImageBackground>
+                
+            </View>
+        </View>
+        </TouchableOpacity>)
+    }
+    const CardNear =({Hotels})=>{
+        return(
+        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels})}>
+        <View style={styles.cardNearContainer}>
+            <View style={{alignItems:'center'}}>
+                <ImageBackground source={Hotels._image}
+                style={{marginVertical:5,height:110,width:cardWidth/1}}
                 resizeMode="contain">
                     <View style={{backgroundColor: 'rgba(50, 50, 50, 0.8)',width:'93%',height:50,
                 borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:6}}>
@@ -86,14 +107,31 @@ const HomeScreen = ({navigation}) => {
         <View>
             <ListBtn/>
         </View>
-        <FlatList
-        keyExtractor={(_,key)=>key.toString()}
-        horizontal 
-         showsHorizontalScrollIndicator={false}
+        {Hotels?(
+            <FlatList
+            keyExtractor={(_,key)=>key.toString()}
+            horizontal 
+             showsHorizontalScrollIndicator={false}
+            
+            data={Hotels[selectedBtnIndex].hotel}
+            renderItem={({item,id})=><Card Hotels={item}/>}
+            />
+        ):(
+            <Text>No Hotels this side</Text>
+        )}
+        {Hotels?(
+            <FlatList
+            keyExtractor={(_,key)=>key.toString()}
+            horizontal 
+             showsHorizontalScrollIndicator={false}
+            
+            data={Hotels[selectedHotelIndex+ 3].hotel}
+            renderItem={({item,id})=><CardNear Hotels={item}/>}
+            />
+        ):(
+            <Text>No Hotels this side</Text>
+        )}
         
-        data={Hotels}
-        renderItem={({item})=><Card Hotels={item}/>}
-        />
         </SafeAreaView>
     )
 }
@@ -145,5 +183,13 @@ const styles = StyleSheet.create({
         elevation:13,
         backgroundColor:COLORS.white
 
+    },
+    cardNearContainer:{
+      height:120,
+      width:cardWidth/2,
+      borderRadius:15, 
+      backgroundColor:COLORS.white ,
+      elevation:13,
+      marginLeft:12
     }
 })

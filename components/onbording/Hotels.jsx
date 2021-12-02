@@ -1,5 +1,7 @@
 const Hotels=[
-    {
+    {id:1,
+    name:'Recomended',
+    hotel:[{
         _id:'1',
         _price:' 453.54',
         _location:'Polokwane',
@@ -36,8 +38,134 @@ const Hotels=[
        _image:require('../images/hotel2.jpg'),
        Aminities:['fastfood','pool',
             'wifi','tv'],
-       innerimages:[require('../images/bed5.jpg'),require('../images/sitting4.jpg'),
+       innerimages:[require('../images/bed5.jpg'),require('../images/sitting5.jpg'),
        require('../images/bathroom4.jpg'),require('../images/balcony8.jpg')]
-    },
+    },]},
+    {id:1,
+        name:'Popular',
+        hotel:[{
+            _id:'1',
+            _price:' 453.54',
+            _location:'Polokwane',
+            _image:require('../images/hotel1.jpg'),
+            Aminities:['fastfood','pool',
+                'wifi','tv'],
+            innerimages:[require('../images/bed6.jpg'),require('../images/sitting1.jpg'),
+            require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
+        },
+        {
+            _id:'2',
+            _price:' 746.83',
+            _location:'Durban',
+            _image:require('../images/hotel5.jpg'),
+            Aminities:['fastfood','pool',
+                'wifi','tv'],
+            innerimages:[require('../images/bed7.jpg'),require('../images/sitting2.jpg'),
+            require('../images/bathroom10.jpg'),require('../images/balcony1.jpg')]
+        },
+        {
+            _id:'3',
+            _price:'548.84',
+            _location:'cape town',
+           _image:require('../images/hotel18.jpg'),
+           Aminities:['fastfood','pool',
+                'wifi','tv'],
+           innerimages:[require('../images/bed8.jpg'),require('../images/sitting4.jpg'),
+            require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')]
+        },
+        {
+            _id:'4',
+            _price:'846.95',
+            _location:'Thornhill',
+           _image:require('../images/hotel24.jpg'),
+           Aminities:['fastfood','pool',
+                'wifi','tv'],
+           innerimages:[require('../images/bed9.jpg'),require('../images/sitting4.jpg'),
+           require('../images/bathroom9.jpg'),require('../images/balcony8.jpg')]
+        },]},
+        {id:1,
+            name:'Top Ratings',
+            hotel:[{
+                _id:'1',
+                _price:' 453.54',
+                _location:'Polokwane',
+                _image:require('../images/hotel19.jpg'),
+                Aminities:['fastfood','pool',
+                    'wifi','tv'],
+                innerimages:[require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
+                require('../images/bathroom7.jpg'),require('../images/balcony4.jpg')]
+            },
+            {
+                _id:'2',
+                _price:' 746.83',
+                _location:'Durban',
+                _image:require('../images/hotel10.jpg'),
+                Aminities:['fastfood','pool',
+                    'wifi','tv'],
+                innerimages:[require('../images/bed10.jpg'),require('../images/sitting2.jpg'),
+                require('../images/bathroom6.jpg'),require('../images/balcony3.jpg')]
+            },
+            {
+                _id:'3',
+                _price:'548.84',
+                _location:'cape town',
+               _image:require('../images/hotel11.jpg'),
+               Aminities:['fastfood','pool',
+                    'wifi','tv'],
+               innerimages:[require('../images/bed4.jpg'),require('../images/sitting4.jpg'),
+                require('../images/bathroom8.jpg'),require('../images/balcony2.jpg')]
+            },
+            {
+                _id:'4',
+                _price:'846.95',
+                _location:'Thornhill',
+               _image:require('../images/hotel12.jpg'),
+               Aminities:['fastfood','pool',
+                    'wifi','tv'],
+               innerimages:[require('../images/bed5.jpg'),require('../images/sitting4.jpg'),
+               require('../images/bathroom9.jpg'),require('../images/balcony1.jpg')]
+            },]},
+            {id:4,
+                name:'Near Your',
+                hotel:[{
+                    _id:'1',
+                    _price:' 453.54',
+                    _location:'Polokwane',
+                    _image:require('../images/hotel23.jpg'),
+                    Aminities:['fastfood','pool',
+                        'wifi','tv'],
+                    innerimages:[require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
+                    require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
+                },
+                {
+                    _id:'2',
+                    _price:' 746.83',
+                    _location:'Durban',
+                    _image:require('../images/hotel22.jpg'),
+                    Aminities:['fastfood','pool',
+                        'wifi','tv'],
+                    innerimages:[require('../images/bed3.jpg'),require('../images/sitting2.jpg'),
+                    require('../images/bathroom10.jpg'),require('../images/balcony8.jpg')]
+                },
+                {
+                    _id:'3',
+                    _price:'548.84',
+                    _location:'cape town',
+                   _image:require('../images/hotel21.jpg'),
+                   Aminities:['fastfood','pool',
+                        'wifi','tv'],
+                   innerimages:[require('../images/bed4.jpg'),require('../images/sitting4.jpg'),
+                    require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')]
+                },
+                {
+                    _id:'4',
+                    _price:'846.95',
+                    _location:'Thornhill',
+                   _image:require('../images/hotel20.jpg'),
+                   Aminities:['fastfood','pool',
+                        'wifi','tv'],
+                   innerimages:[require('../images/bed5.jpg'),require('../images/sitting4.jpg'),
+                   require('../images/bathroom4.jpg'),require('../images/balcony6.jpg')]
+                },]}
 ]
 export default Hotels
