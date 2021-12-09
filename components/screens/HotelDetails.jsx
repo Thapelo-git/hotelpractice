@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useRef} from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,15 +15,22 @@ import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Flatbutton from "../styles/button"
-
+import SlidingUpPanel from "rn-sliding-up-panel";
+import BottomSheet from 'reanimated-bottom-sheet';
+import Animated from "react-native-reanimated";
+import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
+const {height} = Dimensions.get('window')
 const imgContainerHeight = screenHeight * 0.4;
 const sub = imgContainerHeight * 0.2;
 
 const aminitieSsize=screenHeight*.06
 
 const HotelDetails = ({ navigation, route }) => {
+  let _panel= React.useRef(null)
+  let bs=React.createRef();
+  let fall = new Animated.Value(1)
   const list = route.params.data;
   const galary = route.params.data.innerimages;
 
@@ -55,6 +62,19 @@ const HotelDetails = ({ navigation, route }) => {
       </View>
     );
   };
+  const renderInner=()=>(
+    <Text>hello</Text>
+  )
+  const renderHeader=()=>(
+    <View style={styles.header}>
+      <View style={styles.panelHeader}>
+      <View style={styles.panelHandle}>
+
+      </View>
+      </View>
+    </View>
+  )
+  
   return (
     <SafeAreaView style={{flex:1}}>
       <View style={styles.imgContaner}>
@@ -106,7 +126,50 @@ opacity: 0.7,width:30,
         />
         </View>
 
-        <Flatbutton  text='Check Availability'/>
+        <Flatbutton  text='Check Availability' onPress={()=>bs.current.snapTo(0)}/>
+        {/* <BottomSheet
+        // ref={bs}
+        snapPoints={[330,0]}
+        // renderContent={renderInner}
+        // renderHeader={renderHeader}
+        // initialSnap={1}
+        // callbackNode={fall}
+        // enabledGestureInteraction={true}
+        /> */}
+        <SlidingUpPanel
+         ref={c=>(_panel=c)}
+        draggableRange={{top:700,bottom:120}}
+        showBackdrop={false}
+        snappingPoints={[200]}
+        height={900}
+        friction={0.7}
+        >
+          <View
+          style={{flex:1,
+          backgroundColor:"transparent"}}>
+            <View
+            style={{height:120,backgroundColor:"transparent",
+            alignItems:"center",
+            justifyContent:'center'}}>
+              <Feather name='arrow-up' size={30}/>
+              <Text>Swipe up</Text>
+            </View>
+            <View style={{flex:1,
+            backgroundColor:"#fff",alignItems:'center',justifyContent:'center'}}>
+                <MapView
+                style={{width:'100%',height:'100%'}}
+                provider={PROVIDER_GOOGLE}
+               initialRegion={list.coordinates}
+
+              >
+                  <Marker coordinate={list.coordinates}/>
+               
+                </MapView>
+            </View>
+          </View>
+
+        </SlidingUpPanel>
+    
       </View>
     </SafeAreaView>
   );
@@ -134,5 +197,40 @@ const styles = StyleSheet.create({
     top:10,
     
 
+  },
+  header:{
+    backgroundColor:'#fff',
+    shadowColor:'#333333',
+    shadowOffset:{width:-1,height:-2},
+    shadowRadius:2,
+    shadowOpacity:0.4,
+    paddingTop:20,
+    borderTopLeftRadius:20,
+    borderTopRightRadius:20
+
+  },
+  panelHandle: {
+    width:40,
+    height:8,
+    borderRadius:4,
+    
+    backgroundColor: 'white',
+    marginBottom:10,
+  },
+  panelHeader: {
+    
+    alignItems: 'center',
+   
+  },
+  favoriteIcon: {
+    position: 'absolute',
+    top: -24,
+    right: 24,
+    backgroundColor: '#2b8a3e',
+    width: 48,
+    height: 48,
+    padding: 8,
+    borderRadius: 24,
+    zIndex: 1
   }
 });

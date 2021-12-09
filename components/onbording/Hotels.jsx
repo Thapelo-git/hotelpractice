@@ -9,7 +9,9 @@ const Hotels=[
         Aminities:['fastfood','pool',
             'wifi','tv'],
         innerimages:[require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
-        require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
+        require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')],
+        coordinates:{latitude: 48.8587741,
+            longitude: 2.2069771},
     },
     {
         _id:'2',
@@ -19,7 +21,9 @@ const Hotels=[
         Aminities:['fastfood','pool',
             'wifi','tv'],
         innerimages:[require('../images/bed3.jpg'),require('../images/sitting2.jpg'),
-        require('../images/bathroom2.jpg'),require('../images/balcony1.jpg')]
+        require('../images/bathroom2.jpg'),require('../images/balcony1.jpg')],
+        coordinates:{latitude: 48.8587741,
+            longitude: 2.2069771},
     },
     {
         _id:'3',
@@ -29,7 +33,9 @@ const Hotels=[
        Aminities:['fastfood','pool',
             'wifi','tv'],
        innerimages:[require('../images/bed4.jpg'),require('../images/sitting4.jpg'),
-        require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')]
+        require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')],
+        coordinates:{latitude: 48.8587741,
+            longitude: 2.2069771},
     },
     {
         _id:'4',
@@ -39,7 +45,9 @@ const Hotels=[
        Aminities:['fastfood','pool',
             'wifi','tv'],
        innerimages:[require('../images/bed5.jpg'),require('../images/sitting5.jpg'),
-       require('../images/bathroom4.jpg'),require('../images/balcony8.jpg')]
+       require('../images/bathroom4.jpg'),require('../images/balcony8.jpg')],
+       coordinates:{latitude: 48.8587741,
+        longitude: 2.2069771},
     },]},
     {id:1,
         name:'Popular',
@@ -51,7 +59,9 @@ const Hotels=[
             Aminities:['fastfood','pool',
                 'wifi','tv'],
             innerimages:[require('../images/bed6.jpg'),require('../images/sitting1.jpg'),
-            require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
+            require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')],
+            coordinates:{latitude: 48.8587741,
+                longitude: 2.2069771},
         },
         {
             _id:'2',
@@ -61,7 +71,9 @@ const Hotels=[
             Aminities:['fastfood','pool',
                 'wifi','tv'],
             innerimages:[require('../images/bed7.jpg'),require('../images/sitting2.jpg'),
-            require('../images/bathroom10.jpg'),require('../images/balcony1.jpg')]
+            require('../images/bathroom10.jpg'),require('../images/balcony1.jpg')],
+            coordinates:{latitude: 48.8587741,
+                longitude: 2.2069771},
         },
         {
             _id:'3',
@@ -71,7 +83,9 @@ const Hotels=[
            Aminities:['fastfood','pool',
                 'wifi','tv'],
            innerimages:[require('../images/bed8.jpg'),require('../images/sitting4.jpg'),
-            require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')]
+            require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')],
+            coordinates:{latitude: 48.8587741,
+                longitude: 2.2069771},
         },
         {
             _id:'4',
@@ -82,6 +96,8 @@ const Hotels=[
                 'wifi','tv'],
            innerimages:[require('../images/bed9.jpg'),require('../images/sitting4.jpg'),
            require('../images/bathroom9.jpg'),require('../images/balcony8.jpg')]
+           ,coordinates:{latitude: 48.8587741,
+            longitude: 2.2069771},
         },]},
         {id:1,
             name:'Top Ratings',
@@ -93,7 +109,9 @@ const Hotels=[
                 Aminities:['fastfood','pool',
                     'wifi','tv'],
                 innerimages:[require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
-                require('../images/bathroom7.jpg'),require('../images/balcony4.jpg')]
+                require('../images/bathroom7.jpg'),require('../images/balcony4.jpg')],
+                coordinates:{latitude: 48.8587741,
+                    longitude: 2.2069771},
             },
             {
                 _id:'2',
@@ -103,7 +121,9 @@ const Hotels=[
                 Aminities:['fastfood','pool',
                     'wifi','tv'],
                 innerimages:[require('../images/bed10.jpg'),require('../images/sitting2.jpg'),
-                require('../images/bathroom6.jpg'),require('../images/balcony3.jpg')]
+                require('../images/bathroom6.jpg'),require('../images/balcony3.jpg')],
+                coordinates:{latitude: 48.8587741,
+                    longitude: 2.2069771},
             },
             {
                 _id:'3',
@@ -113,7 +133,9 @@ const Hotels=[
                Aminities:['fastfood','pool',
                     'wifi','tv'],
                innerimages:[require('../images/bed4.jpg'),require('../images/sitting4.jpg'),
-                require('../images/bathroom8.jpg'),require('../images/balcony2.jpg')]
+                require('../images/bathroom8.jpg'),require('../images/balcony2.jpg')],
+                coordinates:{latitude: 48.8587741,
+                    longitude: 2.2069771},
             },
             {
                 _id:'4',
@@ -123,7 +145,9 @@ const Hotels=[
                Aminities:['fastfood','pool',
                     'wifi','tv'],
                innerimages:[require('../images/bed5.jpg'),require('../images/sitting4.jpg'),
-               require('../images/bathroom9.jpg'),require('../images/balcony1.jpg')]
+               require('../images/bathroom9.jpg'),require('../images/balcony1.jpg')],
+               coordinates:{latitude: 48.8587741,
+                longitude: 2.2069771},
             },]},
             {id:4,
                 name:'Near Your',
@@ -135,7 +159,9 @@ const Hotels=[
                     Aminities:['fastfood','pool',
                         'wifi','tv'],
                     innerimages:[require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
-                    require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
+                    require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')],
+                    coordinates:{latitude: 48.8587741,
+                        longitude: 2.2069771},
                 },
                 {
                     _id:'2',
@@ -145,7 +171,9 @@ const Hotels=[
                     Aminities:['fastfood','pool',
                         'wifi','tv'],
                     innerimages:[require('../images/bed3.jpg'),require('../images/sitting2.jpg'),
-                    require('../images/bathroom10.jpg'),require('../images/balcony8.jpg')]
+                    require('../images/bathroom10.jpg'),require('../images/balcony8.jpg')],
+                    coordinates:{latitude: 48.8587741,
+                        longitude: 2.2069771},
                 },
                 {
                     _id:'3',
@@ -155,7 +183,9 @@ const Hotels=[
                    Aminities:['fastfood','pool',
                         'wifi','tv'],
                    innerimages:[require('../images/bed4.jpg'),require('../images/sitting4.jpg'),
-                    require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')]
+                    require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')],
+                    coordinates:{latitude: 48.8587741,
+                        longitude: 2.2069771},
                 },
                 {
                     _id:'4',
@@ -165,7 +195,9 @@ const Hotels=[
                    Aminities:['fastfood','pool',
                         'wifi','tv'],
                    innerimages:[require('../images/bed5.jpg'),require('../images/sitting4.jpg'),
-                   require('../images/bathroom4.jpg'),require('../images/balcony6.jpg')]
+                   require('../images/bathroom4.jpg'),require('../images/balcony6.jpg')],
+                   coordinates:{latitude: 48.8587741,
+                    longitude: 2.2069771},
                 },]}
 ]
 export default Hotels

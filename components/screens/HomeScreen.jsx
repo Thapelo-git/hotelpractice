@@ -38,9 +38,9 @@ const HomeScreen = ({navigation}) => {
             ))}
         </ScrollView>
     }
-    const Card =({Hotels})=>{
+    const Card =({Hotels,index})=>{
         return(
-        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels})}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
         <View style={styles.cardContainer}>
             <View style={{alignItems:'center'}}>
                 <ImageBackground source={Hotels._image}
@@ -114,7 +114,7 @@ opacity: 0.7,width:'93%',height:50,
              showsHorizontalScrollIndicator={false}
             
             data={Hotels[selectedBtnIndex].hotel}
-            renderItem={({item,id})=><Card Hotels={item}/>}
+            renderItem={({item,index})=><Card Hotels={item} index={index}/>}
             />
         ):(
             <Text>No Hotels this side</Text>

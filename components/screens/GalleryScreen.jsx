@@ -43,7 +43,7 @@ const GalleryScreen = ({route,navigation}) => {
                
                <Feather name="arrow-left" size={30} color='#fff'
              onPress={()=>navigation.goBack()} /> 
-            <Text style={styles.headerTitle}></Text>
+            <Text style={styles.headerTitle}>{galaryArr.length}{myIndex+1}</Text>
             </View>
            <View style={styles.Gallerylist}>
                <Text style={{fontSize:20,color:'#fff',fontWeight:'bold'}}>Review Gallery</Text>
