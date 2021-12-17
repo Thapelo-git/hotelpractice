@@ -1,42 +1,23 @@
-import React,{useState} from 'react'
-import { SafeAreaView, StyleSheet, Text, View ,Pressable,TextInput} from 'react-native'
+import React,{useEffect, useState} from 'react'
+
+import { SafeAreaView,FlatList, StyleSheet, Text, View ,Pressable,TextInput, Image} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
-const CheckAvailability = ({navigation}) => {
-    const [date,setDate]=useState(Date())
-    const [isDatePickerVisible,setDatePickerVisibility]= useState(false)
-    const [checkin,setCheckin]=useState('')
-    const [checkout,setCheckout]=useState('')
-    const [adultPlus,setAdultPlus]=useState(0)
 
-    const [childPlus,setChildPlus]=useState(0)
-    const [childMinus,setChildMinus]=useState(0)
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-      };
-    
-      const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-      };
-    
-      const handleConfirm = (date) => {
-        const currentDate =  date;
-    
-      //let tempDate = new Date(currentDate)
-      let tempDate =currentDate
-      let checkin = tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-      let checkout= tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-      setCheckin(checkin)
-      setCheckout(checkout)
-        // console.warn("A date has been picked: ", date);
-        
-        hideDatePicker();
-       
-      };
+const CheckAvailability = ({navigation,route}) => {
+    const list=route.params.list
+    const [index,setindex]=useState(0)
+    console.log(list)
+    // useEffect(()=>{
+    //   console.log('Availableroom')
+    // })
+    const Rooms=({rooms})=>{
+      <Image source={rooms} style={{height:80,width:80,borderRadius:20}}/>
+    }
     return (
         <SafeAreaView>
-             <View style={{width:30,flexDirection:'row',
+             <View style={{flexDirection:'row',
       height:30,justifyContent:'center',alignItems:'center',
       }}>
          
@@ -45,107 +26,15 @@ const CheckAvailability = ({navigation}) => {
              
             <Text style={styles.headerTitle}>Bookingss</Text>
             </View>
-            <View>
-            <View style={styles.inputContainer}>
-        <View style={styles.inputIconView}>
-        <Pressable style={[
-            styles.button,
-          ] }
-        onPress={showDatePicker}>
-          <Feather
-                 name="calendar" size={22}
-                 color='white'
-                 />
-                 </Pressable>
-        </View>
-            <TextInput
-             style={styles.inputs}
-             placeholder='Enter checkin Date'
-             keyboardType='email-address'
-             value={checkin}
-            //  onChangeText={props.handleChange('email')}
-            //  value={props.values.email}
-            //  onBlur={props.handleBlur('email')}
-             />
-        
-        </View>
-        <View style={styles.inputContainer}>
-        <View style={styles.inputIconView}>
-        <Pressable style={[
-            styles.button,
-          ] }
-        onPress={showDatePicker}>
-          <Feather
-                 name="calendar" size={22}
-                 color='white'
-                 />
-                 </Pressable>
-        </View>
-            <TextInput
-             style={styles.inputs}
-             placeholder='Enter checkout Date'
-         
-             value={checkout}
-            //  onChangeText={props.handleChange('email')}
-            //  value={props.values.email}
-            //  onBlur={props.handleBlur('email')}
-             />
-        
-        </View>
-            <DateTimePickerModal
-            isVisible={isDatePickerVisible}
-            mode='date'
-            value={checkout}
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-            />
-            <Pressable style={[
-            styles.button,{backgroundColor: 'blue',flexDirection:"row"}
-          ] }
-        onPress={showDatePicker}>
-          <Feather
-                 name="calendar" size={22}
-                 color='black'
-                 />
-      <Text>
-        checkin
-      </Text>
-          </Pressable>
-          <Pressable style={[
-            styles.button,{backgroundColor: 'blue',flexDirection:"row"}
-          ] }
-        onPress={showDatePicker}>
-          <Feather
-                 name="calendar" size={22}
-                 color='black'
-                 />
-      <Text>
-       checkout
-      </Text>
-          </Pressable>
-
-          <Pressable style={[
-            styles.buttonAdding,{backgroundColor: 'blue',flexDirection:"row"}
-          ] }
-        onPress={()=>setAdultPlus(Math.min(5,adultPlus+1))}>
-          <Feather
-                 name="plus" size={22}
-                 color='black'
-                 />
-      
-          </Pressable>
-          <Text>{adultPlus}</Text>
-          <Pressable style={[
-            styles.buttonAdding,{backgroundColor: 'blue',flexDirection:"row"}
-          ] }
-        onPress={()=>setAdultPlus(Math.max(0,adultPlus-1))}>
-          <Feather
-                 name="minus" size={22}
-                 color='black'
-                 />
-      
-          </Pressable>
-            </View>
+           {/* <FlatList
+           showsVerticalScrollIndicator={false}
+           data={Availablerooms}
+            renderItem={({item})=><Rooms rooms={item} />}/> */}
+            {
+              list[index].Room.map((items)=>{
+                <Text>{items.bedtype}</Text>
+              })
+            }
         </SafeAreaView>
     )
 }

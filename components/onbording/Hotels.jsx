@@ -12,6 +12,11 @@ const Hotels=[
         require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')],
         coordinates:{latitude: 48.8587741,
             longitude: 2.2069771},
+            Room:[{name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')}]
     },
     {
         _id:'2',
@@ -24,6 +29,11 @@ const Hotels=[
         require('../images/bathroom2.jpg'),require('../images/balcony1.jpg')],
         coordinates:{latitude: 48.8587741,
             longitude: 2.2069771},
+            Room:[{name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')}]
     },
     {
         _id:'3',
@@ -36,6 +46,11 @@ const Hotels=[
         require('../images/bathroom3.jpg'),require('../images/balcony9.jpg')],
         coordinates:{latitude: 48.8587741,
             longitude: 2.2069771},
+            Room:[{name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+            {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')}]
     },
     {
         _id:'4',
@@ -48,6 +63,11 @@ const Hotels=[
        require('../images/bathroom4.jpg'),require('../images/balcony8.jpg')],
        coordinates:{latitude: 48.8587741,
         longitude: 2.2069771},
+        Room:[{name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+        {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+        {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+        {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')},
+        {name:'Standard Romm',price:'400.00',bedtype:'2 king beds',image:require('../images/hotel6.jpg')}]
     },]},
     {id:1,
         name:'Popular',
