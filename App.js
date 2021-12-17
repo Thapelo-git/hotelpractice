@@ -11,6 +11,7 @@ import ForgetPassword from './components/screens/ForgetPassword';
 import TabScreen from './components/screens/TabScreen';
 import HotelDetails from './components/screens/HotelDetails';
 import GalleryScreen from './components/screens/GalleryScreen';
+import CheckAvailability from './components/screens/CheckAvailability';
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
       <Stack.Screen name="Hotel Details" options = {{headerShown :false}} component={HotelDetails} />
       <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
       <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
+      <Stack.Screen name="CheckAvailability" options = {{headerShown :false}} component={CheckAvailability} />
     </Stack.Navigator>
   </NavigationContainer>
   );

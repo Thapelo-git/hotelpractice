@@ -15,7 +15,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Flatbutton from "../styles/button"
-import SlidingUpPanel from "rn-sliding-up-panel";
+// import SlidingUpPanel from "rn-sliding-up-panel";
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from "react-native-reanimated";
 import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
@@ -126,7 +126,7 @@ opacity: 0.7,width:30,
         />
         </View>
 
-        <Flatbutton  text='Check Availability' onPress={()=>bs.current.snapTo(0)}/>
+        <Flatbutton  text='Check Availability'style={{top:-90}} onPress={()=>navigation.navigate('CheckAvailability')}/>
         {/* <BottomSheet
         // ref={bs}
         snapPoints={[330,0]}
@@ -136,7 +136,7 @@ opacity: 0.7,width:30,
         // callbackNode={fall}
         // enabledGestureInteraction={true}
         /> */}
-        <SlidingUpPanel
+        {/* <SlidingUpPanel
          ref={c=>(_panel=c)}
         draggableRange={{top:700,bottom:120}}
         showBackdrop={false}
@@ -162,14 +162,15 @@ opacity: 0.7,width:30,
                initialRegion={list.coordinates}
 
               >
-                  <Marker coordinate={list.coordinates}/>
+                  <Marker coordinate={list.coordinates}
+                  />
                
                 </MapView>
             </View>
           </View>
 
         </SlidingUpPanel>
-    
+     */}
       </View>
     </SafeAreaView>
   );
