@@ -12,6 +12,7 @@ import TabScreen from './components/screens/TabScreen';
 import HotelDetails from './components/screens/HotelDetails';
 import GalleryScreen from './components/screens/GalleryScreen';
 import CheckAvailability from './components/screens/CheckAvailability';
+import confirmScreen from './components/screens/confirmScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
       <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
       <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
       <Stack.Screen name="CheckAvailability" options = {{headerShown :false}} component={CheckAvailability} />
+      <Stack.Screen name="confirmScreen" options = {{headerShown :false}} component={confirmScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   );

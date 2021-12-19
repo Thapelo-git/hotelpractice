@@ -35,7 +35,11 @@ const HotelDetails = ({ navigation, route }) => {
   let fall = new Animated.Value(1)
   const list = route.params.data;
   const galary = route.params.data.innerimages;
-  const rooms = route.params.data.Room
+  const room1 = route.params.data.Room1
+  const room2 = route.params.data.Room2
+  const room3 = route.params.data.Room3
+  const room4 = route.params.data.Room4
+  
 
   const Imageslist = ({ images, index }) => {
     return (
@@ -243,7 +247,12 @@ const HotelDetails = ({ navigation, route }) => {
             <View style={{left:50}}>
             <Flatbutton text='Book Now'
                onPress={()=>
-                navigation.navigate('CheckAvailability',{list:list})}/>
+                navigation.navigate('CheckAvailability',{
+                  room1:room1,
+                  room2:room2,
+                  room3:room3,
+                  room4:room4,
+                  })}/>
             </View>
           </SafeAreaView>
         </ScrollView>

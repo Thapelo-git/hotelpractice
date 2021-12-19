@@ -16,6 +16,7 @@ const HomeScreen = ({navigation}) => {
         {id:'3',name:'Top Ratings'},
         
     ]
+    
     const ListBtn =()=>{
         return <ScrollView horizontal 
         showsHorizontalScrollIndicator={false} style={styles.btnListContainer}>
@@ -126,7 +127,7 @@ opacity: 0.7,width:'93%',height:50,
              showsHorizontalScrollIndicator={false}
             
             data={Hotels[selectedHotelIndex+ 3].hotel}
-            renderItem={({item,id})=><CardNear Hotels={item}/>}
+            renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
         ):(
             <Text>No Hotels this side</Text>
