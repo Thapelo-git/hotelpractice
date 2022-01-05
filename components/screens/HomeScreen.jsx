@@ -39,6 +39,7 @@ const HomeScreen = ({navigation}) => {
             ))}
         </ScrollView>
     }
+    
     const Card =({Hotels,index})=>{
         return(
         <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
@@ -67,10 +68,7 @@ opacity: 0.7,width:'93%',height:50,
                 <ImageBackground source={Hotels._image}
                 style={{marginVertical:5,height:110,width:cardWidth/1}}
                 resizeMode="contain">
-                    <View style={{backgroundColor: 'rgba(50, 50, 50, 0.8)',width:'93%',height:50,
-                borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:6}}>
-                    <Text style={{marginHorizontal:10,marginStart:80}}>{Hotels._price}</Text>
-                    </View>
+                   
                     
                 </ImageBackground>
                 

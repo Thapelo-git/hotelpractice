@@ -48,7 +48,7 @@ const TabScreen = () => {
                 tabBarIcon:({color}) =>
             <FontAwesome name="history" color={color} size={26}/>}}/>
            
-            <Tab.Screen name="Bookings" component={combineHotel}
+            <Tab.Screen name="Bookings" component={Bookings}
             options={{
                 tabBarLabel:'Bookings',
                 tarBarColor:COLORS.theme,

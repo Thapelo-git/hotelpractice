@@ -1,16 +1,20 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View,FlatList } from 'react-native'
+import { StyleSheet, Text, View,FlatList,TextInput } from 'react-native'
 import { SearchBar } from 'react-native-elements';
 import Hotels from '../onbording/Hotels.jsx'
+import { COLORS } from '../styles/Colors'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Entypo from 'react-native-vector-icons/Entypo'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const HistoryScreen = () => {
     const [searchtext,setSearchtext] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-    // useEffect(() => {
-    //     setFilteredDataSource(Hotels);
-    //     setMasterDataSource(Hotels);
-    // }, [])
+    useEffect(() => {
+        setFilteredDataSource(Hotels);
+        setMasterDataSource(Hotels);
+    }, [])
 
     const searchFilterFunction =(text)=>{
         if(text){
@@ -66,7 +70,25 @@ const HistoryScreen = () => {
            onClear={(text) => searchFilterFunction('')}
            value={searchtext}
            round
+     
            />
+           <View style={{
+            marginTop:20,
+            flexDirection:'row',
+            paddingHorizontal:20,
+        }}>
+        <View style={styles.inputContainer}>
+        <Ionicons name="search" size={24}/>
+        <TextInput 
+        style={{fontSize:18,flex:1,marginLeft:10}}
+        placeholder="Looking for previews hotel?"
+        onChangeText={(text) => searchFilterFunction(text)}
+        />
+        {/* <TouchableOpacity onPress={(text) => searchFilterFunction('')}>
+       <Entypo name='circle-with-cross' size={20}/>
+       </TouchableOpacity> */}
+        </View>
+        </View>
            <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
@@ -79,4 +101,14 @@ const HistoryScreen = () => {
 
 export default HistoryScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  inputContainer:{
+    flex:1,
+    height:50,
+    borderRadius:10,
+    flexDirection:'row',
+    backgroundColor:COLORS.lightgray,
+    alignItems:'center',
+    paddingHorizontal:20, 
+},
+})

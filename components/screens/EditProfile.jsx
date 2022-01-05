@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
-import { SafeAreaView, StyleSheet, Text, View,ImageBackground ,TextInput} from 'react-native'
+import { StyleSheet, Text, View ,StatusBar,SafeAreaView,TextInput,Image,
+    TouchableOpacity} from 'react-native'
+import Feather from 'react-native-vector-icons/Feather'
 import { COLORS } from '../styles/Colors'
 import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -8,7 +10,8 @@ import { FONTS } from '../styles/Font'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-const SignUp = ({navigation}) => {
+
+const EditProfile = () => {
     const [isPasswordShow,setPasswordShow]=useState(false)
     const ReviewSchem=yup.object({
         name:yup.string().required().min(2),
@@ -19,11 +22,28 @@ const SignUp = ({navigation}) => {
     })
     return (
         <SafeAreaView>
-             <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
-             <View style={styles.container}>
-            <Text style={{fontFamily:FONTS.extraBold,fontWeight:'bold',fontSize:30,
-        color:COLORS.theme}}>Register</Text>
-        <Formik
+             <StatusBar
+            backgroundColor="#0225A1"
+            barStyle="light-content"
+            />
+            <View style={styles.headerContainer} 
+            >
+               
+               <Feather name="arrow-left" size={30} 
+             onPress={()=>navigation.goBack()} /> 
+            
+            <Text style={styles.headerTitle}></Text>
+            </View>
+            <View style={{marginLeft:110}}>
+            <Image source={require('../images/profile.jpg')}
+                style={{height:120,width:120,borderRadius:60,}}/>
+                <TouchableOpacity style={{marginLeft:80}}>
+                <FontAwesome name='camera' size={29} color='grey'/>
+                </TouchableOpacity>
+            </View>
+           
+            <View style={{padding:20}}>
+            <Formik
         initialValues={{name:'',phonenumber:'',email:'',password:'',confirmpassword:''}}
         validationSchema={ReviewSchem}
         >
@@ -132,39 +152,20 @@ const SignUp = ({navigation}) => {
         <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='REGISTER' />
-            <View style={styles.signupContainer}>
-               <Text style={styles.accountText}>Already have account?</Text>
-               <Text style={styles.signupText}
-               onPress={()=>navigation.navigate('SignIn')}>Sign In</Text>
-            </View>
+            <Flatbutton text='UPDATE' />
+      
             </View>
             </KeyboardAwareScrollView>
             )}</Formik>
         </View>
-        </ImageBackground>
         </SafeAreaView>
+        
     )
 }
 
-export default SignUp
+export default EditProfile
 
 const styles = StyleSheet.create({
-    imageBackground:{
-        width:'100%',
-        height:'100%'
-    },
-    container:{
-        backgroundColor:'#fff',
-        padding:20,
-        width:'100%',
-        height:'90%',
-        marginTop:80,
-        borderTopRightRadius:50,
-        borderTopLeftRadius:50,
-        justifyContent:'center',
-        alignItems:'center'
-    },
     innerContainer:{
         marginTop:20
     },

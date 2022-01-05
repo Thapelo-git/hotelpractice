@@ -39,6 +39,7 @@ const HotelDetails = ({ navigation, route }) => {
   const room2 = route.params.data.Room2
   const room3 = route.params.data.Room3
   const room4 = route.params.data.Room4
+  const anyprice= list.price
   
 
   const Imageslist = ({ images, index }) => {
@@ -230,6 +231,7 @@ const HotelDetails = ({ navigation, route }) => {
                    />
         
             </Pressable>
+           
             <Text style={{fontSize:21}}>{childPlus}</Text>
             <Pressable style={[
               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
