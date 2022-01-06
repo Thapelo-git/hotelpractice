@@ -127,13 +127,18 @@ const HotelDetails = ({ navigation, route }) => {
         <ScrollView showsVerticalScrollIndicator={false} 
         style={{width:'100%'}}>
           <TouchableOpacity onPress={()=>onCancel()}>
-            <View style={{width:70,height:60,left:130}}>
-              <Entypo name='circle-with-cross' size={50}/>
+            <View style={{
+              flexDirection:'row',alignItems:'center',justifyContent:"space-between"}}>
+                <Text></Text>
+              <Feather name='x' size={30}/>
             </View>
           </TouchableOpacity>
           <SafeAreaView>
+          
                
-              <View  >
+              <View style={{
+              flexDirection:'row',alignItems:'center',justifyContent:'space-around'}} >
+                <View>
                 <Text>CHECK IN</Text>
               <View style={styles.inputContainer}>
           <View style={styles.inputIconView}>
@@ -143,7 +148,7 @@ const HotelDetails = ({ navigation, route }) => {
           onPress={showDatePicker}>
             <Feather
                    name="calendar" size={22}
-                   color='white'
+                   
                    />
                    </Pressable>
           </View>
@@ -158,6 +163,8 @@ const HotelDetails = ({ navigation, route }) => {
                />
           
           </View> 
+          </View>
+          <View>
           <Text>CHECK OUT</Text>
           <View style={styles.inputContainer}>
           <View style={styles.inputIconView}>
@@ -167,7 +174,7 @@ const HotelDetails = ({ navigation, route }) => {
           onPress={showDatePicker}>
             <Feather
                    name="calendar" size={22}
-                   color='white'
+                  
                    />
                    </Pressable>
           </View>
@@ -182,6 +189,7 @@ const HotelDetails = ({ navigation, route }) => {
                />
           
           </View>
+          </View>
               <DateTimePickerModal
               isVisible={isDatePickerVisible}
               mode='date'
@@ -194,18 +202,20 @@ const HotelDetails = ({ navigation, route }) => {
            justifyContent:'space-between',padding:30}}>
            <View>
            <Text>No of Adults</Text>
-  <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+  <View style={{flexDirection:'row',justifyContent:'space-between',
+borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+elevation:2,}}>
             <Pressable style={[
               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
             ] }
-          onPress={()=>setAdultPlus(Math.min(5,adultPlus+1))}>
+          onPress={()=>setAdultPlus(Math.max(1,adultPlus+1))}>
             <Feather
                    name="plus" size={22}
                    color='black'
                    />
         
             </Pressable>
-            <Text style={{fontSize:21}}>{adultPlus}</Text>
+            <Text style={{fontSize:21}}> {adultPlus} </Text>
             <Pressable style={[
               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
             ] }
@@ -220,7 +230,9 @@ const HotelDetails = ({ navigation, route }) => {
             </View>
             <View>
             <Text>No of Children</Text>
-  <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+  <View style={{flexDirection:'row',justifyContent:'space-between',
+borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+elevation:2,}}>
             <Pressable style={[
               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
             ] }
@@ -232,7 +244,7 @@ const HotelDetails = ({ navigation, route }) => {
         
             </Pressable>
            
-            <Text style={{fontSize:21}}>{childPlus}</Text>
+            <Text style={{fontSize:21}}> {childPlus} </Text>
             <Pressable style={[
               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
             ] }
@@ -263,9 +275,7 @@ const HotelDetails = ({ navigation, route }) => {
   }
   const [animationValue,setAnimationValue]=useState(-1000)
   const showAnimation= useRef(new Animated.Value(animationValue)).current
-  // const toggleAnimation =()=>{
-
-  // }
+  
   const toggleAnimation=()=>{
     
     const val= animationValue === 0 ? -1000 : 0
@@ -433,26 +443,26 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
   buttonAdding:{
-    borderWidth:1,
+    // borderWidth:1,
     width:30,
     height:30,
-    borderRadius:15,
-    borderColor:'black',
+    borderRadius:1,
+    // borderColor:'black',
     justifyContent:'center',
     alignItems:'center'
 },
 inputContainer:{
-  borderRadius:30,
+  borderRadius:10,
   height:48,
-  marginVertical:12,
+  padding:10,
   flexDirection:'row',
   alignItems:'center',
-  backgroundColor:'#fff',
+  backgroundColor:'#EDEDED',
   elevation:2,
-  width:200,
+  width:150,
 
 },
-inputIconView:{
+inputIconViewi:{
   width:50,
   justifyContent:'center',
   alignItems:'center',
@@ -464,4 +474,31 @@ inputIconView:{
   borderBottomRightRadius:0,
   elevation:2,
 },
+cvv: {
+  paddingLeft: 12,
+  width: '40%'
+
+},
+dataContainer: {
+  flexDirection: "row",
+
+  paddingBottom: 5,
+  width: '100%',
+  // justifyContent: 'space-between'
+},
+input: {
+  width: '70%',
+  borderColor: "black",
+  borderStyle: "solid"
+},
+inputBox: {
+  borderWidth: 2,
+  borderRadius: 10,
+  flexDirection: 'row',
+  // paddingRight: 15,
+  padding: 5,
+  width: '60%',
+  backgroundColor:'#EDEDED'
+},
+
 });

@@ -11,7 +11,7 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-const EditProfile = () => {
+const EditProfile = ({navigation}) => {
     const [isPasswordShow,setPasswordShow]=useState(false)
     const ReviewSchem=yup.object({
         name:yup.string().required().min(2),
@@ -50,7 +50,7 @@ const EditProfile = () => {
 
         {(props)=>(
          <KeyboardAwareScrollView
-             style={styles.innerContainer}>
+           >
                            <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <FontAwesome name='user'

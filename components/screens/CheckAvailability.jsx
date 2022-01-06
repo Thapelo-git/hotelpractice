@@ -1,12 +1,13 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState,useRef} from 'react'
 
 import { SafeAreaView,FlatList, StyleSheet, Text, View ,Picker,
-  Pressable,TextInput, Image} from 'react-native'
+  Pressable,TextInput, Image,TouchableOpacity,Animated} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Hotels from '../onbording/Hotels'
 import Flatbutton from '../styles/button'
+import ConfirmScreen from './confirmScreen'
 const CheckAvailability = ({navigation,route}) => {
   const [pickerindex,setpickerindex]=useState(0)
     const [sorts,setSorts]=useState('')
@@ -24,12 +25,25 @@ const CheckAvailability = ({navigation,route}) => {
 // price.push(room3)
 // price.push(room4)
     const hotel=route.params.list
-   console.log(price)
    
+   const [animationValue,setAnimationValue]=useState(-1000)
+  const showAnimation= useRef(new Animated.Value(animationValue)).current
+  
+  const toggleAnimation=()=>{
+    
+    const val= animationValue === 0 ? -1000 : 0
+    Animated.timing(showAnimation,{
+      useNativeDriver: false,
+      toValue:val,
+      duration:350
+
+    }).start()
+    setAnimationValue(val)
+  }
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{padding:20}}>
              <View style={{flexDirection:'row',
-      height:30,justifyContent:'center',alignItems:'center',
+      height:30,justifyContent:'space-between',alignItems:'center',
       }}>
          
                <Feather name="arrow-left" size={30} color='#000'
@@ -53,19 +67,25 @@ const CheckAvailability = ({navigation,route}) => {
               {
                 price.map((item)=>
                   <View>
-                    <Text>{item.name}</Text>
-                    <Text>{item.price}</Text>
+                    <Text></Text>
+                    
                 
             <View style={{borderColor:'gray',borderBottomWidth:1,flexDirection:'row'}}>
-            <Image source={item.image} style={{height:80,width:80,borderRadius:20}}/>
+            <Image source={item.image} style={{height:120,width:120,borderRadius:20}}/>
+            <Text></Text>
             <View>
               <View>
               <Text>{item.name}</Text>
-              <Text style={{fontSize:20,fontWeight:'bold'}}>{item.bedtype}</Text>
+              <Text style={{fontSize:20,fontWeight:'bold',marginStart:80}}>{item.bedtype}</Text>
               </View>
-            <View>
+            <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
             <Text>{item.price}</Text>
-            <Flatbutton text='Book Now' onPress={()=>navigation.navigate('confirmScreen')} size={10}/>
+           
+            <TouchableOpacity onPress={()=>{toggleAnimation()}} >
+            <View style={styles.buttonstyle}  >
+            <Text style={styles.buttonText}>Book Now</Text>
+            </View>
+        </TouchableOpacity>
             </View>
             </View>
            
@@ -75,6 +95,9 @@ const CheckAvailability = ({navigation,route}) => {
                   
                   )
                }
+               <ConfirmScreen
+     onCancel={()=>{toggleAnimation()}}
+     animation={showAnimation}/>
         </SafeAreaView>
     )
 }
@@ -114,4 +137,20 @@ const styles = StyleSheet.create({
       borderBottomRightRadius:0,
       elevation:2,
   },
+  buttonstyle:{
+    borderRadius:5,
+   marginStart:80,
+    width:100,
+    backgroundColor:'#4A1DD6',
+    
+
+},
+buttonText:{
+    color:'#fff',
+    fontWeight:'normal',
+    // textTransform:'uppercase',
+    fontSize:20,
+    fontStyle:'normal',
+    textAlign:'center'
+},
 })
