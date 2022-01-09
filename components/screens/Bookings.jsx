@@ -1,26 +1,43 @@
 
-import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View,FlatList,TextInput } from 'react-native'
+import React,{useState,useEffect,useRef} from 'react'
+import { StyleSheet, Text, View,FlatList,TextInput, Image, ScrollView ,
+  Animated, TouchableOpacity} from 'react-native'
 import { SearchBar } from 'react-native-elements';
 import Hotels from '../onbording/Hotels.jsx'
+import NearHotels from '../onbording/NearHotels.jsx';
 import { COLORS } from '../styles/Colors'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import Entypo from 'react-native-vector-icons/Entypo'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import Entypo from 'react-native-vector-icons/Entypo'
+import { } from 'react-native-gesture-handler';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Cancellation from './Cancellation.jsx';
 const Bookings = () => {
+  const [animationValue,setAnimationValue]=useState(-1000)
+  const showAnimation= useRef(new Animated.Value(animationValue)).current
+  
+  const toggleAnimation=()=>{
+    
+    const val= animationValue === 0 ? -1000 : 0
+    Animated.timing(showAnimation,{
+      useNativeDriver: false,
+      toValue:val,
+      duration:350
+
+    }).start()
+    setAnimationValue(val)
+  }
     const [searchtext,setSearchtext] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
     useEffect(() => {
-        setFilteredDataSource(Hotels);
-        setMasterDataSource(Hotels);
+        setFilteredDataSource(NearHotels);
+        setMasterDataSource(NearHotels);
     }, [])
 
     const searchFilterFunction =(text)=>{
         if(text){
             const newData = masterDataSource.filter(function(item){
-                const itemData = item.name ? item.name.toUpperCase()
+                const itemData = item.hotelname ? item.hotelname.toUpperCase()
                 :''.toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf( textData)>-1;
@@ -36,13 +53,40 @@ const Bookings = () => {
     const ItemView = ({item}) => {
         return (
           // Flat List Item
+          <View >
+            <ScrollView>
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+              <Text></Text>
           <Text
-            style={styles.itemStyle}
+            style={{color:'#032B7A'}}
             onPress={() => getItem(item)}>
-              {item.id}
-              {'.'}
-              {item.name.toUpperCase()}
+              
+              {item.hotelname.toUpperCase()}
+
           </Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={{padding:10}}>
+          <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
+          </View>
+          <View>
+            <View style={{flexDirection:'row'}}>
+              <Ionicons name='location-sharp' size={21}/>
+          <Text>{item._location}</Text>
+          </View>
+          <Text>Successfully paid booking</Text>
+       
+              
+          <Text>Price  {item._price}</Text>
+          <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
+          alignItems:'center',}}  onPress={()=>{toggleAnimation()}}>
+          <Text style={{color:'#fff'}}>Cancel</Text>
+          </TouchableOpacity>
+          
+          </View>
+          </View>
+          </ScrollView>
+          </View>
         );
       };
     
@@ -63,10 +107,11 @@ const Bookings = () => {
         // Function for click on an item
         alert('Id : ' + item.id + ' Title : ' + item.name);
       };
+    
     return (
         <View>
            <SearchBar
-           placeholder="Looking for previews hotel?"
+           placeholder="Looking for your bookings?"
            onChangeText={(text) => searchFilterFunction(text)}
            onClear={(text) => searchFilterFunction('')}
            value={searchtext}
@@ -96,6 +141,9 @@ const Bookings = () => {
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
         />
+         <Cancellation
+     onCancel={()=>{toggleAnimation()}}
+     animation={showAnimation}/>
         </View>
     )
 }

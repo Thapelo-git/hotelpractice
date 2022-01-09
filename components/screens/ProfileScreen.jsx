@@ -54,13 +54,18 @@ const ProfileScreen = ({navigation}) => {
             </View>
             <Icon name="chevron-right" size={15}  />
         </View>
+       
         <View style={styles.pagelist}>
+        
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Icon name="credit-card-alt" size={15}  /> 
             <Text>     My Cards</Text>
             </View>
+            <TouchableOpacity onPress={()=>navigation.navigate('PaymentScreen')}>
             <Icon name="chevron-right" size={15}  />
+            </TouchableOpacity>
         </View>
+        
         <View style={styles.pagelist}>
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Entypo name="help" size={15}  /> 

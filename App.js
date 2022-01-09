@@ -14,6 +14,8 @@ import GalleryScreen from './components/screens/GalleryScreen';
 import CheckAvailability from './components/screens/CheckAvailability';
 import confirmScreen from './components/screens/confirmScreen';
 import EditProfile from './components/screens/EditProfile';
+import Creditcard from './components/screens/Creditcard';
+import PaymentScreen from './components/screens/PaymentScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -31,6 +33,8 @@ export default function App() {
       <Stack.Screen name="CheckAvailability" options = {{headerShown :false}} component={CheckAvailability} />
       <Stack.Screen name="confirmScreen" options = {{headerShown :false}} component={confirmScreen} />
       <Stack.Screen name="EditProfile" options = {{headerShown :false}} component={EditProfile} />
+      <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
+      <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   );

@@ -43,15 +43,15 @@ const CheckAvailability = ({navigation,route}) => {
     return (
         <SafeAreaView style={{padding:20}}>
              <View style={{flexDirection:'row',
-      height:30,justifyContent:'space-between',alignItems:'center',
+      height:30,justifyContent:'flex-start',alignItems:'center',
       }}>
          
                <Feather name="arrow-left" size={30} color='#000'
              onPress={()=>navigation.goBack()} /> 
              
-            <Text style={styles.headerTitle}>Bookingss</Text>
+            <Text style={styles.headerTitle}>Bookings</Text>
             </View>
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+            <View style={{flexDirection:'row',justifyContent:'center'}}>
             <Text style={styles.titles}>Sort By</Text>
               <Picker 
               selectedValue={sorts}
@@ -81,7 +81,7 @@ const CheckAvailability = ({navigation,route}) => {
             <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
             <Text>{item.price}</Text>
            
-            <TouchableOpacity onPress={()=>{toggleAnimation()}} >
+            <TouchableOpacity onPress={()=>navigation.navigate('confirmScreen',{room:item})} >
             <View style={styles.buttonstyle}  >
             <Text style={styles.buttonText}>Book Now</Text>
             </View>
@@ -95,9 +95,7 @@ const CheckAvailability = ({navigation,route}) => {
                   
                   )
                }
-               <ConfirmScreen
-     onCancel={()=>{toggleAnimation()}}
-     animation={showAnimation}/>
+               
         </SafeAreaView>
     )
 }
@@ -153,4 +151,7 @@ buttonText:{
     fontStyle:'normal',
     textAlign:'center'
 },
+headerTitle:{
+  marginLeft:130
+}
 })

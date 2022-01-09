@@ -1,146 +1,88 @@
 import React ,{useState}from 'react'
 import { StyleSheet, Text, View ,Animated,TouchableOpacity,
-ScrollView,Pressable,Dimensions,SafeAreaView,TextInput} from 'react-native'
+ScrollView,Pressable,Dimensions,SafeAreaView,TextInput, Image} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import Flatbutton from "../styles/button"
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
-const ConfirmScreen = ({onCancel,animation}) => {
+const ConfirmScreen = ({navigation,route}) => {
     
-        const [date,setDate]=useState(Date())
-          const [isDatePickerVisible,setDatePickerVisibility]= useState(false)
-          const [checkin,setCheckin]=useState('')
-          const [checkout,setCheckout]=useState('')
-          const [adultPlus,setAdultPlus]=useState(1)
-      
-          const [childPlus,setChildPlus]=useState(0)
+       const room=route.params.room
+          const [roomnumber,setRoomnumber]=useState(1)
           
-          const showDatePicker = () => {
-              setDatePickerVisibility(true);
-            };
           
-            const hideDatePicker = () => {
-              setDatePickerVisibility(false);
-            };
-            const handleConfirm = (date) => {
-                const currentDate =  date;
-            
-              //let tempDate = new Date(currentDate)
-              let tempDate =currentDate
-              let checkin = tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-              let checkout= tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-              setCheckin(checkin)
-              setCheckout(checkout)
-                // console.warn("A date has been picked: ", date);
-                
-                hideDatePicker();
-               
-              };
         
     return (
-        <Animated.View style={{
-            width:screenWidth,
-      
-            backgroundColor:'#fff',
-            borderTopLeftRadius:30,borderTopRightRadius:30,padding:20,
-            position:'absolute',
-            zIndex:3,alignItems:'center',justifyContent:'center',
-            maxHeight:300,shadowColor:'#000',shadowOffset:{width:0,height:12},shadowOpacity:0.50,shadowRadius:16.80,
-            bottom:animation,elevation:24, 
-          }}>
-            <ScrollView showsVerticalScrollIndicator={false} 
-            style={{width:'100%'}}>
-              <TouchableOpacity onPress={()=>onCancel()}>
+        
+      <SafeAreaView >
+              
                 <View style={{
-                  flexDirection:'row',alignItems:'center',justifyContent:"space-between"}}>
-                    <Text></Text>
-                  <Feather name='x' size={30}/>
+                  flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                   <TouchableOpacity onPress={()=>navigation.goBack()}> 
+                  <Feather name="arrow-left" size={30}/>
+                  </TouchableOpacity>
+                  <Text style={styles.headerTitle}>Room</Text>
                 </View>
-              </TouchableOpacity>
-              <SafeAreaView>
+                <View style={{padding:10,width:screenWidth}}>
+                <Image source={room.image} style={{height:190,width:'100%',borderRadius:7}}/>
+                </View>
+                
+             
+              <View style={{
+                  flexDirection:'row',alignItems:'center',justifyContent:'space-around',}} >
+                    <View>
+                    <Text style={{color:'grey'}}>Room Type</Text>
+                    <View style={{paddingVertical:10}}>
+                    <Text>{room.name}</Text>
+                    </View>
+              </View>
+              <View>
+              <Text style={{color:'grey'}}>Capacity</Text>
+              <View style={{paddingVertical:10}}>
+                  
+                  <Text>{room.bedtype}</Text>
+              </View>
+              </View>
+               
+               </View>
               
                    
                   <View style={{
                   flexDirection:'row',alignItems:'center',justifyContent:'space-around'}} >
                     <View>
-                    <Text>CHECK IN</Text>
-                  <View style={styles.inputContainer}>
-              <View style={styles.inputIconView}>
-              <Pressable style={[
-                  styles.button,
-                ] }
-              onPress={showDatePicker}>
-                <Feather
-                       name="calendar" size={22}
-                       
-                       />
-                       </Pressable>
-              </View>
-                  <TextInput
-                   style={styles.inputs}
-                   placeholder='Enter checkin Date'
-                 
-                   />
-              
-              </View> 
+                    <Text style={{color:'grey'}}>Your Reservation</Text>
+                  
               </View>
               <View>
-              <Text>CHECK OUT</Text>
-              <View style={styles.inputContainer}>
-              <View style={styles.inputIconView}>
-              <Pressable style={[
-                  styles.button,
-                ] }
-              onPress={showDatePicker}>
-                <Feather
-                       name="calendar" size={22}
-                      
-                       />
-                       </Pressable>
-              </View>
-                  <TextInput
-                   style={styles.inputs}
-                   placeholder='Enter checkout Date'
-               
-                   value={checkout}
-                  //  onChangeText={props.handleChange('email')}
-                  //  value={props.values.email}
-                  //  onBlur={props.handleBlur('email')}
-                   />
+              <Text style={{color:'grey'}}>Guests</Text>
               
               </View>
-              </View>
-                  <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode='date'
-                  value={checkout}
-                  onConfirm={handleConfirm}
-                  onCancel={hideDatePicker}
-                  />
+               
                </View>
                <View style={{flexDirection:'row' ,alignItems:'stretch',
                justifyContent:'space-between',padding:30}}>
                <View>
-               <Text>No of Adults</Text>
+               <Text style={{fontSize:21,color:'gray'}}>No of Room needed</Text>
       <View style={{flexDirection:'row',justifyContent:'space-between',
     borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
     elevation:2,}}>
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
-              onPress={()=>setAdultPlus(Math.max(1,adultPlus+1))}>
+              onPress={()=>setRoomnumber(Math.max(1,roomnumber+1))}>
                 <Feather
                        name="plus" size={22}
                        color='black'
                        />
             
                 </Pressable>
-                <Text style={{fontSize:21}}> {adultPlus} </Text>
+                <Text style={{fontSize:21}}> {roomnumber} </Text>
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
-              onPress={()=>setAdultPlus(Math.max(1,adultPlus-1))}>
+              onPress={()=>setRoomnumber(Math.max(1,roomnumber-1))}>
                 <Feather
                        name="minus" size={22}
                        color='black'
@@ -149,52 +91,30 @@ const ConfirmScreen = ({onCancel,animation}) => {
                 </Pressable>
                 </View>
                 </View>
-                <View>
-                <Text>No of Children</Text>
-      <View style={{flexDirection:'row',justifyContent:'space-between',
-    borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
-    elevation:2,}}>
-                <Pressable style={[
-                  styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
-                ] }
-              onPress={()=>setChildPlus(Math.max(0,childPlus+1))}>
-                <Feather
-                       name="plus" size={22}
-                       color='black'
-                       />
-            
-                </Pressable>
                
-                <Text style={{fontSize:21}}> {childPlus} </Text>
-                <Pressable style={[
-                  styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
-                ] }
-              onPress={()=>setChildPlus(Math.max(0,childPlus-1))}>
-                <Feather
-                       name="minus" size={22}
-                       color='black'
-                       />
-            
-                </Pressable>
                 </View>
-                </View>
-                </View>
+                <View style={{paddingVertical:18,paddingHorizontal:18}}>
+                <Text style={{fontSize:21,fontWeight:'bold'}}>PRICE   R</Text>
+                <View style={{justifyContent:'space-between',
+    borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+    elevation:2,}}>
+      <Text style={{fontSize:25}}>{room.price * roomnumber}</Text>
+    </View>
+    </View>
                 <View style={{left:50}}>
-                {/* <Flatbutton text='Book Now'
-                   onPress={()=>
-                    navigation.navigate('CheckAvailability',{
-                      room1:room1,
-                      room2:room2,
-                      room3:room3,
-                      room4:room4,
-                      })}/> */}
+                <Flatbutton text='Pay Now'
+                   onPress={()=>navigation.navigate('PaymentScreen')}/>
                 </View>
+                
               </SafeAreaView>
-            </ScrollView>
-          </Animated.View>
+            
     )
 }
 
 export default ConfirmScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  headerTitle:{
+    marginLeft:130
+  }
+})
