@@ -17,10 +17,10 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Flatbutton from "../styles/button"
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Entypo from 'react-native-vector-icons/Entypo'
-// import SlidingUpPanel from "rn-sliding-up-panel";
+import SlidingUpPanel from "rn-sliding-up-panel";
 
-// import Animated from "react-native-reanimated";
-// import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
+
+import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 const {height} = Dimensions.get('window')
@@ -311,7 +311,13 @@ opacity: 0.7,width:30,
           <MaterialIcons name='location-pin' size={20}/>
       <Text>{list._location}</Text>
       </View>
-        <View style={{marginLeft:270,top:-20,flext:1}}>
+      <View style={{flexDirection:'row'}}>
+                        <Ionicons name='star' size={16} color='orange'/>
+                        <Ionicons name='star' size={16} color='orange'/>
+                        <Ionicons name='star-half-sharp' size={16} color='orange'/>
+                    <Text style={{marginHorizontal:10,marginStart:0}}>{list.rating}</Text>
+                    </View>
+        <View style={{marginLeft:270,top:-50,flext:1}}>
           
       <Text style={{fontWeight:'bold',fontSize:15}}>R{list._price}</Text>
       <Text style={{fontSize:10}}>per night</Text>
@@ -341,7 +347,7 @@ opacity: 0.7,width:30,
         <Flatbutton  text='Check Availability'style={{top:-90}} 
         onPress={()=>{toggleAnimation()}}/>
         
-        {/* <SlidingUpPanel
+        <SlidingUpPanel
          ref={c=>(_panel=c)}
         draggableRange={{top:700,bottom:120}}
         showBackdrop={false}
@@ -357,15 +363,15 @@ opacity: 0.7,width:30,
             alignItems:"center",
             justifyContent:'center'}}>
               <Feather name='arrow-up' size={30}/>
-              <Text>Swipe up</Text>
+              <Text> Location Swipe up</Text>
             </View>
             <View style={{flex:1,
             backgroundColor:"#fff",alignItems:'center',justifyContent:'center'}}>
                 <MapView
-                style={{width:'100%',height:'100%'}}
+                style={styles.map}
                 provider={PROVIDER_GOOGLE}
-               initialRegion={list.coordinates}
-
+              //  initialRegion={list.coordinates}
+              region={list.coordinates}
               >
                   <Marker coordinate={list.coordinates}
                   />
@@ -375,7 +381,7 @@ opacity: 0.7,width:30,
           </View>
 
         </SlidingUpPanel>
-     */}
+    
      <BottomSheet
      onCancel={()=>{toggleAnimation()}}
      animation={showAnimation}/>
@@ -501,4 +507,5 @@ inputBox: {
   backgroundColor:'#EDEDED'
 },
 
+map:{...StyleSheet.absoluteFillObject},
 });

@@ -61,7 +61,7 @@ const ProfileScreen = ({navigation}) => {
             <Icon name="credit-card-alt" size={15}  /> 
             <Text>     My Cards</Text>
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('PaymentScreen')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Creditcard')}>
             <Icon name="chevron-right" size={15}  />
             </TouchableOpacity>
         </View>

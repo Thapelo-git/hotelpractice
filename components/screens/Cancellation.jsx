@@ -1,6 +1,7 @@
 import React ,{useState}from 'react'
 import { StyleSheet, Text, View ,Animated,TouchableOpacity,Dimensions} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
+import Flatbutton from "../styles/button"
 const screenWidth = Dimensions.get("screen").width;
 const Cancellation = ({onCancel,animation}) => {
       return(
@@ -22,8 +23,16 @@ const Cancellation = ({onCancel,animation}) => {
                   <Feather name='x' size={30}/>
                 </View>
               </TouchableOpacity>
-              
-           
+              <View>
+                  <Text style={{fontSize:30,paddingVertical:30}}>Cancellation Policy</Text>
+              <Text>No charge if cancelled day before arrival.
+                   Penalty charge for late cancellation 
+                   is R100 per night</Text>    
+              </View>
+              <Flatbutton text='Continue'
+               onPress={()=>
+                navigation.navigate('CheckAvailability')}/>
+            
           </Animated.View>
         )
       

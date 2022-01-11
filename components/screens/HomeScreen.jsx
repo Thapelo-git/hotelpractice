@@ -49,9 +49,17 @@ const HomeScreen = ({navigation}) => {
                 style={{marginVertical:5,height:210,width:cardWidth}}
                 resizeMode="contain">
                     <View style={{backgroundColor: 'white',
-opacity: 0.7,width:'93%',height:50,
-                borderTopLeftRadius:70,marginTop:160,paddingt:20,marginStart:6}}>
-                    <Text style={{marginHorizontal:10,marginStart:80}}>{Hotels._price}</Text>
+opacity: 0.7,width:'80%',height:50,
+                marginTop:160,paddingt:20,marginStart:18,
+                justifyContent:'flex-start',alignItems:'flex-start'}}>
+                    <View style={{flexDirection:'row'}}>
+                        <Ionicons name='location-sharp' size={16}/>
+                    <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels._location}</Text>
+                    </View>
+                    <View style={{flexDirection:'row'}}>
+                        <Ionicons name='star' size={16} color='orange'/>
+                    <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels.rating}</Text>
+                    </View>
                     </View>
                     
                 </ImageBackground>
