@@ -200,7 +200,7 @@ const HotelDetails = ({ navigation, route }) => {
               value={checkin}
               onConfirm={handleConfirm}
               onCancel={hideDatePicker}
-              
+              isValidDate={disableWeekends}
               />
               
            </View>
