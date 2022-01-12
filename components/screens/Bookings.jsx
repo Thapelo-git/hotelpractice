@@ -69,7 +69,14 @@ const Bookings = () => {
             <View style={{padding:10}}>
           <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
           </View>
-          <View>
+          <View style={{marginTop:20,}}>
+          <Text
+            style={{color:'#032B7A',fontWeight:'bold'}}
+            onPress={() => getItem(item)}>
+              
+              {item.hotelname.toUpperCase()}
+
+          </Text>
             <View style={{flexDirection:'row'}}>
               <Ionicons name='location-sharp' size={21}/>
           <Text>{item._location}</Text>

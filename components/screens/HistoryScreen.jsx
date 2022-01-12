@@ -1,19 +1,23 @@
-import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View,FlatList,TextInput } from 'react-native'
+import React,{useState,useEffect,useRef} from 'react'
+import { StyleSheet, Text, View,FlatList,TextInput, Image, ScrollView ,
+  Animated, TouchableOpacity} from 'react-native'
 import { SearchBar } from 'react-native-elements';
-import Hotels from '../onbording/Hotels.jsx'
+
+import NearHotels from '../onbording/NearHotels.jsx';
 import { COLORS } from '../styles/Colors'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+
 import Entypo from 'react-native-vector-icons/Entypo'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { } from 'react-native-gesture-handler';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Cancellation from './Cancellation.jsx';
 
 const HistoryScreen = () => {
     const [searchtext,setSearchtext] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
     useEffect(() => {
-        setFilteredDataSource(Hotels);
-        setMasterDataSource(Hotels);
+        setFilteredDataSource(NearHotels);
+        setMasterDataSource(NearHotels);
     }, [])
 
     const searchFilterFunction =(text)=>{
@@ -35,13 +39,44 @@ const HistoryScreen = () => {
     const ItemView = ({item}) => {
         return (
           // Flat List Item
-          <Text
-            style={styles.itemStyle}
-            onPress={() => getItem(item)}>
-              {item.id}
-              {'.'}
-              {item.name.toUpperCase()}
-          </Text>
+          <View style={{padding:5}}>
+          <ScrollView>
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+            <Text></Text>
+        <Text
+          style={{color:'#032B7A'}}
+          onPress={() => getItem(item)}>
+            
+            {item.hotelname.toUpperCase()}
+
+        </Text>
+        </View>
+        <View style={{flexDirection:'row'}}>
+          <View style={{padding:10}}>
+        <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
+        </View>
+        <View style={{marginTop:20,}}>
+        <Text
+          style={{color:'#032B7A',fontWeight:'bold'}}
+          onPress={() => getItem(item)}>
+            
+            {item.hotelname.toUpperCase()}
+
+        </Text>
+          <View style={{flexDirection:'row'}}>
+            <Ionicons name='location-sharp' size={21}/>
+        <Text>{item._location}</Text>
+        </View>
+        <Text>Successfully paid booking</Text>
+     
+            
+        <Text>Price  {item._price}</Text>
+        
+        
+        </View>
+        </View>
+        </ScrollView>
+        </View>
         );
       };
     

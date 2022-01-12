@@ -66,32 +66,36 @@ const CheckAvailability = ({navigation,route}) => {
               {/* <Text style={styles.text}> {price.price}</Text> */}
               {
                 price.map((item)=>
-                  <View>
-                    <Text></Text>
+                 
+                    
                     
                 
-            <View style={{borderColor:'gray',borderBottomWidth:1,flexDirection:'row'}}>
-            <Image source={item.image} style={{height:120,width:120,borderRadius:20}}/>
-            <Text></Text>
-            <View>
-              <View>
-              <Text>{item.name}</Text>
-              <Text style={{fontSize:20,fontWeight:'bold',marginStart:80}}>{item.bedtype}</Text>
+            <View style={{flexDirection:'row',
+          alignContent:'space-between',justifyContent:'space-between',marginTop:20}}>
+            <Image source={item.image} style={{height:100,width:'40%',borderRadius:10}}/>
+            
+            <View style={{flex:1,flexDirection:'column',paddingHorizontal:15}}>
+            <Text>{item.name}</Text>
+              <View style={{flex:1,flexDirection:'column',paddingHorizontal:15}}>
+              <Text style={{fontSize:16,fontWeight:'bold'}}>{item.bedtype}</Text>
+              
               </View>
-            <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
-            <Text>{item.price}</Text>
-           
+            <View style={{flexDirection:'row'}}>
+            <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {item.price}</Text>
+            
+         
+            
+            </View>
             <TouchableOpacity onPress={()=>navigation.navigate('confirmScreen',{room:item})} >
             <View style={styles.buttonstyle}  >
             <Text style={styles.buttonText}>Book Now</Text>
             </View>
         </TouchableOpacity>
             </View>
-            </View>
            
             </View>
             
-            </View>
+   
                   
                   )
                }
@@ -147,7 +151,7 @@ buttonText:{
     color:'#fff',
     fontWeight:'normal',
     // textTransform:'uppercase',
-    fontSize:20,
+    fontSize:16,
     fontStyle:'normal',
     textAlign:'center'
 },

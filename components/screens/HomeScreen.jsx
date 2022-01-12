@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Hotels from '../onbording/Hotels'
 const {width}=Dimensions.get("screen")
-const cardWidth =width/2 - 20
+const cardWidth =width/1.8
 const HomeScreen = ({navigation}) => {
     const [ selectedBtnIndex,setSelectedBtnIndex] = useState(0);
     const [ selectedHotelIndex,setSelectedHotelIndex] = useState(0);
@@ -45,9 +45,9 @@ const HomeScreen = ({navigation}) => {
         <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
         <View style={styles.cardContainer}>
             <View style={{alignItems:'center'}}>
-                <ImageBackground source={Hotels._image}
-                style={{marginVertical:5,height:210,width:cardWidth}}
-                resizeMode="contain">
+                <Image source={Hotels._image}
+                style={{height:200,width:'100%',borderTopLeftRadius:15,borderTopRightRadius:15}}
+                />
                     <View style={{backgroundColor: 'white',
 opacity: 0.7,width:'80%',height:50,
                 marginTop:160,paddingt:20,marginStart:18,
@@ -62,7 +62,7 @@ opacity: 0.7,width:'80%',height:50,
                     </View>
                     </View>
                     
-                </ImageBackground>
+             
                 
             </View>
         </View>
@@ -72,15 +72,17 @@ opacity: 0.7,width:'80%',height:50,
         return(
         <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels})}>
         <View style={styles.cardNearContainer}>
-            <View style={{alignItems:'center'}}>
-                <ImageBackground source={Hotels._image}
-                style={{marginVertical:5,height:110,width:cardWidth/1}}
-                resizeMode="contain">
-                   
-                    
-                </ImageBackground>
-                
-            </View>
+           
+                <Image source={Hotels._image}
+                style={{height:80,width:'100%',borderTopRightRadius:10,borderTopLeftRadius:10}}
+                />
+                   <View style={{paddingVertical:5,paddingHorizontal:10}}>
+                       <Text style={{fontSize:12,fontWeight:'bold'}}>{Hotels._location}</Text>
+                       <View style={{flexDirection:'row'}}>
+                        <Ionicons name='star' size={12} color='orange'/>
+                    <Text style={{marginHorizontal:10,marginStart:0,fontSize:10}}> {Hotels.rating}</Text>
+                    </View>
+                    </View> 
         </View>
         </TouchableOpacity>)
     }
@@ -97,7 +99,9 @@ opacity: 0.7,width:'80%',height:50,
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
             marginTop:18}}>Thapelo</Text>
             </View>
+            <TouchableOpacity onPress={navigation.navigate('SearchScreen')}>
           <Ionicons name="notifications" size={24}/>
+          </TouchableOpacity>
         </View>
         <View style={{
             marginTop:20,
@@ -105,7 +109,9 @@ opacity: 0.7,width:'80%',height:50,
             paddingHorizontal:20,
         }}>
         <View style={styles.inputContainer}>
+           
         <Ionicons name="search" size={24}/>
+       
         <TextInput 
         style={{fontSize:18,flex:1,marginLeft:10}}
         placeholder="Where to go ?"/>
@@ -119,7 +125,7 @@ opacity: 0.7,width:'80%',height:50,
             keyExtractor={(_,key)=>key.toString()}
             horizontal 
              showsHorizontalScrollIndicator={false}
-            
+             contentContainerStyle={{paddingVertical:30, paddingLeft:20}}
             data={Hotels[selectedBtnIndex].hotel}
             renderItem={({item,index})=><Card Hotels={item} index={index}/>}
             />
@@ -127,14 +133,21 @@ opacity: 0.7,width:'80%',height:50,
             <Text>No Hotels this side</Text>
         )}
         {Hotels?(
+            <View>
+                <View style={{flexDirection:'row',
+                justifyContent:'space-between',marginHorizontal:20}}>
+                        <Text style={{fontWeight:'bold',color:'grey'}}>Near You</Text>
+                        <Text style={{color:'grey'}}>Show all</Text>
+                </View>
             <FlatList
             keyExtractor={(_,key)=>key.toString()}
             horizontal 
              showsHorizontalScrollIndicator={false}
-            
+            contentContainerStyle={{paddingLeft:20,marginTop:0,paddingBottom:10}}
             data={Hotels[selectedHotelIndex+ 3].hotel}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
+            </View>
         ):(
             <Text>No Hotels this side</Text>
         )}
@@ -181,22 +194,27 @@ const styles = StyleSheet.create({
        height:220, 
     },
     cardContainer:{
-        height:220,
-        width:cardWidth/1,
-        marginBottom:20,
-        marginHorizontal:10,
-        marginTop:5,
+        height:200,
+        width:cardWidth,
+        marginRight:20,
+        // marginBottom:20,
+        // marginHorizontal:10,
+        // marginTop:5,
         borderRadius:15,
-        elevation:13,
+        elevation:15,
         backgroundColor:COLORS.white
 
     },
     cardNearContainer:{
       height:120,
-      width:cardWidth/2,
+    //   width:cardWidth/2,
       borderRadius:15, 
       backgroundColor:COLORS.white ,
-      elevation:13,
-      marginLeft:12
+      elevation:15,
+      width:120,
+      marginHorizontal:10,
+    //   marginLeft:12
+
+    
     }
 })
