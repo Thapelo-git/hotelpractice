@@ -113,6 +113,9 @@ const HotelDetails = ({ navigation, route }) => {
           hideDatePicker();
          
         };
+        const disableWeekends = current => {
+          return current.day() !== 0 && current.day() !== 6;
+        }
     return(
       <Animated.View style={{
         width:screenWidth,
@@ -140,6 +143,7 @@ const HotelDetails = ({ navigation, route }) => {
               flexDirection:'row',alignItems:'center',justifyContent:'space-around'}} >
                 <View>
                 <Text>CHECK IN</Text>
+                {/* AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw\\ mnbhgfttdfd */}
               <View style={styles.inputContainer}>
           <View style={styles.inputIconView}>
           <Pressable style={[
@@ -196,14 +200,9 @@ const HotelDetails = ({ navigation, route }) => {
               value={checkin}
               onConfirm={handleConfirm}
               onCancel={hideDatePicker}
+              
               />
-              <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode='date'
-              value={checkout}
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-              />
+              
            </View>
            <View style={{flexDirection:'row' ,alignItems:'stretch',
            justifyContent:'space-between',padding:30}}>

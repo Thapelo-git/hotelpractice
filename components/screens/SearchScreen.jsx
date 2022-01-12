@@ -72,7 +72,7 @@ const SearchScreen = ({navigation}) => {
         console.log(data, details);
       }}
       query={{
-        key: 'AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw',
+        key: 'fg',
         language: 'en',
         
       }}
