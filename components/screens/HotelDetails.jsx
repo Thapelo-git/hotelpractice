@@ -193,6 +193,13 @@ const HotelDetails = ({ navigation, route }) => {
               <DateTimePickerModal
               isVisible={isDatePickerVisible}
               mode='date'
+              value={checkin}
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+              />
+              <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode='date'
               value={checkout}
               onConfirm={handleConfirm}
               onCancel={hideDatePicker}

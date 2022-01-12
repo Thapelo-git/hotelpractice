@@ -36,7 +36,7 @@ export default function App() {
       <Stack.Screen name="EditProfile" options = {{headerShown :false}} component={EditProfile} />
       <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
       <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
-      <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} />
+      {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
     </Stack.Navigator>
   </NavigationContainer>
   );

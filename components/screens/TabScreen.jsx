@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HotelDetails from './HotelDetails';
 import GalleryScreen from './GalleryScreen';
+import SearchScreen from './SearchScreen';
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 function combineHotel(){
