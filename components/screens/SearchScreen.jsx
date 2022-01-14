@@ -53,7 +53,7 @@ const SearchScreen = ({navigation}) => {
             data={NearHotels}
             renderItem={({item,index})=><Card Hotels={item} index={index}/>}
             /> */}
-                <View style={styles.container}>
+                {/* <View style={styles.container}> */}
             {/* <View style={styles.headerContainer} 
             >
                
@@ -63,24 +63,21 @@ const SearchScreen = ({navigation}) => {
             <Text style={styles.headerTitle}></Text>
             </View> */}
             
-            <GooglePlacesAutocomplete
+            {/* <GooglePlacesAutocomplete
       placeholder='Search'
       fetchDetails={true}
-    //   GooglePlacesSearchQuery={{rankby:"distance"}}
+    
       onPress={(data, details = null) => {
-        // 'details' is provided when fetchDetails = true
+       
         console.log(data, details);
       }}
       query={{
-        key: 'fg',
+        key: 'AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw',
         language: 'en',
         
       }}
       
-    //   styles={{
-    //       container:{flex:0,position:'absolute',width:'100%',zIndex:1},
-    //       listView:{backgroundColor:'black'}
-    //   }}
+    
     styles={{ container: {
         marginTop: 95,
         zIndex: 9999,
@@ -111,7 +108,7 @@ const SearchScreen = ({navigation}) => {
             borderBottomWidth: 0
             },
             listView: {
-            // position: 'absolute',
+            position: 'absolute',
             b4ckgroundColor: "white",
             borderWidth: 1,
             borderColor:'red',
@@ -120,8 +117,19 @@ const SearchScreen = ({navigation}) => {
             height:120
             },
             }}
+    /> */}
+    <GooglePlacesAutocomplete
+      placeholder='Search'
+      onPress={(data, details = null) => {
+        // 'details' is provided when fetchDetails = true
+        console.log(data, details);
+      }}
+      query={{
+        key: 'AIzaSyAfevgpvPNjRALaz3jPJhNgE040p9GnH5o',
+        language: 'en',
+      }}
     />
-    </View>
+    {/* </View> */}
         </SafeAreaView>
     )
 }

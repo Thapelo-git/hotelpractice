@@ -94,8 +94,10 @@ opacity: 0.7,width:'80%',height:50,
             />
         <View style={styles.header}>
             <View style={{flexDirection:'row'}}>
-                <Image source={require('../images/profile.jpg')}
+            <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
+                <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
                 style={{height:50,width:50,borderRadius:25}}/>
+                </TouchableOpacity>
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
             marginTop:18}}>Thapelo</Text>
             </View>

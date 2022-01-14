@@ -85,6 +85,7 @@ const HotelDetails = ({ navigation, route }) => {
   const BottomSheet =({onCancel,animation})=>{
     const [date,setDate]=useState(Date())
       const [isDatePickerVisible,setDatePickerVisibility]= useState(false)
+      const [isDatePickerVisibleB,setDatePickerVisibilityB]= useState(false)
       const [checkin,setCheckin]=useState('')
       const [checkout,setCheckout]=useState('')
       const [adultPlus,setAdultPlus]=useState(1)
@@ -94,8 +95,14 @@ const HotelDetails = ({ navigation, route }) => {
       const showDatePicker = () => {
           setDatePickerVisibility(true);
         };
+        const showDatePickerB = () => {
+          setDatePickerVisibilityB(true);
+        };
       
         const hideDatePicker = () => {
+          setDatePickerVisibility(false);
+        };
+         const hideDatePickerB = () => {
           setDatePickerVisibility(false);
         };
       
@@ -107,15 +114,30 @@ const HotelDetails = ({ navigation, route }) => {
         let checkin = tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
         let checkout= tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
         setCheckin(checkin)
-        setCheckout(checkout)
+        // setCheckout(checkout)
           // console.warn("A date has been picked: ", date);
           
           hideDatePicker();
          
         };
+        const handleConfirmB = (date) => {
+          const currentDate =  date;
+      
+        //let tempDate = new Date(currentDate)
+        let tempDate =currentDate
+        let checkin = tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
+        let checkout= tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
+        // setCheckin(checkin)
+        setCheckout(checkout)
+          // console.warn("A date has been picked: ", date);
+          
+          hideDatePickerB();
+         
+        };
         const disableWeekends = current => {
           return current.day() !== 0 && current.day() !== 6;
         }
+        var datetoday= new Date()
     return(
       <Animated.View style={{
         width:screenWidth,
@@ -159,7 +181,7 @@ const HotelDetails = ({ navigation, route }) => {
               <TextInput
                style={styles.inputs}
                placeholder='Enter checkin Date'
-              
+        
                value={checkin}
               //  onChangeText={props.handleChange('email')}
               //  value={props.values.email}
@@ -175,7 +197,7 @@ const HotelDetails = ({ navigation, route }) => {
           <Pressable style={[
               styles.button,
             ] }
-          onPress={showDatePicker}>
+          onPress={showDatePickerB}>
             <Feather
                    name="calendar" size={22}
                   
@@ -185,7 +207,8 @@ const HotelDetails = ({ navigation, route }) => {
               <TextInput
                style={styles.inputs}
                placeholder='Enter checkout Date'
-           
+               onChangeText={(text)=>setCheckout(text)}
+               keyboardType={"numeric"}
                value={checkout}
               //  onChangeText={props.handleChange('email')}
               //  value={props.values.email}
@@ -201,6 +224,16 @@ const HotelDetails = ({ navigation, route }) => {
               onConfirm={handleConfirm}
               onCancel={hideDatePicker}
               isValidDate={disableWeekends}
+              minimumDate={datetoday}
+              />
+              <DateTimePickerModal
+              isVisible={isDatePickerVisibleB}
+              mode='date'
+              value={checkout}
+              onConfirm={handleConfirmB}
+              onCancel={hideDatePickerB}
+              
+              minimumDate={datetoday}
               />
               
            </View>

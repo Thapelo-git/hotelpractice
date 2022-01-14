@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useRef} from 'react'
 import { StyleSheet, Text, View,FlatList,TextInput, Image, ScrollView ,
-  Animated, TouchableOpacity} from 'react-native'
+  Animated, TouchableOpacity ,Alert} from 'react-native'
 import { SearchBar } from 'react-native-elements';
 
 import NearHotels from '../onbording/NearHotels.jsx';
@@ -10,6 +10,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import { } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Cancellation from './Cancellation.jsx';
+import moment from 'moment'
 
 const HistoryScreen = () => {
     const [searchtext,setSearchtext] = useState('');
@@ -37,12 +38,31 @@ const HistoryScreen = () => {
         }
     }
     const ItemView = ({item}) => {
+      var a =moment([2022,1,20])
+      var b =moment([2022,1,4])
+      var given=moment("2022-01-15","YYYY-MM-DD")
+      var current =moment().startOf('day')
         return (
           // Flat List Item
           <View style={{padding:5}}>
           <ScrollView>
           <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-            <Text></Text>
+            <Text>{a.diff(b,'days')}</Text>
+            <Text>{moment.duration(given.diff(current)).asDays()}</Text>
+            {/* {
+              moment('2022-10-20').isBefore('2022-10-22')?(
+                <Text>correct</Text>
+              ):(
+                Alert.alert(
+                  "Error",
+                  "checkout must not be before checkin",
+                  [
+                   
+                    { text: "OK" }
+                  ]
+                )
+              )
+            } */}
         <Text
           style={{color:'#032B7A'}}
           onPress={() => getItem(item)}>

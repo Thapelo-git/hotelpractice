@@ -20,8 +20,10 @@ const ProfileScreen = ({navigation}) => {
              <Text style={{fontSize:18,marginLeft:10,
             }}>Thapelo@gmail.com</Text>
              </View>
-            <Image source={require('../images/profile.jpg')}
+             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
+            <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
                 style={{height:80,width:80,borderRadius:40}}/>
+                </TouchableOpacity>
         </View>
         <View style={styles.editBox}>
             <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',

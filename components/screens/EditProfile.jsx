@@ -10,8 +10,10 @@ import { FONTS } from '../styles/Font'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import * as ImagePicker from 'expo-image-picker';
 
 const EditProfile = ({navigation}) => {
+    const [selectedImage, setSelectedImage] = useState(null);
     const [isPasswordShow,setPasswordShow]=useState(false)
     const ReviewSchem=yup.object({
         name:yup.string().required().min(2),
@@ -20,6 +22,38 @@ const EditProfile = ({navigation}) => {
         password:yup.string().required().min(6),
         confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
     })
+    let openImagePickerAsync = async () => {
+        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    
+        if (permissionResult.granted === false) {
+          alert("Permission to access camera roll is required!");
+          return;
+        }
+    
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        if (pickerResult.cancelled === true) {
+            return;
+          }
+      
+          setSelectedImage({ localUri: pickerResult.uri });
+      }
+    //   if (selectedImage !== null) {
+    //     return (
+    //       <View style={styles.container}>
+    //         <Image
+    //           source={{ uri: selectedImage.localUri }}
+    //           style={{height:120,width:120,borderRadius:60,}}
+    //         />
+             
+           
+             
+            
+        
+ 
+    //       </View>
+    //     );
+    //   }
+      
     return (
         <SafeAreaView>
              <StatusBar
@@ -35,9 +69,20 @@ const EditProfile = ({navigation}) => {
             <Text style={styles.headerTitle}></Text>
             </View>
             <View style={{marginLeft:110}}>
-            <Image source={require('../images/profile.jpg')}
-                style={{height:120,width:120,borderRadius:60,}}/>
-                <TouchableOpacity style={{marginLeft:80}}>
+                {
+                   selectedImage?(<Image
+              source={{ uri: selectedImage.localUri }}
+              style={{height:120,width:120,borderRadius:60,}}
+            />
+                   ):(
+                    <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
+                    style={{height:120,width:120,borderRadius:60,}}/>
+                   ) 
+                }
+            {/* <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
+                style={{height:120,width:120,borderRadius:60,}}/> */}
+                <TouchableOpacity style={{marginLeft:80}}
+               mode="contained" onPress={openImagePickerAsync}>
                 <FontAwesome name='camera' size={29} color='grey'/>
                 </TouchableOpacity>
             </View>
