@@ -74,7 +74,7 @@ opacity: 0.7,width:'80%',height:50,
         <View style={styles.cardNearContainer}>
            
                 <Image source={Hotels._image}
-                style={{height:80,width:'100%',borderTopRightRadius:10,borderTopLeftRadius:10}}
+                style={{height:60,width:'100%',borderTopRightRadius:10,borderTopLeftRadius:10}}
                 />
                    <View style={{paddingVertical:5,paddingHorizontal:10}}>
                        <Text style={{fontSize:12,fontWeight:'bold'}}>{Hotels._location}</Text>

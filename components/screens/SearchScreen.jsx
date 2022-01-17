@@ -1,12 +1,102 @@
-import React from 'react'
-import { SafeAreaView, StyleSheet, Text, View,TextInput,FlatList ,TouchableOpacity,Image} from 'react-native'
+import React,{useState,useEffect} from 'react'
+
+import { SafeAreaView, StyleSheet, Text, View,TextInput,FlatList 
+    ,TouchableOpacity,Image,ScrollView} from 'react-native'
 import NearHotels from '../onbording/NearHotels'
+import SearchData from '../onbording/SearchData'
 import { COLORS } from '../styles/Colors'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Feather from 'react-native-vector-icons/Feather'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const SearchScreen = ({navigation}) => {
+    const [searchtext,setSearchtext] = useState('');
+    const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
+    useEffect(() => {
+        setFilteredDataSource(SearchData);
+        setMasterDataSource(SearchData);
+    }, [])
+
+    const searchFilterFunction =(text)=>{
+        if(text){
+            const newData = masterDataSource.filter(function(item){
+                const itemData = item._location ? item._location.toUpperCase()
+                :''.toUpperCase();
+                const textData = text.toUpperCase();
+                return itemData.indexOf( textData)>-1;
+
+            })
+            setFilteredDataSource(newData);
+            setSearchtext(text)
+        }else {
+            setFilteredDataSource(masterDataSource);
+            setSearchtext(text)
+        }
+    }
+    const ItemView = ({item}) => {
+      
+        return (
+          // Flat List Item
+          <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:item})}>
+          <View style={{padding:5}}>
+          <ScrollView>
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+           
+        {/* <Text
+          style={{color:'#032B7A'}}
+          onPress={() => getItem(item)}>
+            
+            {item._location.toUpperCase()}
+
+        </Text> */}
+        </View>
+        <View style={{flexDirection:'row'}}>
+          <View style={{padding:10}}>
+        <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
+        </View>
+        <View style={{marginTop:20,}}>
+        <Text
+          style={{color:'#032B7A',fontWeight:'bold'}}
+          onPress={() => getItem(item)}>
+            
+            {item.name.toUpperCase()}
+
+        </Text>
+          <View style={{flexDirection:'row'}}>
+            <Ionicons name='location-sharp' size={21}/>
+        <Text>{item._location}</Text>
+        </View>
+        <Text>Successfully paid booking</Text>
+     
+            
+        <Text>Price  {item._price}</Text>
+        
+        
+        </View>
+        </View>
+        </ScrollView>
+        </View>
+       </TouchableOpacity> );
+      };
+    
+      const ItemSeparatorView = () => {
+        return (
+          // Flat List Item Separator
+          <View
+            style={{
+              height: 0.5,
+              width: '100%',
+              backgroundColor: '#C8C8C8',
+            }}
+          />
+        );
+      };
+    
+      const getItem = (item) => {
+        // Function for click on an item
+        alert('Id : ' + item.id + ' Title : ' + item.name);
+      };
     const Card =({Hotels,index})=>{
         return(
         <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
@@ -30,106 +120,29 @@ const SearchScreen = ({navigation}) => {
     }
     return (
         <SafeAreaView >
-        
-             {/* <View style={{
-            marginTop:20,
-            flexDirection:'row',
-            paddingHorizontal:20,
-        }}>
-        <View style={styles.inputContainer}>
-           
+            <View style={styles.header}>
+                
+            </View>
+             <View style={styles.inputContainer}>
         <Ionicons name="search" size={24}/>
-       
         <TextInput 
         style={{fontSize:18,flex:1,marginLeft:10}}
-        placeholder="Where to go ?"/>
+        placeholder="Looking for previews hotel?"
+        onChangeText={(text) => searchFilterFunction(text)}
+        />
+        
+    
         </View>
-        </View> */}
-        {/* <FlatList
-            keyExtractor={(_,key)=>key.toString()}
+           <FlatList
+          data={filteredDataSource}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
+     
+        
           
-             showsVeticalScrollIndicator={false}
-             
-            data={NearHotels}
-            renderItem={({item,index})=><Card Hotels={item} index={index}/>}
-            /> */}
-                {/* <View style={styles.container}> */}
-            {/* <View style={styles.headerContainer} 
-            >
-               
-               <Feather name="arrow-left" size={30} color='black'
-             onPress={()=>navigation.goBack()} /> 
-           
-            <Text style={styles.headerTitle}></Text>
-            </View> */}
-            
-            {/* <GooglePlacesAutocomplete
-      placeholder='Search'
-      fetchDetails={true}
     
-      onPress={(data, details = null) => {
-       
-        console.log(data, details);
-      }}
-      query={{
-        key: 'AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw',
-        language: 'en',
-        
-      }}
-      
-    
-    styles={{ container: {
-        marginTop: 95,
-        zIndex: 9999,
-        width: '100%',
-        borderWidth: 1,
-        margin: 0,
-        padding: 0,
-        position: 'absolute',
-        backgroundColor: 'white',
-        
-        },
-        textInput: {
-            color: 'balck',
-            paddingTop: 0,
-            paddingBottom: 0,
-            paddingLeft: 0,
-            paddingRight: 0,
-            marginTop: 0,
-            marginLeft: 0,
-            marginRight: 0,
-            borderWidth: 0,
-            height: 44,
-            },
-           
-           textInputContainer: {
-            backgroundColor: 'rgba(0,0,0,0)',
-            borderTopWidth: 0,
-            borderBottomWidth: 0
-            },
-            listView: {
-            position: 'absolute',
-            b4ckgroundColor: "white",
-            borderWidth: 1,
-            borderColor:'red',
-            width: '100%',
-            zIndex: 9999,
-            height:120
-            },
-            }}
-    /> */}
-    <GooglePlacesAutocomplete
-      placeholder='Search'
-      onPress={(data, details = null) => {
-        // 'details' is provided when fetchDetails = true
-        console.log(data, details);
-      }}
-      query={{
-        key: 'AIzaSyAfevgpvPNjRALaz3jPJhNgE040p9GnH5o',
-        language: 'en',
-      }}
-    />
-    {/* </View> */}
         </SafeAreaView>
     )
 }
@@ -138,14 +151,29 @@ export default SearchScreen
 
 const styles = StyleSheet.create({
     inputContainer:{
-        flex:1,
+      
         height:50,
+        width:'100%',
         borderRadius:10,
+        // borderWidth:1,
         flexDirection:'row',
         backgroundColor:COLORS.lightgray,
         alignItems:'center',
         paddingHorizontal:20, 
+        
+        
     },
+    header: {
+        width:'100%',
+        height:20,
+        paddingVertical: 30,
+        // borderRadius:10,
+        alignItems:'center',
+        backgroundColor: '#0225A1',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        marginBottom:12
+        },
     container:{
         // padding:20,
         // height:'100%',
@@ -153,5 +181,6 @@ const styles = StyleSheet.create({
     },
     // headerContainer:{
     //     marginTop:20,
-    // }
+    // },
+    
 })

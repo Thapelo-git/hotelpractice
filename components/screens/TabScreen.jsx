@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import HomeScreen from './HomeScreen';
@@ -33,9 +33,7 @@ const TabScreen = () => {
     return (
         <Tab.Navigator
         initialRouteName="HomeScreen"
-        activeColor="#fff"
-       
-        >
+        activeColor="#fff">
             <Tab.Screen name="HomeScreen" component={HomeScreen}
             options={{
                 tabBarLabel:'Home',

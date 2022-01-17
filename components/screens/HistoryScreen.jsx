@@ -38,31 +38,13 @@ const HistoryScreen = () => {
         }
     }
     const ItemView = ({item}) => {
-      var a =moment([2022,1,20])
-      var b =moment([2022,1,4])
-      var given=moment("2022-01-15","YYYY-MM-DD")
-      var current =moment().startOf('day')
+      
         return (
           // Flat List Item
           <View style={{padding:5}}>
           <ScrollView>
           <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-            <Text>{a.diff(b,'days')}</Text>
-            <Text>{moment.duration(given.diff(current)).asDays()}</Text>
-            {/* {
-              moment('2022-10-20').isBefore('2022-10-22')?(
-                <Text>correct</Text>
-              ):(
-                Alert.alert(
-                  "Error",
-                  "checkout must not be before checkin",
-                  [
-                   
-                    { text: "OK" }
-                  ]
-                )
-              )
-            } */}
+           
         <Text
           style={{color:'#032B7A'}}
           onPress={() => getItem(item)}>
@@ -119,14 +101,17 @@ const HistoryScreen = () => {
       };
     return (
         <View>
-           <SearchBar
+           {/* <SearchBar
            placeholder="Looking for previews hotel?"
            onChangeText={(text) => searchFilterFunction(text)}
            onClear={(text) => searchFilterFunction('')}
            value={searchtext}
            round
      
-           />
+           /> */}
+            <View style={styles.header}>
+                
+                </View>
            <View style={{
             marginTop:20,
             flexDirection:'row',
@@ -165,5 +150,15 @@ const styles = StyleSheet.create({
     backgroundColor:COLORS.lightgray,
     alignItems:'center',
     paddingHorizontal:20, 
-},
+},header: {
+  width:'100%',
+  height:20,
+  paddingVertical: 30,
+  // borderRadius:10,
+  alignItems:'center',
+  backgroundColor: '#0225A1',
+  borderBottomLeftRadius: 10,
+  borderBottomRightRadius: 10,
+  marginBottom:12
+  },
 })

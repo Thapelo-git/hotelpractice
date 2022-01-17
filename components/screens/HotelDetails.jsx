@@ -8,7 +8,7 @@ import {
   Image,
   ScrollView,
   FlatList,
-  ImageBackground,
+  ImageBackground,ToastAndroid,
   Dimensions,ImageBackgroud,Animated,Pressable,TextInput
 } from "react-native";
 import Feather from 'react-native-vector-icons/Feather'
@@ -18,7 +18,8 @@ import Flatbutton from "../styles/button"
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Entypo from 'react-native-vector-icons/Entypo'
 import SlidingUpPanel from "rn-sliding-up-panel";
-
+import DatePicker from "react-native-datepicker";
+import moment from 'moment'
 
 import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
 const screenWidth = Dimensions.get("screen").width;
@@ -83,61 +84,22 @@ const HotelDetails = ({ navigation, route }) => {
     </View>
   )
   const BottomSheet =({onCancel,animation})=>{
-    const [date,setDate]=useState(Date())
-      const [isDatePickerVisible,setDatePickerVisibility]= useState(false)
-      const [isDatePickerVisibleB,setDatePickerVisibilityB]= useState(false)
-      const [checkin,setCheckin]=useState('')
-      const [checkout,setCheckout]=useState('')
-      const [adultPlus,setAdultPlus]=useState(1)
+    const [date,setDate]=useState( new Date())
   
+      const [checkin,setCheckin]=useState(date)
+      const [checkout,setCheckout]=useState(date)
+      const [adultPlus,setAdultPlus]=useState(1)
+
       const [childPlus,setChildPlus]=useState(0)
-      
-      const showDatePicker = () => {
-          setDatePickerVisibility(true);
-        };
-        const showDatePickerB = () => {
-          setDatePickerVisibilityB(true);
-        };
-      
-        const hideDatePicker = () => {
-          setDatePickerVisibility(false);
-        };
-         const hideDatePickerB = () => {
-          setDatePickerVisibility(false);
-        };
-      
-        const handleConfirm = (date) => {
-          const currentDate =  date;
-      
-        //let tempDate = new Date(currentDate)
-        let tempDate =currentDate
-        let checkin = tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-        let checkout= tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-        setCheckin(checkin)
-        // setCheckout(checkout)
-          // console.warn("A date has been picked: ", date);
-          
-          hideDatePicker();
-         
-        };
-        const handleConfirmB = (date) => {
-          const currentDate =  date;
-      
-        //let tempDate = new Date(currentDate)
-        let tempDate =currentDate
-        let checkin = tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-        let checkout= tempDate.getDate()+'/'+ (tempDate.getMonth()+ 1)+'/'+tempDate.getFullYear()
-        // setCheckin(checkin)
-        setCheckout(checkout)
-          // console.warn("A date has been picked: ", date);
-          
-          hideDatePickerB();
-         
-        };
-        const disableWeekends = current => {
-          return current.day() !== 0 && current.day() !== 6;
-        }
+      const setToastMsg =msg=>{
+        ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
+    }
+      var a =moment(checkout)
+      var b =moment(checkin)
+      var given=moment("2022-01-15","YYYY-MM-DD")
+     
         var datetoday= new Date()
+        var out =datetoday.setDate(datetoday.getDate()+1)
     return(
       <Animated.View style={{
         width:screenWidth,
@@ -158,85 +120,86 @@ const HotelDetails = ({ navigation, route }) => {
               <Feather name='x' size={30}/>
             </View>
           </TouchableOpacity>
+           {/* AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw\\ mnbhgfttdfd */}
           <SafeAreaView>
           
                
               <View style={{
               flexDirection:'row',alignItems:'center',justifyContent:'space-around'}} >
-                <View>
-                <Text>CHECK IN</Text>
-                {/* AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw\\ mnbhgfttdfd */}
-              <View style={styles.inputContainer}>
-          <View style={styles.inputIconView}>
-          <Pressable style={[
-              styles.button,
-            ] }
-          onPress={showDatePicker}>
-            <Feather
-                   name="calendar" size={22}
-                   
-                   />
-                   </Pressable>
-          </View>
-              <TextInput
-               style={styles.inputs}
-               placeholder='Enter checkin Date'
-        
-               value={checkin}
-              //  onChangeText={props.handleChange('email')}
-              //  value={props.values.email}
-              //  onBlur={props.handleBlur('email')}
-               />
-          
-          </View> 
-          </View>
-          <View>
-          <Text>CHECK OUT</Text>
-          <View style={styles.inputContainer}>
-          <View style={styles.inputIconView}>
-          <Pressable style={[
-              styles.button,
-            ] }
-          onPress={showDatePickerB}>
-            <Feather
-                   name="calendar" size={22}
-                  
-                   />
-                   </Pressable>
-          </View>
-              <TextInput
-               style={styles.inputs}
-               placeholder='Enter checkout Date'
-               onChangeText={(text)=>setCheckout(text)}
-               keyboardType={"numeric"}
-               value={checkout}
-              //  onChangeText={props.handleChange('email')}
-              //  value={props.values.email}
-              //  onBlur={props.handleBlur('email')}
-               />
-          
-          </View>
-          </View>
-              <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode='date'
-              value={checkin}
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-              isValidDate={disableWeekends}
-              minimumDate={datetoday}
-              />
-              <DateTimePickerModal
-              isVisible={isDatePickerVisibleB}
-              mode='date'
-              value={checkout}
-              onConfirm={handleConfirmB}
-              onCancel={hideDatePickerB}
-              
-              minimumDate={datetoday}
-              />
+         
+                    <DatePicker
+        style={{width: 140}}
+        date={checkin}
+        mode="date"
+        placeholder="CHECK IN"
+        format="YYYY/MM/DD"
+         minDate={datetoday}
+        // maxDate={datetoday}
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => {setCheckin(date)}}
+      />
+                        <DatePicker
+        style={{width: 140}}
+        date={checkout}
+        mode="date"
+        placeholder="CHECK OUT"
+        format="YYYY/MM/DD"
+         minDate={datetoday}
+        // maxDate={datetoday}
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => {setCheckout(date)}}
+      />
+
               
            </View>
+      <View style={{flexDirection:'row' ,justifyContent:'space-between'}}>
+        {
+              moment(checkin).isBefore(checkout)?(
+                <Text></Text>
+              ):(
+             
+              //  setToastMsg('checkout must not be before checkin')
+              <Text style={{color:'red'}}>checkout must not be before checkin</Text>
+              )
+            }
+             {
+              moment(checkin).isSame(checkout)?(
+                setToastMsg('date must not be the same')
+               
+              ):(
+               <Text></Text>
+              )
+            }
+            
+      <Text>{a.diff(b,'days')} Nights</Text>
+            {/* <Text>{moment.duration(given.diff(current)).asDays()}</Text> */}
+      </View>
            <View style={{flexDirection:'row' ,alignItems:'stretch',
            justifyContent:'space-between',padding:30}}>
            <View>
