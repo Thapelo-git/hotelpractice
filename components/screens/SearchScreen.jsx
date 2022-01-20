@@ -34,11 +34,11 @@ const SearchScreen = ({navigation}) => {
             setSearchtext(text)
         }
     }
-    const ItemView = ({item}) => {
+    const ItemView = ({Hotels,index}) => {
       
         return (
           // Flat List Item
-          <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:item})}>
+          <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
           <View style={{padding:5}}>
           <ScrollView>
           <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
@@ -53,24 +53,24 @@ const SearchScreen = ({navigation}) => {
         </View>
         <View style={{flexDirection:'row'}}>
           <View style={{padding:10}}>
-        <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
+        <Image source={Hotels._image} style={{height:120,width:120,borderRadius:10}}/>
         </View>
         <View style={{marginTop:20,}}>
         <Text
           style={{color:'#032B7A',fontWeight:'bold'}}
-          onPress={() => getItem(item)}>
+          onPress={() => getItem(Hotels)}>
             
-            {item.name.toUpperCase()}
+            {Hotels.name.toUpperCase()}
 
         </Text>
           <View style={{flexDirection:'row'}}>
             <Ionicons name='location-sharp' size={21}/>
-        <Text>{item._location}</Text>
+        <Text>{Hotels._location}</Text>
         </View>
         <Text>Successfully paid booking</Text>
      
             
-        <Text>Price  {item._price}</Text>
+        <Text>Price  {Hotels._price}</Text>
         
         
         </View>
@@ -137,7 +137,7 @@ const SearchScreen = ({navigation}) => {
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={ItemView}
+          renderItem={({item,id})=><ItemView Hotels={item} index={id}/>}
         />
      
         

@@ -68,7 +68,7 @@ const EditProfile = ({navigation}) => {
             
             <Text style={styles.headerTitle}></Text>
             </View>
-            <View style={{marginLeft:110}}>
+            <View style={{marginLeft:120}}>
                 {
                    selectedImage?(<Image
               source={{ uri: selectedImage.localUri }}
@@ -81,7 +81,7 @@ const EditProfile = ({navigation}) => {
                 }
             {/* <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
                 style={{height:120,width:120,borderRadius:60,}}/> */}
-                <TouchableOpacity style={{marginLeft:80}}
+                <TouchableOpacity style={{marginLeft:90,marginTop:-20}}
                mode="contained" onPress={openImagePickerAsync}>
                 <FontAwesome name='camera' size={29} color='grey'/>
                 </TouchableOpacity>
