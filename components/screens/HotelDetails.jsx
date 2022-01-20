@@ -65,7 +65,7 @@ const HotelDetails = ({ navigation, route }) => {
     return (
       <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
-      borderRadius:10,top:10}}>
+      borderRadius:10}}>
         
         <MaterialIcons name={aminity} size={aminitieSsize/2}/>
       </View>
@@ -300,7 +300,7 @@ elevation:2,}}>
 opacity: 0.7,width:30,
       height:30,justifyContent:'center',alignItems:'center',
       borderRadius:10,}}>
-               <Feather name="arrow-left" size={30} color='#fff'
+               <Feather name="arrow-left" size={30} color='black'
              onPress={()=>navigation.goBack()} /> 
              </View>
             <Text style={styles.headerTitle}></Text>
@@ -309,6 +309,10 @@ opacity: 0.7,width:30,
       </View>
 
       <View style={styles.cardBox}>
+        <View style={{marginTop:-10}}>
+      <Text
+          style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
+          >{list.name}</Text>
         <View style={{flexDirection:'row'}}>
           <MaterialIcons name='location-pin' size={20}/>
       <Text>{list._location}</Text>
@@ -319,11 +323,13 @@ opacity: 0.7,width:30,
                         <Ionicons name='star-half-sharp' size={16} color='orange'/>
                     <Text style={{marginHorizontal:10,marginStart:0}}>{list.rating}</Text>
                     </View>
-        <View style={{marginLeft:270,top:-50,flext:1}}>
+        <View style={{marginLeft:320,top:-70,flext:1}}>
           
       <Text style={{fontWeight:'bold',fontSize:15}}>R{list._price}</Text>
       <Text style={{fontSize:10}}>per night</Text>
       </View>
+      </View>
+      <View style={{paddingVertical:5}}>
       <Text style={{fontSize:15,fontWeight:'bold',top:-5}}>Aminities</Text>
         <FlatList
           keyExtractor={(_, key) => key.toString()}
@@ -333,7 +339,7 @@ opacity: 0.7,width:30,
           renderItem={({ item }) => <Aminities aminity={item} />}
         />
          
-         <View style={{top:-160}}>
+        
          <Text style={{fontSize:15,fontWeight:'bold',}}>Gallery</Text>
         <FlatList
           keyExtractor={(_, key) => key.toString()}
@@ -344,11 +350,12 @@ opacity: 0.7,width:30,
             <Imageslist images={item} index={index} />
           )}
         />
-        </View>
-
-        <Flatbutton  text='Check Availability'style={{top:-90}} 
-        onPress={()=>{toggleAnimation()}}/>
         
+        </View>
+              <View style={{marginLeft:190,top:-40,}}>
+        <Flatbutton  text='Check Availability'style={{top:10,}} 
+        onPress={()=>{toggleAnimation()}}/>
+</View>
         <SlidingUpPanel
          ref={c=>(_panel=c)}
         draggableRange={{top:700,bottom:120}}
@@ -361,11 +368,11 @@ opacity: 0.7,width:30,
           style={{flex:1,
           backgroundColor:"transparent"}}>
             <View
-            style={{height:120,backgroundColor:"transparent",
+            style={{height:120,backgroundColor:"transparent",marginLeft:-180,
             alignItems:"center",
             justifyContent:'center'}}>
               <Feather name='arrow-up' size={30}/>
-              <Text> Location Swipe up</Text>
+              <Text style={{fontWeight:'bold'}}> Location Swipe up</Text>
             </View>
             <View style={{flex:1,
             backgroundColor:"#fff",alignItems:'center',justifyContent:'center'}}>
@@ -412,6 +419,8 @@ const styles = StyleSheet.create({
   },
   headerContainer:{
     top:10,
+    flexDirection:'row',justifyContent:'space-between',
+    alignContent:'center'
     
 
   },

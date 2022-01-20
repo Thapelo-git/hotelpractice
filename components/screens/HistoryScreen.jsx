@@ -43,7 +43,7 @@ const HistoryScreen = () => {
           // Flat List Item
           <View style={{padding:5}}>
           <ScrollView>
-          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+          {/* <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
            
         <Text
           style={{color:'#032B7A'}}
@@ -52,7 +52,7 @@ const HistoryScreen = () => {
             {item.hotelname.toUpperCase()}
 
         </Text>
-        </View>
+        </View> */}
         <View style={{flexDirection:'row'}}>
           <View style={{padding:10}}>
         <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
@@ -110,7 +110,7 @@ const HistoryScreen = () => {
      
            /> */}
             <View style={styles.header}>
-                
+                <Text style={{color:'#fff'}}>My History</Text>
                 </View>
            <View style={{
             marginTop:20,
@@ -152,13 +152,15 @@ const styles = StyleSheet.create({
     paddingHorizontal:20, 
 },header: {
   width:'100%',
-  height:20,
-  paddingVertical: 30,
+  height:50,
+  paddingVertical: 10,
   // borderRadius:10,
   alignItems:'center',
   backgroundColor: '#0225A1',
   borderBottomLeftRadius: 10,
   borderBottomRightRadius: 10,
-  marginBottom:12
+  marginBottom:12,
+  justifyContent:'center',
+ 
   },
 })

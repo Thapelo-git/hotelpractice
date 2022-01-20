@@ -57,13 +57,13 @@ const Bookings = () => {
             <ScrollView>
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
               <Text></Text>
-          <Text
+          {/* <Text
             style={{color:'#032B7A'}}
             onPress={() => getItem(item)}>
               
               {item.hotelname.toUpperCase()}
 
-          </Text>
+          </Text> */}
           </View>
           <View style={{flexDirection:'row'}}>
             <View style={{padding:10}}>

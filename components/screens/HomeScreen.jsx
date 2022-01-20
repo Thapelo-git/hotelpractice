@@ -43,17 +43,18 @@ const HomeScreen = ({navigation}) => {
     const Card =({Hotels,index})=>{
         return(
         <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
-        <View style={styles.cardContainer}>
-            <View style={{alignItems:'center'}}>
-                <Image source={Hotels._image}
-                style={{height:200,width:'100%',borderTopLeftRadius:15,borderTopRightRadius:15}}
-                />
+        {/* <View style={styles.cardContainer}> */}
+        <ImageBackground style={styles.cardImage} source={Hotels._image}>
+            <View style={{height:100,alignItems:'center'}}>
+                {/* <Image source={Hotels._image}
+                style={{flex:1,resizeMode:'contain'}}
+                /> */}
                     <View style={{backgroundColor: 'white',
-opacity: 0.7,width:'80%',height:50,
-                marginTop:160,paddingt:20,marginStart:18,
+opacity: 0.7,width:'90%',height:55,
+        paddingt:10,paddingHorizontal:12,marginTop:120,
                 justifyContent:'flex-start',alignItems:'flex-start'}}>
                     <View style={{flexDirection:'row'}}>
-                        <Ionicons name='location-sharp' size={16}/>
+                        <Ionicons name='location-sharp' size={16} />
                     <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels._location}</Text>
                     </View>
                     <View style={{flexDirection:'row'}}>
@@ -65,7 +66,8 @@ opacity: 0.7,width:'80%',height:50,
              
                 
             </View>
-        </View>
+            </ImageBackground>
+        {/* </View> */}
         </TouchableOpacity>)
     }
     const CardNear =({Hotels})=>{
@@ -78,10 +80,10 @@ opacity: 0.7,width:'80%',height:50,
                 />
                    <View style={{paddingVertical:5,paddingHorizontal:10}}>
                        <Text style={{fontSize:12,fontWeight:'bold'}}>{Hotels._location}</Text>
-                       <View style={{flexDirection:'row'}}>
+                       {/* <View style={{flexDirection:'row'}}>
                         <Ionicons name='star' size={12} color='orange'/>
                     <Text style={{marginHorizontal:10,marginStart:0,fontSize:10}}> {Hotels.rating}</Text>
-                    </View>
+                    </View> */}
                     </View> 
         </View>
         </TouchableOpacity>)
@@ -122,12 +124,13 @@ opacity: 0.7,width:'80%',height:50,
         <View>
             <ListBtn/>
         </View>
+        <View style={{paddingVertical:20}}>
         {Hotels?(
             <FlatList
             keyExtractor={(_,key)=>key.toString()}
             horizontal 
              showsHorizontalScrollIndicator={false}
-             contentContainerStyle={{paddingVertical:30, paddingLeft:20}}
+             contentContainerStyle={{paddingVertical:5, paddingLeft:20}}
             data={Hotels[selectedBtnIndex].hotel}
             renderItem={({item,index})=><Card Hotels={item} index={index}/>}
             />
@@ -153,7 +156,7 @@ opacity: 0.7,width:'80%',height:50,
         ):(
             <Text>No Hotels this side</Text>
         )}
-        
+        </View>
         </SafeAreaView>
     )
 }
@@ -218,5 +221,13 @@ const styles = StyleSheet.create({
     //   marginLeft:12
 
     
+    },
+    cardImage:{
+        height:190,
+        width:width/2,
+        marginRight:20,
+        padding:10,
+        overflow:'hidden',
+        borderRadius:10,
     }
 })

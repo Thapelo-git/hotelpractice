@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View,TextInput } from 'react-native'
-//import { CreditCardInput } from "react-native-credit-card-input";
+import { CreditCardInput } from "react-native-credit-card-input";
 const PaymentScreen = () => {
     const [cardInput,setCardInput]=useState(0)
     // _onFocus= field=>console.log(field)
@@ -17,14 +17,14 @@ const PaymentScreen = () => {
         <View style={styles.container}>
         <CreditCardInput 
          autoFocus
-        //  requireName={true}
-        //  requireCVC={true}
-        //  requirePostalCode={true}
-        //  validColor='black'
-        //  invalidColor='red'
-        //  placeholderColor='darkgray'
-        //  labelStyle={{color:'black',fontSize:12}}
-        //  InputStyle={{color:'black',fontSize:16}}
+         requireName={true}
+         requireCVC={true}
+         requirePostalCode={true}
+         validColor='black'
+         invalidColor='red'
+         placeholderColor='darkgray'
+         labelStyle={{color:'black',fontSize:12}}
+         InputStyle={{color:'black',fontSize:16}}
          
         //  onfocus={_onFocus}
         //  onChange={_onChange}
