@@ -10,6 +10,9 @@ const Creditcard = () => {
     const [Expiry,setExpiry]=useState('')
     return (
         <SafeAreaView>
+             <View style={styles.header}>
+                <Text style={{color:'#fff'}}>My Cards</Text>
+                </View>
         <View style={styles.container}>
         <View style={styles.card}>
         <Image source={require('../images/MasterCard.png')}
@@ -78,4 +81,17 @@ const styles = StyleSheet.create({
         height:180,
         borderRadius:10,
     }
+    ,header: {
+        width:'100%',
+        height:50,
+        paddingVertical: 10,
+        // borderRadius:10,
+        alignItems:'center',
+        backgroundColor: '#0225A1',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        marginBottom:12,
+        justifyContent:'center',
+       
+        },
 })

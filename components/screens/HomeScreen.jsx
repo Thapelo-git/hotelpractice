@@ -124,13 +124,13 @@ opacity: 0.7,width:'90%',height:55,
         <View>
             <ListBtn/>
         </View>
-        <View style={{paddingVertical:20}}>
+        <View >
         {Hotels?(
             <FlatList
             keyExtractor={(_,key)=>key.toString()}
             horizontal 
              showsHorizontalScrollIndicator={false}
-             contentContainerStyle={{paddingVertical:5, paddingLeft:20}}
+             contentContainerStyle={{ paddingLeft:20}}
             data={Hotels[selectedBtnIndex].hotel}
             renderItem={({item,index})=><Card Hotels={item} index={index}/>}
             />
@@ -140,7 +140,7 @@ opacity: 0.7,width:'90%',height:55,
         {Hotels?(
             <View>
                 <View style={{flexDirection:'row',
-                justifyContent:'space-between',marginHorizontal:20}}>
+                justifyContent:'space-between',marginHorizontal:20,paddingVertical:20}}>
                         <Text style={{fontWeight:'bold',color:'grey'}}>Near You</Text>
                         <Text style={{color:'grey'}}>Show all</Text>
                 </View>
@@ -148,7 +148,7 @@ opacity: 0.7,width:'90%',height:55,
             keyExtractor={(_,key)=>key.toString()}
             horizontal 
              showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{paddingLeft:20,marginTop:0,paddingBottom:10}}
+            contentContainerStyle={{paddingLeft:20,}}
             data={Hotels[selectedHotelIndex+ 3].hotel}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />

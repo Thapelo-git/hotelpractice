@@ -117,14 +117,17 @@ const Bookings = () => {
     
     return (
         <View>
-           <SearchBar
+           {/* <SearchBar
            placeholder="Looking for your bookings?"
            onChangeText={(text) => searchFilterFunction(text)}
            onClear={(text) => searchFilterFunction('')}
            value={searchtext}
            round
      
-           />
+           /> */}
+           <View style={styles.header}>
+                <Text style={{color:'#fff'}}>My Bookings</Text>
+                </View>
            <View style={{
             marginTop:20,
             flexDirection:'row',
@@ -167,6 +170,19 @@ const styles = StyleSheet.create({
     alignItems:'center',
     paddingHorizontal:20, 
 },
+header: {
+  width:'100%',
+  height:50,
+  paddingVertical: 10,
+  // borderRadius:10,
+  alignItems:'center',
+  backgroundColor: '#0225A1',
+  borderBottomLeftRadius: 10,
+  borderBottomRightRadius: 10,
+  marginBottom:12,
+  justifyContent:'center',
+ 
+  },
 })
 
 

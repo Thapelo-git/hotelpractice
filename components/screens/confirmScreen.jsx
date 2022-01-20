@@ -102,7 +102,7 @@ const ConfirmScreen = ({navigation,route}) => {
     </View>
     </View>
                 <View style={{left:50}}>
-                <Flatbutton text='Pay Now'
+                <Flatbutton text='Book Now'
                    onPress={()=>navigation.navigate('PaymentScreen')}/>
                 </View>
                 

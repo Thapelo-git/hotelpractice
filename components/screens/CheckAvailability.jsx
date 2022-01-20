@@ -52,7 +52,7 @@ const CheckAvailability = ({navigation,route}) => {
             <Text style={styles.headerTitle}>Bookings</Text>
             </View>
             <View style={{flexDirection:'row',justifyContent:'center'}}>
-            <Text style={styles.titles}>Sort By</Text>
+            {/* <Text style={styles.titles}>Sort By</Text>
               <Picker 
               selectedValue={sorts}
               
@@ -61,7 +61,7 @@ const CheckAvailability = ({navigation,route}) => {
                   <Picker.Item label='Lowest Price' value='Lowest Price'/>
                   <Picker.Item label='Highest Price' value='Highest Price'/>
                
-              </Picker>
+              </Picker> */}
               </View>
               {/* <Text style={styles.text}> {price.price}</Text> */}
               {
@@ -88,7 +88,7 @@ const CheckAvailability = ({navigation,route}) => {
             </View>
             <TouchableOpacity onPress={()=>navigation.navigate('confirmScreen',{room:item})} >
             <View style={styles.buttonstyle}  >
-            <Text style={styles.buttonText}>Book Now</Text>
+            <Text style={styles.buttonText}>View Bed</Text>
             </View>
         </TouchableOpacity>
             </View>

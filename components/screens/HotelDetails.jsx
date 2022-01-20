@@ -86,8 +86,8 @@ const HotelDetails = ({ navigation, route }) => {
   const BottomSheet =({onCancel,animation})=>{
     const [date,setDate]=useState( new Date())
   
-      const [checkin,setCheckin]=useState(date)
-      const [checkout,setCheckout]=useState(date)
+      const [checkin,setCheckin]=useState()
+      const [checkout,setCheckout]=useState()
       const [adultPlus,setAdultPlus]=useState(1)
 
       const [childPlus,setChildPlus]=useState(0)
@@ -309,7 +309,9 @@ opacity: 0.7,width:30,
       </View>
 
       <View style={styles.cardBox}>
-        <View style={{marginTop:-10}}>
+        
+        <View style={{marginTop:-10,flexDirection:'row',justifyContent:'space-between'}}>
+          <View>
       <Text
           style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
           >{list.name}</Text>
@@ -323,7 +325,8 @@ opacity: 0.7,width:30,
                         <Ionicons name='star-half-sharp' size={16} color='orange'/>
                     <Text style={{marginHorizontal:10,marginStart:0}}>{list.rating}</Text>
                     </View>
-        <View style={{marginLeft:320,top:-70,flext:1}}>
+                    </View>
+        <View style={{flext:1}}>
           
       <Text style={{fontWeight:'bold',fontSize:15}}>R{list._price}</Text>
       <Text style={{fontSize:10}}>per night</Text>
@@ -352,7 +355,7 @@ opacity: 0.7,width:30,
         />
         
         </View>
-              <View style={{marginLeft:190,top:-40,}}>
+              <View style={{marginLeft:110,top:-5,}}>
         <Flatbutton  text='Check Availability'style={{top:10,}} 
         onPress={()=>{toggleAnimation()}}/>
 </View>
@@ -368,7 +371,7 @@ opacity: 0.7,width:30,
           style={{flex:1,
           backgroundColor:"transparent"}}>
             <View
-            style={{height:120,backgroundColor:"transparent",marginLeft:-180,
+            style={{height:60,backgroundColor:"transparent",marginLeft:-180,
             alignItems:"center",
             justifyContent:'center'}}>
               <Feather name='arrow-up' size={30}/>
