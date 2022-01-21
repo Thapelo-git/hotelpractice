@@ -97,7 +97,7 @@ const HotelDetails = ({ navigation, route }) => {
       var a =moment(checkout)
       var b =moment(checkin)
       var given=moment("2022-01-15","YYYY-MM-DD")
-     
+     var diff=0
         var datetoday= new Date()
         var out =datetoday.setDate(datetoday.getDate()+1)
     return(
@@ -197,7 +197,7 @@ const HotelDetails = ({ navigation, route }) => {
               )
             }
             
-      <Text>{a.diff(b,'days')} Nights</Text>
+      <Text>{diff=(a.diff(b,'days'))} Nights</Text>
             {/* <Text>{moment.duration(given.diff(current)).asDays()}</Text> */}
       </View>
            <View style={{flexDirection:'row' ,alignItems:'stretch',
@@ -268,6 +268,7 @@ elevation:2,}}>
                   room2:room2,
                   room3:room3,
                   room4:room4,
+                  diff:diff,
                   })}/>
             </View>
           </SafeAreaView>
