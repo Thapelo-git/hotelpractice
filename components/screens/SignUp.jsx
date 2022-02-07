@@ -7,6 +7,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { FONTS } from '../styles/Font'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { auth } from './firebase'
+import { db } from './firebase'
+import { useAuth } from '../../contexts/AuthContext'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const SignUp = ({navigation}) => {
     const [isPasswordShow,setPasswordShow]=useState(false)
@@ -17,6 +20,46 @@ const SignUp = ({navigation}) => {
         password:yup.string().required().min(6),
         confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
     })
+
+
+    // auth
+    //     .createUserWithEmailAndPassword(
+    //       email.trim().toLowerCase(),password
+    //     )
+    const {signup}=useAuth()
+    const addUser= async (data)=>{
+        try{
+          const {uid,email,password,name,Phonenumber} =data
+        const user = await signup(email.trim().toLowerCase(),password)
+        
+        .then(res =>{
+          db.ref(`/user`).child(res.user.uid).set({
+            name:name,
+            email:email,
+            Phonenumber:Phonenumber,
+            uid:res.user.uid
+          })
+          })
+        }
+        catch(error){
+          if(error.code === 'auth/email-already-in-use'){
+            Alert.alert(
+              'That email adress is already inuse'
+            )
+          }
+          if(error.code === 'auth/invalid-email'){
+            Alert.alert(
+              'That email address is invalid'
+            )
+          }
+          else{
+            Alert.alert(error.code)
+          }
+          
+        }
+        
+      }
+  
     return (
         <SafeAreaView>
              <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
@@ -26,6 +69,10 @@ const SignUp = ({navigation}) => {
         <Formik
         initialValues={{name:'',phonenumber:'',email:'',password:'',confirmpassword:''}}
         validationSchema={ReviewSchem}
+        onSubmit={(values,action)=>{
+            action.resetForm()
+            addUser(values)
+        }}
         >
 
         {(props)=>(
