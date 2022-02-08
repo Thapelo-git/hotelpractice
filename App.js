@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import SplashScreen from './components/screens/SplashScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,17 +17,38 @@ import EditProfile from './components/screens/EditProfile';
 import Creditcard from './components/screens/Creditcard';
 import PaymentScreen from './components/screens/PaymentScreen';
 import SearchScreen from './components/screens/SearchScreen';
+
+import { auth } from './components/screens/firebase';
 const Stack = createNativeStackNavigator();
-export default function App() {
+export default function App({navigation}) {
+  const [signedIn,setSignedIn]=useState(false)
+
+//   auth.onAuthStateChanged((user)=>{
+//     if(user){
+//         setSignedIn(true);
+//        console.log(user.uid,"user------------")
+     
+//     }else{
+     
+//         setSignedIn(false);
+//     }
+// });
   return (
     
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="">
+      {/* {!signedIn ?( */}
+        <>
+    {/* <Stack.Navigator initialRouteName="WelcomeScreen "> */}
       {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
       <Stack.Screen name="WelcomeScreen" options = {{headerShown :false}} component={WelcomeScreen} />
       <Stack.Screen name="SignIn"  component={SignIn} />
       <Stack.Screen name="SignUp"  component={SignUp} />
       <Stack.Screen name="ForgetPassword"  component={ForgetPassword} />
+      {/* </Stack.Navigator> */}
+      </>
+      {/* ):( */}
+        <>
+        {/* <Stack.Navigator initialRouteName="HomeTap"> */}
       <Stack.Screen name="Hotel Details" options = {{headerShown :false}} component={HotelDetails} />
       <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
       <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
@@ -37,7 +58,9 @@ export default function App() {
       <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
       <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
       {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
-    </Stack.Navigator>
+    {/* </Stack.Navigator> */}
+    </>
+      {/* )} */}
   </NavigationContainer>
   );
 }

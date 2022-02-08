@@ -4,14 +4,14 @@ import { auth } from "../components/screens/firebase";
 
 const AuthContext = React.createContext()
 export function useAuth () {
-    return(useContext(AuthContext))
+    return useContext(AuthContext)
 }
 
 const AuthProvider=({children})=>{
 
-const signup=(email,password)=>(
-     auth.createUserWithEmailAndPassword(email,password)
-)
+function signup(email,password){
+    return auth.createUserWithEmailAndPassword(email,password)
+}
 
 const value ={
     signup,
@@ -19,7 +19,7 @@ const value ={
 
 return(
     <AuthContext.Provider value={value}>
-
+        {children}
     </AuthContext.Provider>
 )
 }

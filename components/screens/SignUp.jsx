@@ -22,17 +22,13 @@ const SignUp = ({navigation}) => {
     })
 
 
-    // auth
-    //     .createUserWithEmailAndPassword(
-    //       email.trim().toLowerCase(),password
-    //     )
-    const {signup}=useAuth()
+    
     const addUser= async (data)=>{
         try{
           const {uid,email,password,name,Phonenumber} =data
-        const user = await signup(email.trim().toLowerCase(),password)
-        
-        .then(res =>{
+      const user = await auth.createUserWithEmailAndPassword(
+      email.trim().toLowerCase(),password
+    ).then(res =>{
           db.ref(`/user`).child(res.user.uid).set({
             name:name,
             email:email,
@@ -179,7 +175,7 @@ const SignUp = ({navigation}) => {
         <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='REGISTER' />
+            <Flatbutton text='REGISTER' onPress={props.handleSubmit}/>
             <View style={styles.signupContainer}>
                <Text style={styles.accountText}>Already have account?</Text>
                <Text style={styles.signupText}

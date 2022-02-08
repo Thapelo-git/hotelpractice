@@ -8,6 +8,8 @@ import { Checkbox } from 'react-native-paper'
 import { COLORS } from '../styles/Colors'
 import * as yup from 'yup'
 import { Formik } from 'formik'
+import { auth } from './firebase';
+// import AsyncStorage from '@react-native-async-storage/async-storage'
 const SignIn = ({navigation}) => {
     const [isSelected,setSelection]=useState(false)
     const [isPasswordShow,setPasswordShow]=useState(false)
@@ -15,6 +17,39 @@ const SignIn = ({navigation}) => {
         email:yup.string().required().min(6),
         password:yup.string().required().min(6),
     })
+    // const Submit = async (data) => {
+    //     console.log('run <<<<<<')
+    //     try {
+    //       const { email, password } = data
+    //       const user = await auth
+    //         .signInWithEmailAndPassword(
+    //           email.trim().toLowerCase(), password
+    //         )
+    //         .then(async res => {
+    //           try {
+    //             const jsonValue = JSON.stringify(res.user)
+    //             await AsyncStorage.setItem("user", res.user.uid)
+    //             navigation.navigate('HomeTap')
+    //           } catch (e) {
+    //             // saving error
+    //             console.log('no data')
+    //           }
+    //         })
+    //       Alert.alert(
+    //         'succesfully logged in'
+    //       )
+    
+    //       setToastMsg('succesfully logged in')
+    //     }
+    //     catch (error) {
+    
+    //       Alert.alert(
+    //         error.name,
+    //         error.message
+    //       )
+    //     }
+    // }
+    
     return (
         <SafeAreaView>
             <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
@@ -87,7 +122,7 @@ const SignIn = ({navigation}) => {
         onPress={()=>navigation.navigate('ForgetPassword')}>Forget Password</Text>
         </View>
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='LOGIN' onPress={()=>navigation.navigate('HomeTap')} />
+            <Flatbutton text='LOGIN'  onPress={props.handleSubmit} />
             <View style={styles.signupContainer}>
                <Text style={styles.accountText}>Don't have account?</Text>
                <Text style={styles.signupText}
