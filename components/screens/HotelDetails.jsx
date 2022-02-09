@@ -20,7 +20,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import SlidingUpPanel from "rn-sliding-up-panel";
 import DatePicker from "react-native-datepicker";
 import moment from 'moment'
-
+import LottieView from 'lottie-react-native';
 import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
@@ -120,7 +120,7 @@ const HotelDetails = ({ navigation, route }) => {
               <Feather name='x' size={30}/>
             </View>
           </TouchableOpacity>
-           {/* AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw\\ mnbhgfttdfd */}
+           
           <SafeAreaView>
           
                
@@ -328,9 +328,12 @@ opacity: 0.7,width:30,
                     </View>
                     </View>
         <View style={{flext:1}}>
-          
+          <TouchableOpacity onPress={()=>navigation.navigate('map',{list:list})}>
+        <LottieView style={styles.hotel}
+       source={require('../onbording/makerani.json')} autoPlay loop/>
       <Text style={{fontWeight:'bold',fontSize:15}}>R{list._price}</Text>
       <Text style={{fontSize:10}}>per night</Text>
+      </TouchableOpacity>
       </View>
       </View>
       <View style={{paddingVertical:5}}>
@@ -360,40 +363,7 @@ opacity: 0.7,width:30,
         <Flatbutton  text='Check Availability'style={{top:10,}} 
         onPress={()=>{toggleAnimation()}}/>
 </View>
-        <SlidingUpPanel
-         ref={c=>(_panel=c)}
-        draggableRange={{top:700,bottom:120}}
-        showBackdrop={false}
-        snappingPoints={[200]}
-        height={900}
-        friction={0.7}
-        >
-          <View
-          style={{flex:1,
-          backgroundColor:"transparent"}}>
-            <View
-            style={{height:60,backgroundColor:"transparent",marginLeft:-180,
-            alignItems:"center",
-            justifyContent:'center'}}>
-              <Feather name='arrow-up' size={30}/>
-              <Text style={{fontWeight:'bold'}}> Location Swipe up</Text>
-            </View>
-            <View style={{flex:1,
-            backgroundColor:"#fff",alignItems:'center',justifyContent:'center'}}>
-                <MapView
-                style={styles.map}
-                provider={PROVIDER_GOOGLE}
-              //  initialRegion={list.coordinates}
-              region={list.coordinates}
-              >
-                  <Marker coordinate={list.coordinates}
-                  />
-               
-                </MapView>
-            </View>
-          </View>
-
-        </SlidingUpPanel>
+        
     
      <BottomSheet
      onCancel={()=>{toggleAnimation()}}

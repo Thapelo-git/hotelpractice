@@ -17,10 +17,12 @@ import EditProfile from './components/screens/EditProfile';
 import Creditcard from './components/screens/Creditcard';
 import PaymentScreen from './components/screens/PaymentScreen';
 import SearchScreen from './components/screens/SearchScreen';
+import map from './components/screens/map';
+import { AuthProvider } from './components/contexts/AuthContext';
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    
+    <AuthProvider>
     <NavigationContainer>
     <Stack.Navigator initialRouteName="HomeTap">
       {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
@@ -36,9 +38,11 @@ export default function App() {
       <Stack.Screen name="EditProfile" options = {{headerShown :false}} component={EditProfile} />
       <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
       <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
+      <Stack.Screen name="map" options = {{headerShown :false}} component={map} />
       {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
     </Stack.Navigator>
   </NavigationContainer>
+  </AuthProvider>
   );
 }
 
