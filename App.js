@@ -24,7 +24,7 @@ export default function App() {
   return (
     <AuthProvider>
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="HomeTap">
+    <Stack.Navigator initialRouteName="">
       {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
       <Stack.Screen name="WelcomeScreen" options = {{headerShown :false}} component={WelcomeScreen} />
       <Stack.Screen name="SignIn"  component={SignIn} />

@@ -1,5 +1,6 @@
 import React ,{useState} from 'react'
-import { SafeAreaView, StyleSheet, Text, View,ImageBackground,TextInput,} from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View,
+    ImageBackground,TextInput,Alert,ToastAndroid} from 'react-native'
 import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { FONTS } from '../styles/Font'
@@ -8,6 +9,7 @@ import { Checkbox } from 'react-native-paper'
 import { COLORS } from '../styles/Colors'
 import * as yup from 'yup'
 import { Formik } from 'formik'
+import {useAuth }from '../contexts/AuthContext'
 const SignIn = ({navigation}) => {
     const [isSelected,setSelection]=useState(false)
     const [isPasswordShow,setPasswordShow]=useState(false)
@@ -15,6 +17,43 @@ const SignIn = ({navigation}) => {
         email:yup.string().required().min(6),
         password:yup.string().required().min(6),
     })
+    const setToastMsg =msg=>{
+        ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
+    }
+    const {login}=useAuth()
+    const Submit = async (data) => {
+        console.log('run <<<<<<')
+        try {
+          const { email, password } = data
+          const user = await login(
+              email.trim().toLowerCase(), password
+            ).then(res=>{
+                if(res.user){
+                    navigation.navigate('HomeTap')
+                }
+            })
+
+            // .then(async res => {
+            //   try {
+            //     const jsonValue = JSON.stringify(res.user)
+            //     await AsyncStorage.setItem("user", res.user.uid)
+            //   } catch (e) {
+            //     // saving error
+            //     console.log('no data')
+            //   }
+            // })
+          
+    
+          setToastMsg('succesfully logged in')
+        }
+        catch (error) {
+    
+          Alert.alert(
+            error.name,
+            error.message
+          )
+        }
+    }
     return (
         <SafeAreaView>
             <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
@@ -87,7 +126,7 @@ const SignIn = ({navigation}) => {
         onPress={()=>navigation.navigate('ForgetPassword')}>Forget Password</Text>
         </View>
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='LOGIN' onPress={()=>navigation.navigate('HomeTap')} />
+            <Flatbutton text='LOGIN' onPress={props.handleSubmit} />
             <View style={styles.signupContainer}>
                <Text style={styles.accountText}>Don't have account?</Text>
                <Text style={styles.signupText}

@@ -1,18 +1,29 @@
-import React from 'react'
+import React ,{useState}from 'react'
 import { SafeAreaView, StyleSheet, Text, View ,ImageBackground,TextInput} from 'react-native'
 import { COLORS } from '../styles/Colors'
 import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { FONTS } from '../styles/Font'
+import {useAuth }from '../contexts/AuthContext'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const ForgetPassword = () => {
+    const {resetPassword}=useAuth()
+    const [email,setEmail]=useState();
+    const reset =async()=>{
+        try{
+            await resetPassword(email)
+            setEmail('')
+        }catch(error){
+            Alert.alert(error.message)
+        }
+    }
     return (
         <SafeAreaView>
              <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
              <View style={styles.container}>
             <Text style={{fontFamily:FONTS.extraBold,fontWeight:'bold',fontSize:30,
         color:COLORS.theme}}>Forget Password</Text>
-        <Text style={{fontFamily:FONTS.Regular}}>Please Enter your password to reset your Password</Text>
+        <Text style={{fontFamily:FONTS.Regular}}>Please Enter your email to reset your Password</Text>
          <KeyboardAwareScrollView
              style={styles.innerContainer}>
         <View style={styles.inputContainer}>
@@ -26,12 +37,14 @@ const ForgetPassword = () => {
              style={styles.inputs}
              placeholder='Enter Email'
              keyboardType='email-address'
+             value={email}
+            onChangeText={(e)=>(setEmail(e))}
              />
         
         </View>
        
         <View style={{marginTop:40,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='CONTINUE' />
+            <Flatbutton text='CONTINUE' onPress={()=>reset()} />
            </View>
             </KeyboardAwareScrollView>
         </View>

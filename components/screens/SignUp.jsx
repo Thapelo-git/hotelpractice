@@ -6,7 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { FONTS } from '../styles/Font'
 import { Formik } from 'formik'
-import {auth} from './firebase'
+// import { auth } from './firebase'
+import {useAuth }from '../contexts/AuthContext'
 import {db} from './firebase'
 import * as yup from 'yup'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -19,17 +20,20 @@ const SignUp = ({navigation}) => {
         password:yup.string().required().min(6),
         confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
     })
+    const {signup}=useAuth()
     const addUser= async (data)=>{
         try{
-          const {uid,email,password,name,Phonenumber} =data
-        const user = await auth
-        .createUserWithEmailAndPassword(
-          email.trim().toLowerCase(),password
-        ).then(res =>{
+          const {uid,email,password,name,phonenumber} =data
+        // const user = await auth
+        // .createUserWithEmailAndPassword(
+        //   email.trim().toLowerCase(),password
+        // )
+        await signup(email.trim().toLowerCase(),password)
+        .then(res =>{
           db.ref(`/user`).child(res.user.uid).set({
             name:name,
             email:email,
-            Phonenumber:Phonenumber,
+            Phonenumber:phonenumber,
             uid:res.user.uid
           })
           })
@@ -175,7 +179,7 @@ const SignUp = ({navigation}) => {
         <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='REGISTER' />
+            <Flatbutton text='REGISTER' onPress={props.handleSubmit}/>
             <View style={styles.signupContainer}>
                <Text style={styles.accountText}>Already have account?</Text>
                <Text style={styles.signupText}

@@ -1,11 +1,29 @@
 import React from 'react'
-import { StyleSheet, Text, View ,StatusBar,Image,SafeAreaView,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View ,StatusBar,Image,
+    SafeAreaView,TouchableOpacity,ToastAndroid} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ListItem from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo'
-
+import {useAuth }from '../contexts/AuthContext'
 const ProfileScreen = ({navigation}) => {
+    const setToastMsg =msg=>{
+        ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
+    }
+    const {logOut}=useAuth()
+
+    const onSignout =()=>{
+        logOut()
+        .then(
+           
+                navigation.navigate('SignIn'),
+           
+            setToastMsg('successfully signed out')
+        
+            
+            
+        )
+    }
     return (
         <SafeAreaView style={styles.page}>
             <StatusBar
@@ -75,13 +93,16 @@ const ProfileScreen = ({navigation}) => {
             </View>
             <Icon name="chevron-right" size={15}  />
         </View>
+        <TouchableOpacity onPress={()=>onSignout()}>
         <View style={styles.pagelist}>
+            
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Entypo name="log-out" size={15}  /> 
             <Text>     Log Out</Text>
             </View>
             <Icon name="chevron-right" size={15}  />
         </View>
+        </TouchableOpacity>
         </View>
         </SafeAreaView>
     )
