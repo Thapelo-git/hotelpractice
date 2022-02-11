@@ -25,14 +25,14 @@ const SignUp = ({navigation}) => {
     
     const addUser= async (data)=>{
         try{
-          const {uid,email,password,name,Phonenumber} =data
-      const user = await auth.createUserWithEmailAndPassword(
+          const {uid,email,password,name,phonenumber} =data
+  await auth.createUserWithEmailAndPassword(
       email.trim().toLowerCase(),password
     ).then(res =>{
-          db.ref(`/user`).child(res.user.uid).set({
+          db.ref(`/users`).child(res.user.uid).set({
             name:name,
-            email:email,
-            Phonenumber:Phonenumber,
+            email:email.trim().toLowerCase(),
+            phonenumber:phonenumber,
             uid:res.user.uid
           })
           })

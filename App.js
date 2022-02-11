@@ -17,39 +17,41 @@ import EditProfile from './components/screens/EditProfile';
 import Creditcard from './components/screens/Creditcard';
 import PaymentScreen from './components/screens/PaymentScreen';
 import SearchScreen from './components/screens/SearchScreen';
-
+import HomeScreen from './components/screens/HomeScreen';
 import { auth } from './components/screens/firebase';
+
 const Stack = createNativeStackNavigator();
 export default function App({navigation}) {
   const [signedIn,setSignedIn]=useState(false)
 
-//   auth.onAuthStateChanged((user)=>{
-//     if(user){
-//         setSignedIn(true);
-//        console.log(user.uid,"user------------")
+  auth.onAuthStateChanged((user)=>{
+    if(user){
+        setSignedIn(true);
+       console.log(user.uid,"user------------")
      
-//     }else{
+    }else{
      
-//         setSignedIn(false);
-//     }
-// });
+        setSignedIn(false);
+    }
+});
   return (
     
     <NavigationContainer>
-      {/* {!signedIn ?( */}
-        <>
-    {/* <Stack.Navigator initialRouteName="WelcomeScreen "> */}
-      {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
+      {/* {!signedIn ?(
+        <> */}
+    <Stack.Navigator initialRouteName=" ">
+      <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="WelcomeScreen" options = {{headerShown :false}} component={WelcomeScreen} />
       <Stack.Screen name="SignIn"  component={SignIn} />
       <Stack.Screen name="SignUp"  component={SignUp} />
       <Stack.Screen name="ForgetPassword"  component={ForgetPassword} />
-      {/* </Stack.Navigator> */}
+      {/* </Stack.Navigator>
       </>
-      {/* ):( */}
+      ):(
         <>
-        {/* <Stack.Navigator initialRouteName="HomeTap"> */}
+        <Stack.Navigator initialRouteName="HomeTap"> */}
       <Stack.Screen name="Hotel Details" options = {{headerShown :false}} component={HotelDetails} />
+      <Stack.Screen name="Homescreen" options = {{headerShown :false}} component={HomeScreen} />
       <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
       <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
       <Stack.Screen name="CheckAvailability" options = {{headerShown :false}} component={CheckAvailability} />
@@ -58,9 +60,9 @@ export default function App({navigation}) {
       <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
       <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
       {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
-    {/* </Stack.Navigator> */}
-    </>
-      {/* )} */}
+    </Stack.Navigator>
+    {/* </>
+      )} */}
   </NavigationContainer>
   );
 }

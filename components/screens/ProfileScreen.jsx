@@ -1,11 +1,31 @@
-import React from 'react'
+import React ,{useEffect,useState}from 'react'
 import { StyleSheet, Text, View ,StatusBar,Image,SafeAreaView,TouchableOpacity} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ListItem from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo'
-
+import { auth } from './firebase';
 const ProfileScreen = ({navigation}) => {
+    const [name,setName]=useState('')
+    const [Phonenumber,setPhonenumber]=useState('')
+    const user = auth.currentUser.uid;
+    useEffect(()=>{
+        db.ref(`/users/`+ user).on('value',snap=>{
+          
+          setName(snap.val() && snap.val().name);
+      // setPhonenumber(snap.val().Phonenumber)
+  
+        })
+      
+        
+      },[])
+
+    const onSignout =()=>{
+        
+        auth
+        .signOut()
+        
+    }
     return (
         <SafeAreaView style={styles.page}>
             <StatusBar
@@ -16,7 +36,7 @@ const ProfileScreen = ({navigation}) => {
             
                 <View>
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
-            marginTop:18}}>Thapelo</Text>
+            marginTop:18}}>{name}</Text>
              <Text style={{fontSize:18,marginLeft:10,
             }}>Thapelo@gmail.com</Text>
              </View>
@@ -76,10 +96,12 @@ const ProfileScreen = ({navigation}) => {
             <Icon name="chevron-right" size={15}  />
         </View>
         <View style={styles.pagelist}>
+            <TouchableOpacity  onPress={()=>onSignout() }>
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Entypo name="log-out" size={15}  /> 
             <Text>     Log Out</Text>
             </View>
+            </TouchableOpacity>
             <Icon name="chevron-right" size={15}  />
         </View>
         </View>

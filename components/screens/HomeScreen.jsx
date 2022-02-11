@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { SafeAreaView, StyleSheet, Text, View ,Image, TextInput, TouchableOpacity,
      FlatList, Dimensions,ImageBackground,StatusBar } from 'react-native'
 import { COLORS } from '../styles/Colors'
 import { ScrollView } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Hotels from '../onbording/Hotels'
+import { auth ,db} from './firebase'
 const {width}=Dimensions.get("screen")
 const cardWidth =width/1.8
 const HomeScreen = ({navigation}) => {
+    const [name,setName]=useState(false)
+    const user = auth.currentUser.uid;
+    useEffect(()=>{
+        db.ref(`/users/`+ user).on('value',snap=>{
+          
+          setName(snap.val() && snap.val().name);
+      // setPhonenumber(snap.val().Phonenumber)
+    
+        })
+      
+        
+      },[])
     const [ selectedBtnIndex,setSelectedBtnIndex] = useState(0);
     const [ selectedHotelIndex,setSelectedHotelIndex] = useState(0);
     const Btn =[
@@ -101,7 +114,7 @@ opacity: 0.7,width:'90%',height:55,
                 style={{height:50,width:50,borderRadius:25}}/>
                 </TouchableOpacity>
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
-            marginTop:18}}>Thapelo</Text>
+            marginTop:18}}>{name}</Text>
             </View>
             <TouchableOpacity onPress={navigation.navigate('SearchScreen')}>
           <Ionicons name="notifications" size={24}/>

@@ -1,4 +1,4 @@
-import React, { useState ,useRef} from "react";
+import React, { useState ,useRef,useEffect} from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -19,8 +19,9 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Entypo from 'react-native-vector-icons/Entypo'
 import SlidingUpPanel from "rn-sliding-up-panel";
 import DatePicker from "react-native-datepicker";
-import moment from 'moment'
 
+import moment from 'moment'
+import { auth ,db} from './firebase'
 import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
@@ -31,6 +32,23 @@ const sub = imgContainerHeight * 0.2;
 const aminitieSsize=screenHeight*.06
 
 const HotelDetails = ({ navigation, route }) => {
+  const [food,setFood]=useState(false)
+    const [gym,setgym]=useState(false)
+    const [pool,setPool]=useState(false)
+    const [wifi,setWifi]=useState(false)
+   const [currentkey,setCurrentkey]=useState('')
+    useEffect(()=>{
+      db.ref('/hotels/1aaf0f98-2860-4a0e-98bf-a53d9dd1fb5b').on('value',snap=>{
+        
+        setFood( snap.val().food);
+        setgym( snap.val().food);
+    // setPhonenumber(snap.val().Phonenumber)
+
+      })
+    
+      
+    },[])
+  
   let _panel= React.useRef(null)
   let bs=React.createRef();
   let fall = new Animated.Value(1)
@@ -66,7 +84,8 @@ const HotelDetails = ({ navigation, route }) => {
       <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
       borderRadius:10}}>
-        
+        <MaterialIcons name={food?"fastfood":"no-food"}/>
+        {/* <MaterialIcons name={gym?"fastfood":"no-food"}/> */}
         <MaterialIcons name={aminity} size={aminitieSsize/2}/>
       </View>
     );
