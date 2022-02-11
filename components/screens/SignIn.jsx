@@ -17,38 +17,38 @@ const SignIn = ({navigation}) => {
         email:yup.string().required().min(6),
         password:yup.string().required().min(6),
     })
-    // const Submit = async (data) => {
-    //     console.log('run <<<<<<')
-    //     try {
-    //       const { email, password } = data
-    //       const user = await auth
-    //         .signInWithEmailAndPassword(
-    //           email.trim().toLowerCase(), password
-    //         )
-    //         .then(async res => {
-    //           try {
-    //             const jsonValue = JSON.stringify(res.user)
-    //             await AsyncStorage.setItem("user", res.user.uid)
-    //             navigation.navigate('HomeTap')
-    //           } catch (e) {
-    //             // saving error
-    //             console.log('no data')
-    //           }
-    //         })
-    //       Alert.alert(
-    //         'succesfully logged in'
-    //       )
+    const Submit = async (data) => {
+        console.log('run <<<<<<')
+        try {
+          const { email, password } = data
+          const user = await auth
+            .signInWithEmailAndPassword(
+              email.trim().toLowerCase(), password
+            )
+            .then(async res => {
+              try {
+                const jsonValue = JSON.stringify(res.user)
+                await AsyncStorage.setItem("user", res.user.uid)
+                navigation.navigate('HomeTap')
+              } catch (e) {
+                // saving error
+                console.log('no data')
+              }
+            })
+          Alert.alert(
+            'succesfully logged in'
+          )
     
-    //       setToastMsg('succesfully logged in')
-    //     }
-    //     catch (error) {
+          setToastMsg('succesfully logged in')
+        }
+        catch (error) {
     
-    //       Alert.alert(
-    //         error.name,
-    //         error.message
-    //       )
-    //     }
-    // }
+          Alert.alert(
+            error.name,
+            error.message
+          )
+        }
+    }
     
     return (
         <SafeAreaView>
