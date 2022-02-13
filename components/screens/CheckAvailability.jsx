@@ -10,10 +10,10 @@ import Flatbutton from '../styles/button'
 import ConfirmScreen from './confirmScreen'
 
 const CheckAvailability = ({navigation,route}) => {
-  const [roomnumber,setRoomnumber]=useState(1)
-  const [roomtwo,setRoomtwo]=useState(1)
-  const [roomthree,setRoomthree]=useState(1)
-  const [roomfour,setRoomfour]=useState(1)
+  const [roomnumber,setRoomnumber]=useState(0)
+  const [roomtwo,setRoomtwo]=useState(0)
+  const [roomthree,setRoomthree]=useState(0)
+  const [roomfour,setRoomfour]=useState(0)
   const [cont,setcount]=useState(1)
   const [pickerindex,setpickerindex]=useState(0)
     const [sorts,setSorts]=useState('')
@@ -70,8 +70,7 @@ const CheckAvailability = ({navigation,route}) => {
               </Picker> */}
               </View>
               {/* <Text style={styles.text}> {price.price}</Text> */}
-              {
-                price.map((item)=>
+            
                  
                     
                     
@@ -79,21 +78,20 @@ const CheckAvailability = ({navigation,route}) => {
             <View style={styles.cardItemContainer}>
             <View style={{width:90,
             height:80,marginLeft:-10}}>
-            <Image source={item.image} style={{height:'100%',width:'100%',borderRadius:10,top:10}}/>
+            <Image source={room1.image} style={{height:'100%',width:'100%',borderRadius:10,top:10}}/>
             </View>
             <View style={{flex:1}}>
-            <Text style={{fontSize:16,fontWeight:'bold'}}>{item.name}</Text>
+            <Text style={{fontSize:16,fontWeight:'bold'}}>{room1.name}</Text>
               
-              <Text >{item.bedtype}</Text>
+              <Text >{room1.bedtype}</Text>
               
               
        
-            <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {item.price}</Text>
+            <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {room1.price}</Text>
             
            
             </View>
-            {/* <View style={{flexDirection:'row' ,alignItems:'stretch',
-               justifyContent:'space-between',padding:30}}> */}
+            
                <View style={{width:80}}>
                
       <View style={{flexDirection:'row',justifyContent:'space-between',
@@ -102,7 +100,7 @@ const CheckAvailability = ({navigation,route}) => {
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
-              onPress={()=>setRoomnumber(Math.max(1,roomnumber+1))}>
+              onPress={()=>setRoomnumber(Math.max(0,roomnumber+1))}>
                 <Feather
                        name="plus" size={22}
                        color='black'
@@ -113,7 +111,7 @@ const CheckAvailability = ({navigation,route}) => {
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
-              onPress={()=>setRoomnumber(Math.max(1,roomnumber-1))}>
+              onPress={()=>setRoomnumber(Math.max(0,roomnumber-1))}>
                 <Feather
                        name="minus" size={22}
                        color='black'
@@ -128,12 +126,170 @@ const CheckAvailability = ({navigation,route}) => {
             </View>
    
                   
-                  )
-               }
+                
+               
+                <View style={{height:100,backgroundColor:'#eee'}}>
+            <View style={styles.cardItemContainer}>
+            <View style={{width:90,
+            height:80,marginLeft:-10}}>
+            <Image source={room2.image} style={{height:'100%',width:'100%',borderRadius:10,top:10}}/>
+            </View>
+            <View style={{flex:1}}>
+            <Text style={{fontSize:16,fontWeight:'bold'}}>{room2.name}</Text>
+              
+              <Text >{room2.bedtype}</Text>
+              
+              
+       
+            <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {room2.price}</Text>
+            
+           
+            </View>
+            {/* <View style={{flexDirection:'row' ,alignItems:'stretch',
+               justifyContent:'space-between',padding:30}}> */}
+               <View style={{width:80}}>
+               
+      <View style={{flexDirection:'row',justifyContent:'space-between',
+    borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+    elevation:2,}}>
+                <Pressable style={[
+                  styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                ] }
+              onPress={()=>setRoomtwo(Math.max(0,roomtwo+1))}>
+                <Feather
+                       name="plus" size={22}
+                       color='black'
+                       />
+            
+                </Pressable>
+                <Text style={{fontSize:21}}> {roomtwo} </Text>
+                <Pressable style={[
+                  styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                ] }
+              onPress={()=>setRoomtwo(Math.max(0,roomtwo-1))}>
+                <Feather
+                       name="minus" size={22}
+                       color='black'
+                       />
+            
+                </Pressable>
+
+                </View>
+                </View>
+                
+               
+            </View>
+            </View>
+             <View style={{height:100,backgroundColor:'#eee'}}>
+             <View style={styles.cardItemContainer}>
+             <View style={{width:90,
+             height:80,marginLeft:-10}}>
+             <Image source={room3.image} style={{height:'100%',width:'100%',borderRadius:10,top:10}}/>
+             </View>
+             <View style={{flex:1}}>
+             <Text style={{fontSize:16,fontWeight:'bold'}}>{room3.name}</Text>
+               
+               <Text >{room3.bedtype}</Text>
+               
+               
+        
+             <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {room3.price}</Text>
+             
+            
+             </View>
+             {/* <View style={{flexDirection:'row' ,alignItems:'stretch',
+                justifyContent:'space-between',padding:30}}> */}
+                <View style={{width:80}}>
+                
+       <View style={{flexDirection:'row',justifyContent:'space-between',
+     borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+     elevation:2,}}>
+                 <Pressable style={[
+                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                 ] }
+               onPress={()=>setRoomthree(Math.max(0,roomthree+1))}>
+                 <Feather
+                        name="plus" size={22}
+                        color='black'
+                        />
+             
+                 </Pressable>
+                 <Text style={{fontSize:21}}> {roomthree} </Text>
+                 <Pressable style={[
+                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                 ] }
+               onPress={()=>setRoomthree(Math.max(0,roomthree-1))}>
+                 <Feather
+                        name="minus" size={22}
+                        color='black'
+                        />
+             
+                 </Pressable>
+ 
+                 </View>
+                 </View>
+                 
+                
+             </View>
+             </View>
+           <View style={{height:100,backgroundColor:'#eee'}}>
+           <View style={styles.cardItemContainer}>
+           <View style={{width:90,
+           height:80,marginLeft:-10}}>
+           <Image source={room4.image} style={{height:'100%',width:'100%',borderRadius:10,top:10}}/>
+           </View>
+           <View style={{flex:1}}>
+           <Text style={{fontSize:16,fontWeight:'bold'}}>{room4.name}</Text>
+             
+             <Text >{room4.bedtype}</Text>
+             
+             
+      
+           <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {room4.price}</Text>
+           
+          
+           </View>
+           {/* <View style={{flexDirection:'row' ,alignItems:'stretch',
+              justifyContent:'space-between',padding:30}}> */}
+              <View style={{width:80}}>
+              
+     <View style={{flexDirection:'row',justifyContent:'space-between',
+   borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+   elevation:2,}}>
+               <Pressable style={[
+                 styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+               ] }
+             onPress={()=>setRoomfour(Math.max(0,roomfour+1))}>
+               <Feather
+                      name="plus" size={22}
+                      color='black'
+                      />
+           
+               </Pressable>
+               <Text style={{fontSize:21}}> {roomfour} </Text>
+               <Pressable style={[
+                 styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+               ] }
+             onPress={()=>setRoomfour(Math.max(0,roomfour-1))}>
+               <Feather
+                      name="minus" size={22}
+                      color='black'
+                      />
+           
+               </Pressable>
+
+               </View>
+               </View>
+               
+              
+           </View>
+           </View>
+   
+   
                <Text>{diff}</Text>
                <Text style={{fontSize:25}}>{(room1.price * roomnumber+
-               room2.price * roomnumber+room3.price * roomnumber+
-               room4.price * roomnumber)*diff}</Text>
+               room2.price * roomtwo+room3.price * roomthree+
+               room4.price * roomfour)*diff}</Text>
                
         </SafeAreaView>
     )

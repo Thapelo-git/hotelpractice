@@ -25,11 +25,8 @@ const SignIn = ({navigation}) => {
             .signInWithEmailAndPassword(
               email.trim().toLowerCase(), password
             )
-<<<<<<< HEAD
-            .then( async res => {
-=======
+            
             .then(async res => {
->>>>>>> af1a0f0e8e5c057ab9f6218fe07cc697a26e4de7
               try {
                 const jsonValue = JSON.stringify(res.user)
                 await AsyncStorage.setItem("user", res.user.uid)
@@ -39,10 +36,6 @@ const SignIn = ({navigation}) => {
                 console.log('no data')
               }
             })
-<<<<<<< HEAD
-       
-=======
->>>>>>> af1a0f0e8e5c057ab9f6218fe07cc697a26e4de7
           Alert.alert(
             'succesfully logged in'
           )

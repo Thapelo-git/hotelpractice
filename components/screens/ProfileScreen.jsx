@@ -4,16 +4,27 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import ListItem from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo'
-import { auth } from './firebase';
+import { auth,db } from './firebase';
 const ProfileScreen = ({navigation}) => {
     const [name,setName]=useState('')
-    const [Phonenumber,setPhonenumber]=useState('')
+    const [email,setEmail]=useState('')
     const user = auth.currentUser.uid;
     useEffect(()=>{
         db.ref(`/users/`+ user).on('value',snap=>{
           
           setName(snap.val() && snap.val().name);
-      // setPhonenumber(snap.val().Phonenumber)
+      setEmail(snap.val().email)
+  
+        })
+      
+        
+      },[])
+      const [hotelimage,setSelectedImage]=useState('')
+      useEffect(()=>{
+        db.ref(`/HotelBooking`).on('value',snap=>{
+          
+          
+      setSelectedImage(snap.val().hotelimage)
   
         })
       
@@ -38,10 +49,11 @@ const ProfileScreen = ({navigation}) => {
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
             marginTop:18}}>{name}</Text>
              <Text style={{fontSize:18,marginLeft:10,
-            }}>Thapelo@gmail.com</Text>
+            }}>{email}</Text>
              </View>
              <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
-            <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
+                
+            <Image source={{url:hotelimage}}
                 style={{height:80,width:80,borderRadius:40}}/>
                 </TouchableOpacity>
         </View>
@@ -62,9 +74,9 @@ const ProfileScreen = ({navigation}) => {
         <Text style={{fontSize:17}}>Email</Text>  
             </View>
         <View>
-        <Text>Thapelo</Text>
+        <Text>{name}</Text>
         <Text>0745823169</Text>
-        <Text>Thapelo@gmail.com</Text>
+        <Text>{email}</Text>
         </View>
         </View>
         </View>

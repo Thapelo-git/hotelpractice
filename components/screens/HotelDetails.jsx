@@ -30,13 +30,14 @@ const imgContainerHeight = screenHeight * 0.4;
 const sub = imgContainerHeight * 0.2;
 
 const aminitieSsize=screenHeight*.06
-
+const itemRef =db.ref('/HotelBooking')
 const HotelDetails = ({ navigation, route }) => {
   const [food,setFood]=useState(false)
     const [gym,setgym]=useState(false)
     const [pool,setPool]=useState(false)
     const [wifi,setWifi]=useState(false)
    const [currentkey,setCurrentkey]=useState('')
+   
     useEffect(()=>{
       db.ref('/hotels/1aaf0f98-2860-4a0e-98bf-a53d9dd1fb5b').on('value',snap=>{
         
@@ -58,8 +59,12 @@ const HotelDetails = ({ navigation, route }) => {
   const room2 = route.params.data.Room2
   const room3 = route.params.data.Room3
   const room4 = route.params.data.Room4
-  const anyprice= list.price
+  const hotelimage= list._image
+  const location = list._location
   
+  const addHotelBooking=()=>{
+    itemRef.push({hotelimage,location})
+  }
 
   const Imageslist = ({ images, index }) => {
     return (
@@ -377,7 +382,7 @@ opacity: 0.7,width:30,
         </View>
               <View style={{marginLeft:110,top:-5,}}>
         <Flatbutton  text='Check Availability'style={{top:10,}} 
-        onPress={()=>{toggleAnimation()}}/>
+        onPress={()=>{toggleAnimation(),addHotelBooking()}}/>
 </View>
         <SlidingUpPanel
          ref={c=>(_panel=c)}

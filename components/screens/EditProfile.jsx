@@ -11,8 +11,13 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as ImagePicker from 'expo-image-picker';
+import { db,auth } from './firebase'
+import { storage } from './firebase'
+
 
 const EditProfile = ({navigation}) => {
+    const user = auth.currentUser.uid;
+    const itemRef= db.ref(`/users/`+ user+`/`)
     const [selectedImage, setSelectedImage] = useState(null);
     const [isPasswordShow,setPasswordShow]=useState(false)
     const ReviewSchem=yup.object({
@@ -37,6 +42,35 @@ const EditProfile = ({navigation}) => {
       
           setSelectedImage({ localUri: pickerResult.uri });
       }
+      const uploadImage = async () => {
+        const { uri } = selectedImage;
+        const filename = uri.substring(uri.lastIndexOf('/') + 1);
+        const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+        
+        const task = storage
+          .ref(filename)
+          .putFile(uploadUri);
+        // set progress state
+        // task.on('state_changed', snapshot => {
+        //   setTransferred(
+        //     Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000
+        //   );
+        // });
+        try {
+          await task;
+        } catch (e) {
+          console.error(e);
+        }
+        
+        Alert.alert(
+          'Photo uploaded!',
+          'Your photo has been uploaded to Firebase Cloud Storage!'
+        );
+        setImage(null);
+      };
+    //   const editprofile=()=>{
+    //     itemRef.push({selectedImage})
+    //   }
     //   if (selectedImage !== null) {
     //     return (
     //       <View style={styles.container}>
@@ -197,7 +231,7 @@ const EditProfile = ({navigation}) => {
         <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='UPDATE' />
+            <Flatbutton text='UPDATE'  onPress={()=>{uploadImage()}}/>
       
             </View>
             </KeyboardAwareScrollView>

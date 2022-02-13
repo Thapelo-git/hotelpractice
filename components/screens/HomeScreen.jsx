@@ -110,7 +110,7 @@ opacity: 0.7,width:'90%',height:55,
         <View style={styles.header}>
             <View style={{flexDirection:'row'}}>
             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
-                <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
+                <Image source={{ uri: 'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540chabathapelo%252Fprojectpractice/ImagePicker/7999748e-de51-4cbc-9228-5bc61c45fb3c.jpg'}}
                 style={{height:50,width:50,borderRadius:25}}/>
                 </TouchableOpacity>
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
