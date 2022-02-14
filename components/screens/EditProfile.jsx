@@ -114,7 +114,8 @@ const EditProfile = ({navigation}) => {
                    ) 
                 }
             {/* <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
-                style={{height:120,width:120,borderRadius:60,}}/> */}
+                style={{height:120,width:120,borderRadius:60,}}/>
+                https://aboutreact.com/react-native-firebase-in-app-messaging/ */}
                 <TouchableOpacity style={{marginLeft:90,marginTop:-20}}
                mode="contained" onPress={openImagePickerAsync}>
                 <FontAwesome name='camera' size={29} color='grey'/>
