@@ -68,25 +68,25 @@ const EditProfile = ({navigation}) => {
         );
         setImage(null);
       };
-    //   const editprofile=()=>{
-    //     itemRef.push({selectedImage})
-    //   }
-    //   if (selectedImage !== null) {
-    //     return (
-    //       <View style={styles.container}>
-    //         <Image
-    //           source={{ uri: selectedImage.localUri }}
-    //           style={{height:120,width:120,borderRadius:60,}}
-    //         />
+      const editprofile=()=>{
+        itemRef.push(selectedImage.localUri)
+      }
+      if (selectedImage !== null) {
+        return (
+          <View style={styles.container}>
+            <Image
+              source={{ uri: selectedImage.localUri }}
+              style={{height:120,width:120,borderRadius:60,}}
+            />
              
            
              
             
         
  
-    //       </View>
-    //     );
-    //   }
+          </View>
+        );
+      }
       
     return (
         <SafeAreaView>
@@ -232,7 +232,8 @@ const EditProfile = ({navigation}) => {
         <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='UPDATE'  onPress={()=>{uploadImage()}}/>
+            {/* onPress={()=>{uploadImage()}} */}
+            <Flatbutton text='UPDATE' onPress={()=>{editprofile()}}  />
       
             </View>
             </KeyboardAwareScrollView>

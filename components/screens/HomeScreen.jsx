@@ -4,15 +4,39 @@ import { SafeAreaView, StyleSheet, Text, View ,Image, TextInput, TouchableOpacit
 import { COLORS } from '../styles/Colors'
 import { ScrollView } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import Hotels from '../onbording/Hotels'
+// import Hotels from '../onbording/Hotels'
 import { auth ,db} from './firebase'
 const {width}=Dimensions.get("screen")
 const cardWidth =width/1.8
 const HomeScreen = ({navigation}) => {
     const [name,setName]=useState(false)
+    const [location,setLocation]=useState(false)
+    const [images,setImage]=useState('')
+    const [url,setUrl]=useState('')
+    const [Hotels,setAddHotels]=useState([])
     const user = auth.currentUser.uid;
     useEffect(()=>{
-        db.ref(`/users/`+ user).on('value',snap=>{
+        db.ref('/hotels').on('value',snap=>{
+          
+         const Hotels=[]
+            snap.forEach(action=>{
+                const key=action.key
+                const data =action.val()
+                Hotels.push({
+                    key:key,
+                    location:data.location,
+                    
+                    url:data.url,
+                })
+                setAddHotels(Hotels)
+                console.log(Hotels)
+            })
+        })
+      
+        
+      },[])
+      useEffect(()=>{
+        db.ref('/users/'+ user).on('value',snap=>{
           
           setName(snap.val() && snap.val().name);
       // setPhonenumber(snap.val().Phonenumber)
@@ -30,34 +54,34 @@ const HomeScreen = ({navigation}) => {
         
     ]
     
-    const ListBtn =()=>{
-        return <ScrollView horizontal 
-        showsHorizontalScrollIndicator={false} style={styles.btnListContainer}>
-            {Hotels.map((category,index)=>(
-                <TouchableOpacity key={index} activeOpacity={0.8}
-                onPress={()=> setSelectedBtnIndex(index)} style={{alignItems:'center',justifyContent:'center'
-                ,}}>
-                <View style={{
-                    backgroundColor:selectedBtnIndex == index
-                    ?COLORS.theme
-                    :COLORS.lightgray,
-                    ...styles.categoryBtn,
-                }}>
-                    <Text style={{
-                        fontSize:15,fontWeight:'bold',
-                        color:selectedBtnIndex == index?COLORS.white :COLORS.theme
-                    }}>{category.name}</Text>
-                </View>
-                </TouchableOpacity>
-            ))}
-        </ScrollView>
-    }
+    // const ListBtn =()=>{
+    //     return <ScrollView horizontal 
+    //     showsHorizontalScrollIndicator={false} style={styles.btnListContainer}>
+    //         {Hotels.map((category,index)=>(
+    //             <TouchableOpacity key={index} activeOpacity={0.8}
+    //             onPress={()=> setSelectedBtnIndex(index)} style={{alignItems:'center',justifyContent:'center'
+    //             ,}}>
+    //             <View style={{
+    //                 backgroundColor:selectedBtnIndex == index
+    //                 ?COLORS.theme
+    //                 :COLORS.lightgray,
+    //                 ...styles.categoryBtn,
+    //             }}>
+    //                 <Text style={{
+    //                     fontSize:15,fontWeight:'bold',
+    //                     color:selectedBtnIndex == index?COLORS.white :COLORS.theme
+    //                 }}>{category.name}</Text>
+    //             </View>
+    //             </TouchableOpacity>
+    //         ))}
+    //     </ScrollView>
+    // }
     
     const Card =({Hotels,index})=>{
         return(
         <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
         {/* <View style={styles.cardContainer}> */}
-        <ImageBackground style={styles.cardImage} source={Hotels._image}>
+        <ImageBackground style={styles.cardImage} source={{uri:Hotels.url}}>
             <View style={{height:100,alignItems:'center'}}>
                 {/* <Image source={Hotels._image}
                 style={{flex:1,resizeMode:'contain'}}
@@ -68,11 +92,11 @@ opacity: 0.7,width:'90%',height:55,
                 justifyContent:'flex-start',alignItems:'flex-start'}}>
                     <View style={{flexDirection:'row'}}>
                         <Ionicons name='location-sharp' size={16} />
-                    <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels._location}</Text>
+                    <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels.location}</Text>
                     </View>
                     <View style={{flexDirection:'row'}}>
                         <Ionicons name='star' size={16} color='orange'/>
-                    <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels.rating}</Text>
+                    {/* <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels.rating}</Text> */}
                     </View>
                     </View>
                     
@@ -135,22 +159,22 @@ opacity: 0.7,width:'90%',height:55,
         </View>
         </View>
         <View>
-            <ListBtn/>
+            {/* <ListBtn/> */}
         </View>
         <View >
-        {Hotels?(
+        {/* {Hotels?( */}
             <FlatList
             keyExtractor={(_,key)=>key.toString()}
             horizontal 
              showsHorizontalScrollIndicator={false}
              contentContainerStyle={{ paddingLeft:20}}
-            data={Hotels[selectedBtnIndex].hotel}
+            data={Hotels}
             renderItem={({item,index})=><Card Hotels={item} index={index}/>}
             />
-        ):(
+        {/* ):(
             <Text>No Hotels this side</Text>
-        )}
-        {Hotels?(
+        )} */}
+        {/* {Hotels?(
             <View>
                 <View style={{flexDirection:'row',
                 justifyContent:'space-between',marginHorizontal:20,paddingVertical:20}}>
@@ -168,7 +192,7 @@ opacity: 0.7,width:'90%',height:55,
             </View>
         ):(
             <Text>No Hotels this side</Text>
-        )}
+        )} */}
         </View>
         </SafeAreaView>
     )

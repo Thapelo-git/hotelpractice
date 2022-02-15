@@ -17,7 +17,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Flatbutton from "../styles/button"
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Entypo from 'react-native-vector-icons/Entypo'
-import SlidingUpPanel from "rn-sliding-up-panel";
+// import SlidingUpPanel from "rn-sliding-up-panel";
 import DatePicker from "react-native-datepicker";
 
 import moment from 'moment'
@@ -318,7 +318,7 @@ elevation:2,}}>
     <SafeAreaView style={{flex:1}}>
       <View style={styles.imgContaner}>
       
-        <ImageBackground source={list._image} style={{ width: "100%", height: "100%" }} >
+        <ImageBackground source={list.url} style={{ width: "100%", height: "100%" }} >
         <View style={styles.headerContainer} 
             >
                <View style={{backgroundColor: 'white',
@@ -342,7 +342,7 @@ opacity: 0.7,width:30,
           >{list.name}</Text>
         <View style={{flexDirection:'row'}}>
           <MaterialIcons name='location-pin' size={20}/>
-      <Text>{list._location}</Text>
+      <Text>{list.location}</Text>
       </View>
       <View style={{flexDirection:'row'}}>
                         <Ionicons name='star' size={16} color='orange'/>
@@ -384,7 +384,7 @@ opacity: 0.7,width:30,
         <Flatbutton  text='Check Availability'style={{top:10,}} 
         onPress={()=>{toggleAnimation(),addHotelBooking()}}/>
 </View>
-        <SlidingUpPanel
+        {/* <SlidingUpPanel
          ref={c=>(_panel=c)}
         draggableRange={{top:700,bottom:120}}
         showBackdrop={false}
@@ -417,7 +417,7 @@ opacity: 0.7,width:30,
             </View>
           </View>
 
-        </SlidingUpPanel>
+        </SlidingUpPanel> */}
     
      <BottomSheet
      onCancel={()=>{toggleAnimation()}}

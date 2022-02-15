@@ -19,6 +19,7 @@ import PaymentScreen from './components/screens/PaymentScreen';
 import SearchScreen from './components/screens/SearchScreen';
 import HomeScreen from './components/screens/HomeScreen';
 import { auth } from './components/screens/firebase';
+import EventDemo from './components/screens/Event';
 
 const Stack = createNativeStackNavigator();
 export default function App({navigation}) {
@@ -59,6 +60,7 @@ export default function App({navigation}) {
       <Stack.Screen name="EditProfile" options = {{headerShown :false}} component={EditProfile} />
       <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
       <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
+      {/* <Stack.Screen name="SignIn" options = {{headerShown :false}} component={EventDemo} /> */}
       {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
     </Stack.Navigator>
     {/* </>
