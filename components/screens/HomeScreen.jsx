@@ -75,7 +75,7 @@ const HomeScreen = ({navigation}) => {
     //             </TouchableOpacity>
     //         ))}
     //     </ScrollView>
-    // }
+    // }xcxv
     
     const Card =({Hotels,index})=>{
         return(
@@ -84,7 +84,7 @@ const HomeScreen = ({navigation}) => {
         <ImageBackground style={styles.cardImage} source={{uri:Hotels.url}}>
             <View style={{height:100,alignItems:'center'}}>
                 {/* <Image source={Hotels._image}
-                style={{flex:1,resizeMode:'contain'}}
+                style={{flex:1,resizeMode:'contain'}}vb
                 /> */}
                     <View style={{backgroundColor: 'white',
 opacity: 0.7,width:'90%',height:55,
