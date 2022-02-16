@@ -25,8 +25,13 @@ const HomeScreen = ({navigation}) => {
                 Hotels.push({
                     key:key,
                     location:data.location,
-                    
+                    name:data.name,
                     url:data.url,
+                    price:data.price,
+                    food:data.food,
+                    gym:data.gym,
+                    wifi:data.wifi,
+                    pool:data.pool
                 })
                 setAddHotels(Hotels)
                 console.log(Hotels)
@@ -54,28 +59,28 @@ const HomeScreen = ({navigation}) => {
         
     ]
     
-    // const ListBtn =()=>{
-    //     return <ScrollView horizontal 
-    //     showsHorizontalScrollIndicator={false} style={styles.btnListContainer}>
-    //         {Hotels.map((category,index)=>(
-    //             <TouchableOpacity key={index} activeOpacity={0.8}
-    //             onPress={()=> setSelectedBtnIndex(index)} style={{alignItems:'center',justifyContent:'center'
-    //             ,}}>
-    //             <View style={{
-    //                 backgroundColor:selectedBtnIndex == index
-    //                 ?COLORS.theme
-    //                 :COLORS.lightgray,
-    //                 ...styles.categoryBtn,
-    //             }}>
-    //                 <Text style={{
-    //                     fontSize:15,fontWeight:'bold',
-    //                     color:selectedBtnIndex == index?COLORS.white :COLORS.theme
-    //                 }}>{category.name}</Text>
-    //             </View>
-    //             </TouchableOpacity>
-    //         ))}
-    //     </ScrollView>
-    // }xcxv
+    const ListBtn =()=>{
+        return <ScrollView horizontal 
+        showsHorizontalScrollIndicator={false} style={styles.btnListContainer}>
+            {Btn.map((category,index)=>(
+                <TouchableOpacity key={index} activeOpacity={0.8}
+                onPress={()=> setSelectedBtnIndex(index)} style={{alignItems:'center',justifyContent:'center'
+                ,}}>
+                <View style={{
+                    backgroundColor:selectedBtnIndex == index
+                    ?COLORS.theme
+                    :COLORS.lightgray,
+                    ...styles.categoryBtn,
+                }}>
+                    <Text style={{
+                        fontSize:15,fontWeight:'bold',
+                        color:selectedBtnIndex == index?COLORS.white :COLORS.theme
+                    }}>{category.name}</Text>
+                </View>
+                </TouchableOpacity>
+            ))}
+        </ScrollView>
+    }
     
     const Card =({Hotels,index})=>{
         return(
@@ -112,11 +117,11 @@ opacity: 0.7,width:'90%',height:55,
         <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels})}>
         <View style={styles.cardNearContainer}>
            
-                <Image source={Hotels._image}
+                <Image source={{uri:Hotels.url}}
                 style={{height:60,width:'100%',borderTopRightRadius:10,borderTopLeftRadius:10}}
                 />
                    <View style={{paddingVertical:5,paddingHorizontal:10}}>
-                       <Text style={{fontSize:12,fontWeight:'bold'}}>{Hotels._location}</Text>
+                       <Text style={{fontSize:12,fontWeight:'bold'}}>{Hotels.location}</Text>
                        {/* <View style={{flexDirection:'row'}}>
                         <Ionicons name='star' size={12} color='orange'/>
                     <Text style={{marginHorizontal:10,marginStart:0,fontSize:10}}> {Hotels.rating}</Text>
@@ -159,7 +164,7 @@ opacity: 0.7,width:'90%',height:55,
         </View>
         </View>
         <View>
-            {/* <ListBtn/> */}
+            <ListBtn/>
         </View>
         <View >
         {/* {Hotels?( */}
@@ -174,7 +179,7 @@ opacity: 0.7,width:'90%',height:55,
         {/* ):(
             <Text>No Hotels this side</Text>
         )} */}
-        {/* {Hotels?(
+        {/* {Hotels?( */}
             <View>
                 <View style={{flexDirection:'row',
                 justifyContent:'space-between',marginHorizontal:20,paddingVertical:20}}>
@@ -186,11 +191,11 @@ opacity: 0.7,width:'90%',height:55,
             horizontal 
              showsHorizontalScrollIndicator={false}
             contentContainerStyle={{paddingLeft:20,}}
-            data={Hotels[selectedHotelIndex+ 3].hotel}
+            data={Hotels}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
             </View>
-        ):(
+        {/* ):(
             <Text>No Hotels this side</Text>
         )} */}
         </View>

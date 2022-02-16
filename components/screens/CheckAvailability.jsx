@@ -30,7 +30,7 @@ const CheckAvailability = ({navigation,route}) => {
 // price.push(room2)
 // price.push(room3)
 // price.push(room4)
-    const hotel=route.params.list
+    const hotelinfor=route.params.hotelinfor
    
    const [animationValue,setAnimationValue]=useState(-1000)
   const showAnimation= useRef(new Animated.Value(animationValue)).current

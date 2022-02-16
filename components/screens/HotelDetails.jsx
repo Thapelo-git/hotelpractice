@@ -32,23 +32,13 @@ const sub = imgContainerHeight * 0.2;
 const aminitieSsize=screenHeight*.06
 const itemRef =db.ref('/HotelBooking')
 const HotelDetails = ({ navigation, route }) => {
-  const [food,setFood]=useState(false)
+  // const [food,setFood]=useState(false)
     const [gym,setgym]=useState(false)
     const [pool,setPool]=useState(false)
     const [wifi,setWifi]=useState(false)
    const [currentkey,setCurrentkey]=useState('')
    
-    useEffect(()=>{
-      db.ref('/hotels/1aaf0f98-2860-4a0e-98bf-a53d9dd1fb5b').on('value',snap=>{
-        
-        setFood( snap.val().food);
-        setgym( snap.val().food);
-    // setPhonenumber(snap.val().Phonenumber)
-
-      })
     
-      
-    },[])
   
   let _panel= React.useRef(null)
   let bs=React.createRef();
@@ -59,12 +49,13 @@ const HotelDetails = ({ navigation, route }) => {
   const room2 = route.params.data.Room2
   const room3 = route.params.data.Room3
   const room4 = route.params.data.Room4
-  const hotelimage= list._image
+
+  const hotelinfor= list
   const location = list._location
   
-  const addHotelBooking=()=>{
-    itemRef.push({hotelimage,location})
-  }
+  // const addHotelBooking=()=>{
+  //   itemRef.push({hotelimage,location})
+  // }
 
   const Imageslist = ({ images, index }) => {
     return (
@@ -144,7 +135,7 @@ const HotelDetails = ({ navigation, route }) => {
               <Feather name='x' size={30}/>
             </View>
           </TouchableOpacity>
-           {/* AIzaSyD1oU6YlQOAAv9e8NsErGZLIizIDnbWmxw\\ mnbhgfttdfd */}
+      
           <SafeAreaView>
           
                
@@ -292,6 +283,7 @@ elevation:2,}}>
                   room2:room2,
                   room3:room3,
                   room4:room4,
+                  hotelinfor:hotelinfor,
                   diff:diff,
                   })}/>
             </View>
@@ -318,7 +310,7 @@ elevation:2,}}>
     <SafeAreaView style={{flex:1}}>
       <View style={styles.imgContaner}>
       
-        <ImageBackground source={list.url} style={{ width: "100%", height: "100%" }} >
+        <ImageBackground  source={{uri:list.url}}style={{ width: "100%", height: "100%" }} >
         <View style={styles.headerContainer} 
             >
                <View style={{backgroundColor: 'white',
@@ -353,20 +345,45 @@ opacity: 0.7,width:30,
                     </View>
         <View style={{flext:1}}>
           
-      <Text style={{fontWeight:'bold',fontSize:15}}>R{list._price}</Text>
+      <Text style={{fontWeight:'bold',fontSize:15}}>R{list.price}</Text>
       <Text style={{fontSize:10}}>per night</Text>
       </View>
       </View>
       <View style={{paddingVertical:5}}>
       <Text style={{fontSize:15,fontWeight:'bold',top:-5}}>Aminities</Text>
-        <FlatList
+        {/* <FlatList
           keyExtractor={(_, key) => key.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
           data={list.Aminities}
           renderItem={({ item }) => <Aminities aminity={item} />}
-        />
-         
+        /> */}
+        <View style={{flexDirection:'row'}}>
+  <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
+      height:aminitieSsize,justifyContent:'center',alignItems:'center',
+      borderRadius:10}}>
+        <MaterialIcons name={list.food?"fastfood":"no-food"}/>
+      </View>
+      <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
+      height:aminitieSsize,justifyContent:'center',alignItems:'center',
+      borderRadius:10}}>
+       
+        <MaterialIcons name={list.pool?"pool":"no-food"}/>
+      </View>
+       <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
+      height:aminitieSsize,justifyContent:'center',alignItems:'center',
+      borderRadius:10}}>
+       
+        <MaterialIcons name={list.wifi?"wifi":"wifi-off"}/>
+      </View>
+      <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
+      height:aminitieSsize,justifyContent:'center',alignItems:'center',
+      borderRadius:10}}>
+       
+        <MaterialIcons name={list.gym?"tv-off":"tv"}/>
+      </View>
+      
+      </View>
         
          <Text style={{fontSize:15,fontWeight:'bold',}}>Gallery</Text>
         <FlatList
@@ -382,7 +399,7 @@ opacity: 0.7,width:30,
         </View>
               <View style={{marginLeft:110,top:-5,}}>
         <Flatbutton  text='Check Availability'style={{top:10,}} 
-        onPress={()=>{toggleAnimation(),addHotelBooking()}}/>
+        onPress={()=>{toggleAnimation()}}/>
 </View>
         {/* <SlidingUpPanel
          ref={c=>(_panel=c)}
