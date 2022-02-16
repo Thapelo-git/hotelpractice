@@ -45,10 +45,10 @@ const HotelDetails = ({ navigation, route }) => {
   let fall = new Animated.Value(1)
   const list = route.params.data;
   const galary = route.params.data.innerimages;
-  const room1 = route.params.data.Room1
-  const room2 = route.params.data.Room2
-  const room3 = route.params.data.Room3
-  const room4 = route.params.data.Room4
+  // const room1 = route.params.data.Room1
+  // const room2 = route.params.data.Room2
+  // const room3 = route.params.data.Room3
+  // const room4 = route.params.data.Room4
 
   const hotelinfor= list
   const location = list._location
@@ -279,10 +279,10 @@ elevation:2,}}>
             <Flatbutton text='Book Now'
                onPress={()=>
                 navigation.navigate('CheckAvailability',{
-                  room1:room1,
-                  room2:room2,
-                  room3:room3,
-                  room4:room4,
+                  // room1:room1,
+                  // room2:room2,
+                  // room3:room3,
+                  // room4:room4,
                   hotelinfor:hotelinfor,
                   diff:diff,
                   })}/>

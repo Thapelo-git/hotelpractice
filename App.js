@@ -38,23 +38,24 @@ export default function App({navigation}) {
   return (
     
     <NavigationContainer>
-      {/* {!signedIn ?(
-        <> */}
+      {!signedIn ?(
+        <>
     <Stack.Navigator initialRouteName=" ">
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="WelcomeScreen" options = {{headerShown :false}} component={WelcomeScreen} />
       <Stack.Screen name="SignIn"  component={SignIn} />
       <Stack.Screen name="SignUp"  component={SignUp} />
       <Stack.Screen name="ForgetPassword"  component={ForgetPassword} />
-      {/* </Stack.Navigator>
+      </Stack.Navigator>
       </>
       ):(
         <>
-        <Stack.Navigator initialRouteName="HomeTap"> */}
+        <Stack.Navigator >
+         <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
       <Stack.Screen name="Hotel Details" options = {{headerShown :false}} component={HotelDetails} />
       <Stack.Screen name="Homescreen" options = {{headerShown :false}} component={HomeScreen} />
       <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
-      <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
+     
       <Stack.Screen name="CheckAvailability" options = {{headerShown :false}} component={CheckAvailability} />
       <Stack.Screen name="confirmScreen" options = {{headerShown :false}} component={confirmScreen} />
       <Stack.Screen name="EditProfile" options = {{headerShown :false}} component={EditProfile} />
@@ -63,8 +64,8 @@ export default function App({navigation}) {
       {/* <Stack.Screen name="SignIn" options = {{headerShown :false}} component={EventDemo} /> */}
       {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
     </Stack.Navigator>
-    {/* </>
-      )} */}
+    </>
+      )}
   </NavigationContainer>
   );
 }
