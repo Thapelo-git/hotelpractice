@@ -1,6 +1,8 @@
 const Hotels=[
     {id:1,
     name:'Recomended',
+    innerimages:[require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
+    require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')],
     hotel:[{
         _id:'1',
         name:'Jordan Hotel',

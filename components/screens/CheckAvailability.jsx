@@ -1,6 +1,6 @@
 import React,{useEffect, useState,useRef} from 'react'
 
-import { SafeAreaView,FlatList, StyleSheet, Text, View ,Picker,
+import { SafeAreaView,FlatList, StyleSheet, Text, View ,Picker,ScrollView,
   Pressable,TextInput, Image,TouchableOpacity,Animated} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -14,7 +14,8 @@ const CheckAvailability = ({navigation,route}) => {
   const [roomtwo,setRoomtwo]=useState(0)
   const [roomthree,setRoomthree]=useState(0)
   const [roomfour,setRoomfour]=useState(0)
-  const [cont,setcount]=useState(1)
+  // const [count1,setcount1]=useState(1)
+  const [count2,setcount2]=useState(1)
   const [pickerindex,setpickerindex]=useState(0)
     const [sorts,setSorts]=useState('')
     // const room1=route.params.hotelinfor
@@ -22,16 +23,11 @@ const CheckAvailability = ({navigation,route}) => {
     const room3=route.params.room3
     const room4=route.params.room4
     const diff=route.params.diff
-  // const [price,setPrice]=useState([
-  //   room1,room2,room3,room4
-  // ])
-  // price.price.sort(function(a,b){return a-b})
-// price.push(room1)
-// price.push(room2) 
-// price.push(room3)
-// price.push(room4)
+  
+const count1=0
     const hotelinfor=route.params.hotelinfor
    const roominfor=hotelinfor.room
+   const roominfor2=hotelinfor.room2
    const [animationValue,setAnimationValue]=useState(-1000)
   const showAnimation= useRef(new Animated.Value(animationValue)).current
   console.log(hotelinfor.room)
@@ -47,8 +43,23 @@ const CheckAvailability = ({navigation,route}) => {
     setAnimationValue(val)
   }
     return (
-        <SafeAreaView style={{padding:20}}>
-             <View style={{flexDirection:'row',
+        <SafeAreaView >
+            <View style={styles.header}>
+            <View style={{
+            marginTop:20,
+            flexDirection:'row',
+            justifyContent:'space-between',
+            alignItems:'stretch',
+            paddingHorizontal:20,
+        }}>
+           <Feather name="arrow-left" size={20} color='#fff'
+             onPress={()=>navigation.goBack()} /> 
+             <Text style={{color:'#fff'}}> Rooms</Text>
+        </View>
+                
+                </View>
+          
+             {/* <View style={{flexDirection:'row',
       height:30,justifyContent:'flex-start',alignItems:'center',
       }}>
          
@@ -57,7 +68,7 @@ const CheckAvailability = ({navigation,route}) => {
              
             <Text style={styles.headerTitle}>Bookings</Text>
             </View>
-            <View style={{flexDirection:'row',justifyContent:'center'}}>
+            <View style={{flexDirection:'row',justifyContent:'center'}}> */}
             {/* <Text style={styles.titles}>Sort By</Text>
               <Picker 
               selectedValue={sorts}
@@ -68,12 +79,105 @@ const CheckAvailability = ({navigation,route}) => {
                   <Picker.Item label='Highest Price' value='Highest Price'/>
                
               </Picker> */}
-              </View>
+              {/* </View> */}
               {/* <Text style={styles.text}> {price.price}</Text> */}
             
                  
                     {
-                     hotelinfor.room.map((text)=>
+                     hotelinfor.room.map((item)=>
+                     <View >
+            <ScrollView>
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+              <Text></Text>
+         
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={{padding:10}}>
+          <Image source={{uri:item.roomurl}} style={{height:120,width:120,borderRadius:10}}/>
+          </View>
+          <View style={{marginTop:20,}}>
+          <Text
+            style={{color:'#032B7A',fontWeight:'bold'}}
+            >
+              
+              {item.roomname.toUpperCase()}
+
+          </Text>
+            <View style={{flexDirection:'row'}}>
+              {/* <Ionicons name='location-sharp' size={21}/> */}
+          <Text>{item.bedType}</Text>
+          </View>
+          {/* <Text>Successfully paid booking</Text> */}
+       
+              
+          <Text>Price  {item.beds}</Text>
+          <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
+          alignItems:'center',}}  onPress={()=>navigation.navigate('confirmScreen',{room:item,hotelinfor:hotelinfor,diff:diff})}>
+          <Text style={{color:'#fff'}}>Add number of rooms</Text>
+          </TouchableOpacity>
+          
+          </View>
+          </View>
+          </ScrollView>
+          </View>
+                //         <View style={{height:100,backgroundColor:'#eee'}}>
+                //         <View style={styles.cardItemContainer}>
+                //         <View style={{width:90,
+                //         height:80,marginLeft:-10}}>
+                //         <Image  source={{uri:text.roomurl}} style={{height:'100%',width:'100%',borderRadius:10,top:10}}/>
+                //         </View>
+                //         <View style={{flex:1}}>
+                //         <Text style={{fontSize:16,fontWeight:'bold'}}>{text.roomname}</Text>
+                          
+                //           <Text >{text.bedType}</Text>
+                          
+                          
+                   
+                //         <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {text.beds}</Text>
+                        
+                       
+                //         </View>
+                        
+                //            <View style={{width:80}}>
+                           
+                //   <View style={{flexDirection:'row',justifyContent:'space-between',
+                // borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+                // elevation:2,}}>
+                //             <Pressable style={[
+                //               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                //             ] }
+                //           onPress={()=>setRoomnumber(Math.max(0,roomnumber+1))}>
+                //             <Feather
+                //                    name="plus" size={22}
+                //                    color='black'
+                //                    />
+                        
+                //             </Pressable>
+                //             <Text style={{fontSize:21}}> {roomnumber} </Text>
+                //             <Pressable style={[
+                //               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                //             ] }
+                //           onPress={()=>setRoomnumber(Math.max(0,roomnumber-1))}>
+                //             <Feather
+                //                    name="minus" size={22}
+                //                    color='black'
+                //                    />
+                        
+                //             </Pressable>
+            
+                //             </View>
+                //             </View>
+                           
+                //         </View>
+                //         </View>
+               
+                      )
+                    }
+                    
+              
+                  
+                    {/* {
+                     hotelinfor.room2.map((text)=>
                         <View style={{height:100,backgroundColor:'#eee'}}>
                         <View style={styles.cardItemContainer}>
                         <View style={{width:90,
@@ -87,7 +191,7 @@ const CheckAvailability = ({navigation,route}) => {
                           
                           
                    
-                        <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {text.price}</Text>
+                        <Text style={{fontSize:16,fontWeight:'bold'}}>Price R {text.beds}</Text>
                         
                        
                         </View>
@@ -100,18 +204,18 @@ const CheckAvailability = ({navigation,route}) => {
                             <Pressable style={[
                               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                             ] }
-                          onPress={()=>setRoomnumber(Math.max(0,roomnumber+1))}>
+                          onPress={()=>setRoomtwo(Math.max(0,roomtwo+1))}>
                             <Feather
                                    name="plus" size={22}
                                    color='black'
                                    />
                         
                             </Pressable>
-                            <Text style={{fontSize:21}}> {roomnumber} </Text>
+                            <Text style={{fontSize:21}}> {roomtwo} </Text>
                             <Pressable style={[
                               styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                             ] }
-                          onPress={()=>setRoomnumber(Math.max(0,roomnumber-1))}>
+                          onPress={()=>setRoomtwo(Math.max(0,roomtwo-1))}>
                             <Feather
                                    name="minus" size={22}
                                    color='black'
@@ -127,11 +231,7 @@ const CheckAvailability = ({navigation,route}) => {
                
                       )
                     }
-                    
-              
-                  
-                
-               
+                */}
                 {/* <View style={{height:100,backgroundColor:'#eee'}}>
             <View style={styles.cardItemContainer}>
             <View style={{width:90,
@@ -288,9 +388,10 @@ const CheckAvailability = ({navigation,route}) => {
    
    
                <Text>{diff}</Text>
-               {/* <Text style={{fontSize:25}}>{(room1.price * roomnumber+
-               room2.price * roomtwo+room3.price * roomthree+
-               room4.price * roomfour)*diff}</Text> */}
+             
+              {/* <Text>{count1}</Text> */}
+               {/* <Text style={{fontSize:25}}>{(hotelinfor.room1.beds * roomtwo+
+               hotelinfor.room.beds )*diff}</Text> */}
                
         </SafeAreaView>
     )
@@ -357,5 +458,21 @@ cardItemContainer:{
   paddingHorizontal:12,
  
   borderRadius:10,
-}
+},
+header: {
+  width:'100%',
+  height:50,
+  paddingVertical: 10,
+  // borderRadius:10,
+  alignItems:'center',
+  backgroundColor: '#0225A1',
+  borderBottomLeftRadius: 10,
+  borderBottomRightRadius: 10,
+  marginBottom:12,
+  justifyContent:'center',
+  flexDirection:'row',
+  
+
+ 
+  },
 })

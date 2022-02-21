@@ -32,7 +32,8 @@ const HomeScreen = ({navigation}) => {
                     gym:data.gym,
                     wifi:data.wifi,
                     pool:data.pool,
-                    room:data.room
+                    room:data.room,
+                    room2:data.room2
                 })
                 setAddHotels(Hotels)
                 console.log(Hotels)

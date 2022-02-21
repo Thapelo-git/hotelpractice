@@ -19,7 +19,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Entypo from 'react-native-vector-icons/Entypo'
 // import SlidingUpPanel from "rn-sliding-up-panel";
 import DatePicker from "react-native-datepicker";
-
+// import Hotels from "../onbording/Hotels";
 import moment from 'moment'
 import { auth ,db} from './firebase'
 import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
@@ -29,7 +29,7 @@ const {height} = Dimensions.get('window')
 const imgContainerHeight = screenHeight * 0.4;
 const sub = imgContainerHeight * 0.2;
 
-const aminitieSsize=screenHeight*.06
+const aminitieSsize=screenHeight*.08
 const itemRef =db.ref('/HotelBooking')
 const HotelDetails = ({ navigation, route }) => {
   // const [food,setFood]=useState(false)
@@ -38,7 +38,8 @@ const HotelDetails = ({ navigation, route }) => {
     const [wifi,setWifi]=useState(false)
    const [currentkey,setCurrentkey]=useState('')
    
-    
+   const hotel= [require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
+   require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
   
   let _panel= React.useRef(null)
   let bs=React.createRef();
@@ -340,7 +341,7 @@ opacity: 0.7,width:30,
                         <Ionicons name='star' size={16} color='orange'/>
                         <Ionicons name='star' size={16} color='orange'/>
                         <Ionicons name='star-half-sharp' size={16} color='orange'/>
-                    <Text style={{marginHorizontal:10,marginStart:0}}>{list.rating}</Text>
+                    <Text style={{marginHorizontal:10,marginStart:0}}>3.2</Text>
                     </View>
                     </View>
         <View style={{flext:1}}>
@@ -362,25 +363,25 @@ opacity: 0.7,width:30,
   <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
       borderRadius:10}}>
-        <MaterialIcons name={list.food?"fastfood":"no-food"}/>
+        <MaterialIcons name={list.food?"fastfood":"no-food"} size={20}/>
       </View>
       <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
       borderRadius:10}}>
        
-        <MaterialIcons name={list.pool?"pool":"no-food"}/>
+        <MaterialIcons name={list.pool?"pool":"no-food"} size={20}/>
       </View>
        <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
       borderRadius:10}}>
        
-        <MaterialIcons name={list.wifi?"wifi":"wifi-off"}/>
+        <MaterialIcons name={list.wifi?"wifi":"wifi-off"} size={20}/>
       </View>
       <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
       borderRadius:10}}>
        
-        <MaterialIcons name={list.gym?"tv-off":"tv"}/>
+        <MaterialIcons name={list.gym?"tv-off":"tv"} size={20}/>
       </View>
       
       </View>
@@ -390,14 +391,14 @@ opacity: 0.7,width:30,
           keyExtractor={(_, key) => key.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={list.innerimages}
+          data={hotel}
           renderItem={({ item, index }) => (
             <Imageslist images={item} index={index} />
           )}
         />
         
         </View>
-              <View style={{marginLeft:110,top:-5,}}>
+              <View style={{marginLeft:70,top:130,}}>
         <Flatbutton  text='Check Availability'style={{top:10,}} 
         onPress={()=>{toggleAnimation()}}/>
 </View>
@@ -451,10 +452,11 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
-    padding: 10,
+    padding: 20,
     marginTop: imgContainerHeight - sub,
     backgroundColor: "white",
-    flex:1
+    flex:1,
+
   },
   imgContaner: {
     width: screenWidth,

@@ -10,7 +10,9 @@ const screenHeight = Dimensions.get("screen").height;
 const ConfirmScreen = ({navigation,route}) => {
     
        const room=route.params.room
-          const [roomnumber,setRoomnumber]=useState(1)
+          const [roomnumber,setRoomnumber]=useState(0)  
+          const hotelinfor=route.params.hotelinfor
+          const diff=route.params.diff
           
           
         
@@ -26,7 +28,7 @@ const ConfirmScreen = ({navigation,route}) => {
                   <Text style={styles.headerTitle}>Room</Text>
                 </View>
                 <View style={{padding:10,width:screenWidth}}>
-                <Image source={room.image} style={{height:190,width:'100%',borderRadius:7}}/>
+                <Image source={{uri:room.roomurl}} style={{height:190,width:'100%',borderRadius:7}}/>
                 </View>
                 
              
@@ -35,14 +37,14 @@ const ConfirmScreen = ({navigation,route}) => {
                     <View>
                     <Text style={{color:'grey'}}>Room Type</Text>
                     <View style={{paddingVertical:10}}>
-                    <Text>{room.name}</Text>
+                    <Text>{room.bedType}</Text>
                     </View>
               </View>
               <View>
               <Text style={{color:'grey'}}>Capacity</Text>
               <View style={{paddingVertical:10}}>
                   
-                  <Text>{room.bedtype}</Text>
+                  <Text>{room.roomname}</Text>
               </View>
               </View>
                
@@ -71,7 +73,7 @@ const ConfirmScreen = ({navigation,route}) => {
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
-              onPress={()=>setRoomnumber(Math.max(1,roomnumber+1))}>
+              onPress={()=>setRoomnumber(Math.max(0,roomnumber+1))}>
                 <Feather
                        name="plus" size={22}
                        color='black'
@@ -82,7 +84,7 @@ const ConfirmScreen = ({navigation,route}) => {
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
-              onPress={()=>setRoomnumber(Math.max(1,roomnumber-1))}>
+              onPress={()=>setRoomnumber(Math.max(0,roomnumber-1))}>
                 <Feather
                        name="minus" size={22}
                        color='black'
@@ -98,7 +100,7 @@ const ConfirmScreen = ({navigation,route}) => {
                 <View style={{justifyContent:'space-between',
     borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
     elevation:2,}}>
-      <Text style={{fontSize:25}}>{room.price * roomnumber}</Text>
+      <Text style={{fontSize:25}}>{room.beds * roomnumber}</Text>
     </View>
     </View>
                 <View style={{left:50}}>
