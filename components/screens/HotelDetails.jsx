@@ -45,18 +45,13 @@ const HotelDetails = ({ navigation, route }) => {
   let bs=React.createRef();
   let fall = new Animated.Value(1)
   const list = route.params.data;
-  const galary = route.params.data.innerimages;
-  // const room1 = route.params.data.Room1
-  // const room2 = route.params.data.Room2
-  // const room3 = route.params.data.Room3
-  // const room4 = route.params.data.Room4
+  const galary = hotel;
+  
 
   const hotelinfor= list
   const location = list._location
   
-  // const addHotelBooking=()=>{
-  //   itemRef.push({hotelimage,location})
-  // }
+  
 
   const Imageslist = ({ images, index }) => {
     return (
@@ -65,7 +60,7 @@ const HotelDetails = ({ navigation, route }) => {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate("GalleryScreen", {
-              galary: galary,
+              galary:galary,
               index: index,
             })
           }
@@ -280,12 +275,13 @@ elevation:2,}}>
             <Flatbutton text='Book Now'
                onPress={()=>
                 navigation.navigate('CheckAvailability',{
-                  // room1:room1,
-                  // room2:room2,
-                  // room3:room3,
-                  // room4:room4,
+                 
                   hotelinfor:hotelinfor,
                   diff:diff,
+                  childPlus:childPlus,
+                  adultPlus:adultPlus,
+                  checkin:checkin,
+                  checkout:checkout
                   })}/>
             </View>
           </SafeAreaView>
@@ -398,7 +394,7 @@ opacity: 0.7,width:30,
         />
         
         </View>
-              <View style={{marginLeft:70,top:130,}}>
+              <View style={{marginLeft:70,top:60,}}>
         <Flatbutton  text='Check Availability'style={{top:10,}} 
         onPress={()=>{toggleAnimation()}}/>
 </View>

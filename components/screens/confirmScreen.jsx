@@ -13,7 +13,10 @@ const ConfirmScreen = ({navigation,route}) => {
           const [roomnumber,setRoomnumber]=useState(0)  
           const hotelinfor=route.params.hotelinfor
           const diff=route.params.diff
-          
+          const adultPlus=route.params.adultPlus
+          const childPlus=route.params.childPlus
+          const checkin=route.params.checkin
+          const checkout=route.params.checkout
           
         
     return (
@@ -55,11 +58,13 @@ const ConfirmScreen = ({navigation,route}) => {
                   flexDirection:'row',alignItems:'center',justifyContent:'space-around'}} >
                     <View>
                     <Text style={{color:'grey'}}>Your Reservation</Text>
-                  
+                    <Text>Check In {checkin}</Text>
+                    <Text>Check Out {checkout}</Text>
               </View>
               <View>
               <Text style={{color:'grey'}}>Guests</Text>
-              
+              <Text>Adults {adultPlus}</Text>
+              <Text>Children {childPlus}</Text>
               </View>
                
                </View>

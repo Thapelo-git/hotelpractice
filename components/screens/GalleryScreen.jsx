@@ -10,7 +10,7 @@ const GalleryScreen = ({route,navigation}) => {
     const [myGalary,setMyGalary]=useState(0);
     const [backImg,setBackImg]=useState()
     const [myIndex,setMyIndex]=useState(index);
-
+console.log(galaryArr)
    
    
 
