@@ -9,7 +9,9 @@ import { auth ,db} from './firebase'
 const {width}=Dimensions.get("screen")
 const cardWidth =width/1.8
 const HomeScreen = ({navigation}) => {
-    const [name,setName]=useState(false)
+    const [name,setName]=useState('')
+    const [email,setEmail]=useState('')
+    const [Phonenumber,setPhonenumber]=useState('')
     const [location,setLocation]=useState(false)
     const [images,setImage]=useState('')
     const [url,setUrl]=useState('')
@@ -46,12 +48,38 @@ const HomeScreen = ({navigation}) => {
         db.ref('/users/'+ user).on('value',snap=>{
           
           setName(snap.val() && snap.val().name);
-      // setPhonenumber(snap.val().Phonenumber)
-    
+      setPhonenumber(snap.val().Phonenumber)
+      setPhonenumber(snap.val().email)
         })
       
         
       },[])
+      const [searchtext,setSearchtext] = useState('');
+      const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
+      useEffect(()=>{
+      
+        setFilteredDataSource(Hotels);
+        setMasterDataSource(Hotels);
+        
+      },[])
+      const searchFilterFunction =(text)=>{
+        if(text){
+            const newData = masterDataSource.filter(function(item){
+                const itemData = item.name ? item.name.toUpperCase()
+                :''.toUpperCase();
+                const textData = text.toUpperCase();
+                return itemData.indexOf( textData)>-1;
+
+            })
+            setFilteredDataSource(newData);
+            setSearchtext(text)
+        }else {
+            setFilteredDataSource(masterDataSource);
+            setSearchtext(text)
+        }
+    }
+    
     const [ selectedBtnIndex,setSelectedBtnIndex] = useState(0);
     const [ selectedHotelIndex,setSelectedHotelIndex] = useState(0);
     const Btn =[
@@ -140,8 +168,10 @@ opacity: 0.7,width:'90%',height:55,
             />
         <View style={styles.header}>
             <View style={{flexDirection:'row'}}>
-            <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
-                <Image source={{ uri: 'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540chabathapelo%252Fprojectpractice/ImagePicker/7999748e-de51-4cbc-9228-5bc61c45fb3c.jpg'}}
+            <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
+                 email:email,name:name,Phonenumber:Phonenumber
+            })}>
+                <Image source={{ uri: 'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fprojectpractice-33924af9-34b0-4480-a99c-e0f2c39544c6/ImagePicker/8014fb40-f6ac-45b9-a200-a648118a1add.jpg'}}
                 style={{height:50,width:50,borderRadius:25}}/>
                 </TouchableOpacity>
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
@@ -162,7 +192,8 @@ opacity: 0.7,width:'90%',height:55,
        
         <TextInput 
         style={{fontSize:18,flex:1,marginLeft:10}}
-        placeholder="Where to go ?"/>
+        placeholder="Where to go ?"
+        onChangeText={(text) => searchFilterFunction(text)}/>
         </View>
         </View>
         <View>
@@ -193,7 +224,7 @@ opacity: 0.7,width:'90%',height:55,
             horizontal 
              showsHorizontalScrollIndicator={false}
             contentContainerStyle={{paddingLeft:20,}}
-            data={Hotels}
+            data={filteredDataSource}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
             </View>

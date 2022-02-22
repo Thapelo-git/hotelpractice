@@ -15,9 +15,13 @@ import { db,auth } from './firebase'
 import { storage } from './firebase'
 
 
-const EditProfile = ({navigation}) => {
+const EditProfile = ({navigation,route}) => {
+    
+    const name=route.params.name
+    const email=route.params.email
+    const Phonenumber=route.params.Phonenumber
     const user = auth.currentUser.uid;
-    const itemRef= db.ref(`/users/`+ user+`/`)
+    const itemRef= db.ref(`/users/`)
     const [selectedImage, setSelectedImage] = useState(null);
     const [isPasswordShow,setPasswordShow]=useState(false)
     const ReviewSchem=yup.object({
@@ -69,24 +73,24 @@ const EditProfile = ({navigation}) => {
         setImage(null);
       };
       const editprofile=()=>{
-        itemRef.push(selectedImage.localUri)
+        itemRef.child(user).update({img:selectedImage.localUri})
       }
-      if (selectedImage !== null) {
-        return (
-          <View style={styles.container}>
-            <Image
-              source={{ uri: selectedImage.localUri }}
-              style={{height:120,width:120,borderRadius:60,}}
-            />
+    //   if (selectedImage !== null) {
+    //     return (
+    //       <View style={styles.container}>
+    //         <Image
+    //           source={{ uri: selectedImage.localUri }}
+    //           style={{height:120,width:120,borderRadius:60,}}
+    //         />
              
            
              
             
         
  
-          </View>
-        );
-      }
+    //       </View>
+    //     );
+    //   }
       
     return (
         <SafeAreaView>
@@ -124,7 +128,7 @@ const EditProfile = ({navigation}) => {
            
             <View style={{padding:20}}>
             <Formik
-        initialValues={{name:'',phonenumber:'',email:'',password:'',confirmpassword:''}}
+        initialValues={{name:name,phonenumber:Phonenumber,email:email,password:'',confirmpassword:''}}
         validationSchema={ReviewSchem}
         >
 
@@ -160,7 +164,7 @@ const EditProfile = ({navigation}) => {
              placeholder='Enter Phone Number'
              keyboardType='numeric'
              onChangeText={props.handleChange('phonenumber')}
-             value={props.values.phonenumber}
+             value={props.values.Phonenumber}
              onBlur={props.handleBlur('phonenumber')}
              />
         

@@ -8,13 +8,16 @@ import { auth,db } from './firebase';
 const ProfileScreen = ({navigation}) => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
+    const [Phonenumber,setPhonenumber]=useState('')
+    const [img,setImg]=useState('')
     const user = auth.currentUser.uid;
     useEffect(()=>{
         db.ref(`/users/`+ user).on('value',snap=>{
           
           setName(snap.val() && snap.val().name);
       setEmail(snap.val().email)
-  
+      setPhonenumber(snap.val().Phonenumber)
+      setImg(snap.val().img)
         })
       
         
@@ -51,9 +54,11 @@ const ProfileScreen = ({navigation}) => {
              <Text style={{fontSize:18,marginLeft:10,
             }}>{email}</Text>
              </View>
-             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
+             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
+                   email:email,name:name,Phonenumber:Phonenumber
+             })}>
                 
-            <Image source={{url:hotelimage}}
+            <Image source={{url:img}}
                 style={{height:80,width:80,borderRadius:40}}/>
                 </TouchableOpacity>
         </View>
@@ -61,7 +66,9 @@ const ProfileScreen = ({navigation}) => {
             <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',
         paddingRight:20}}>
             <Text></Text>
-            <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
+                   email:email,name:name,Phonenumber:Phonenumber
+             })}>
             
              <Ionicons name='pencil' size={20}/>
             </TouchableOpacity>
@@ -95,7 +102,8 @@ const ProfileScreen = ({navigation}) => {
             <Icon name="credit-card-alt" size={15}  /> 
             <Text>     My Cards</Text>
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Creditcard')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Creditcard'
+            )}>
             <Icon name="chevron-right" size={15}  />
             </TouchableOpacity>
         </View>

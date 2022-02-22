@@ -24,7 +24,7 @@ const HistoryScreen = () => {
     const searchFilterFunction =(text)=>{
         if(text){
             const newData = masterDataSource.filter(function(item){
-                const itemData = item.name ? item.name.toUpperCase()
+                const itemData = item.hotelname ? item.hotelname.toUpperCase()
                 :''.toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf( textData)>-1;
