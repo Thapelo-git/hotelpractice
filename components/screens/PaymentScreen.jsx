@@ -15,7 +15,7 @@ const PaymentScreen = () => {
     return (
         <SafeAreaView>
         <View style={styles.container}>
-        <CreditCardInput 
+        {/* <CreditCardInput 
          autoFocus
          requireName={true}
          requireCVC={true}
@@ -26,21 +26,11 @@ const PaymentScreen = () => {
          labelStyle={{color:'black',fontSize:12}}
          InputStyle={{color:'black',fontSize:16}}
          
-        //  onfocus={_onFocus}
-        //  onChange={_onChange}
-         />
+        
+         /> */}
          
         </View>
-        {/* <View style={{marginTop:260}}>
-        <Text>{cardInput}</Text>
-        <View style={styles.inputContainer}>
-        <TextInput
-         style={styles.inputs}
-         placeholder='card'
-         value={cardInput}
-        />
-         </View>
-         </View> */}
+        
         </SafeAreaView>
     )
 }
