@@ -14,7 +14,9 @@ import {
 import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AntDesign from "react-native-vector-icons/AntDesign"
 import Flatbutton from "../styles/button"
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Entypo from 'react-native-vector-icons/Entypo'
 // import SlidingUpPanel from "rn-sliding-up-panel";
@@ -97,11 +99,9 @@ const HotelDetails = ({ navigation, route }) => {
   const BottomSheet =({onCancel,animation})=>{
     const [date,setDate]=useState( new Date())
   
-      const [checkin,setCheckin]=useState()
-      const [checkout,setCheckout]=useState()
-      const [adultPlus,setAdultPlus]=useState(1)
-
-      const [childPlus,setChildPlus]=useState(0)
+      const [checkin,setCheckin]=useState(new Date())
+      const [checkout,setCheckout]=useState(new Date())
+      
       const setToastMsg =msg=>{
         ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
     }
@@ -110,11 +110,11 @@ const HotelDetails = ({ navigation, route }) => {
       var given=moment("2022-01-15","YYYY-MM-DD")
      var diff=0
         var datetoday= new Date()
-        var out =datetoday.setDate(datetoday.getDate()+1)
+        var morr =moment().add(1,'days').calendar()
     return(
       <Animated.View style={{
         width:screenWidth,
-  
+        height:300,
         backgroundColor:'#fff',
         borderTopLeftRadius:30,borderTopRightRadius:30,padding:20,
         position:'absolute',
@@ -126,16 +126,17 @@ const HotelDetails = ({ navigation, route }) => {
         style={{width:'100%'}}>
           <TouchableOpacity onPress={()=>onCancel()}>
             <View style={{
-              flexDirection:'row',alignItems:'center',justifyContent:"space-between"}}>
-                <Text></Text>
-              <Feather name='x' size={30}/>
+              alignItems:'center',justifyContent:"space-between",padding:20,top:-21}}>
+              
+                <EvilIcons name='close-o' size={25}/>
+              {/* <Feather name='x' size={30}/> */}
             </View>
           </TouchableOpacity>
       
           <SafeAreaView>
           
                
-              <View style={{
+              <View style={{padding:10,top:-15,
               flexDirection:'row',alignItems:'center',justifyContent:'space-around'}} >
          
                     <DatePicker
@@ -208,81 +209,46 @@ const HotelDetails = ({ navigation, route }) => {
               )
             }
             
-      <Text>{diff=(a.diff(b,'days'))} Nights</Text>
+      <Text style={{left:-9}}>{diff=(a.diff(b,'days'))} Nights</Text>
             {/* <Text>{moment.duration(given.diff(current)).asDays()}</Text> */}
       </View>
-           <View style={{flexDirection:'row' ,alignItems:'stretch',
-           justifyContent:'space-between',padding:30}}>
-           <View>
-           <Text>No of Adults</Text>
-  <View style={{flexDirection:'row',justifyContent:'space-between',
-borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
-elevation:2,}}>
-            <Pressable style={[
-              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
-            ] }
-          onPress={()=>setAdultPlus(Math.max(1,adultPlus+1))}>
-            <Feather
-                   name="plus" size={22}
-                   color='black'
-                   />
-        
-            </Pressable>
-            <Text style={{fontSize:21}}> {adultPlus} </Text>
-            <Pressable style={[
-              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
-            ] }
-          onPress={()=>setAdultPlus(Math.max(1,adultPlus-1))}>
-            <Feather
-                   name="minus" size={22}
-                   color='black'
-                   />
-        
-            </Pressable>
-            </View>
-            </View>
-            <View>
-            <Text>No of Children</Text>
-  <View style={{flexDirection:'row',justifyContent:'space-between',
-borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
-elevation:2,}}>
-            <Pressable style={[
-              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
-            ] }
-          onPress={()=>setChildPlus(Math.max(0,childPlus+1))}>
-            <Feather
-                   name="plus" size={22}
-                   color='black'
-                   />
-        
-            </Pressable>
-           
-            <Text style={{fontSize:21}}> {childPlus} </Text>
-            <Pressable style={[
-              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
-            ] }
-          onPress={()=>setChildPlus(Math.max(0,childPlus-1))}>
-            <Feather
-                   name="minus" size={22}
-                   color='black'
-                   />
-        
-            </Pressable>
-            </View>
-            </View>
-            </View>
-            <View style={{left:50}}>
-            <Flatbutton text='Book Now'
-               onPress={()=>
-                navigation.navigate('CheckAvailability',{
-                 
-                  hotelinfor:hotelinfor,
-                  diff:diff,
-                  childPlus:childPlus,
-                  adultPlus:adultPlus,
-                  checkin:checkin,
-                  checkout:checkout
-                  })}/>
+    
+            <View style={{left:50,padding:20,top:20,}}>
+              {
+                 diff<=0?(
+                   <TouchableOpacity disabled={true}
+                   onPress={()=>
+                      navigation.navigate('CheckAvailability',{
+                       
+                        hotelinfor:hotelinfor,
+                        diff:diff,
+                       
+                        checkin:checkin,
+                        checkout:checkout
+                        })}>
+                          <View style={styles.buttonstyle}>
+                     <Text style={styles.buttonText}>Book Now</Text>
+                     </View>
+                   </TouchableOpacity>
+            
+                 ):(
+                  <TouchableOpacity 
+                   onPress={()=>
+                      navigation.navigate('CheckAvailability',{
+                       
+                        hotelinfor:hotelinfor,
+                        diff:diff,
+                       
+                        checkin:checkin,
+                        checkout:checkout
+                        })}>
+                          <View style={styles.buttonstyle}>
+                     <Text style={styles.buttonText}>Book Now</Text>
+                     </View>
+                   </TouchableOpacity>
+                 )
+              }
+            
             </View>
           </SafeAreaView>
         </ScrollView>
@@ -324,14 +290,14 @@ opacity: 0.7,width:30,
 
       <View style={styles.cardBox}>
         
-        <View style={{marginTop:-10,flexDirection:'row',justifyContent:'space-between'}}>
+        <View style={{paddingVertical:-5,flexDirection:'row',justifyContent:'space-between'}}>
           <View>
       <Text
-          style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
+          style={{color:'#032B7A',fontWeight:'bold',fontSize:20, marginBottom:5}}
           >{list.name}</Text>
         <View style={{flexDirection:'row'}}>
           <MaterialIcons name='location-pin' size={20}/>
-      <Text>{list.location}</Text>
+      <Text style={{marginBottom:5, color:'gray'}}>{list.location}</Text>
       </View>
       <View style={{flexDirection:'row'}}>
                         <Ionicons name='star' size={16} color='orange'/>
@@ -346,8 +312,8 @@ opacity: 0.7,width:30,
       <Text style={{fontSize:10}}>per night</Text>
       </View>
       </View>
-      <View style={{paddingVertical:5}}>
-      <Text style={{fontSize:15,fontWeight:'bold',top:-5}}>Aminities</Text>
+      <View style={{paddingVertical:20}}>
+      <Text style={{fontSize:15,fontWeight:'bold',top:-15, color:'#032B7A'}}>Amenities</Text>
         {/* <FlatList
           keyExtractor={(_, key) => key.toString()}
           horizontal
@@ -355,34 +321,40 @@ opacity: 0.7,width:30,
           data={list.Aminities}
           renderItem={({ item }) => <Aminities aminity={item} />}
         /> */}
-        <View style={{flexDirection:'row'}}>
-  <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
+        
+        <View style={{flexDirection:'row',top:-10}}>
+
+  <View style={{backgroundColor:'lightgray',marginRight:25,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
       borderRadius:10}}>
-        <MaterialIcons name={list.food?"fastfood":"no-food"} size={20}/>
+        
+        <AntDesign  name={list.food?"check":"close"} />
+        <Text>food</Text>
+      </View>
+      <View style={{backgroundColor:'lightgray',marginRight:25,width:aminitieSsize,
+      height:aminitieSsize,justifyContent:'center',alignItems:'center',
+      borderRadius:10}}>
+       
+     
+        <AntDesign  name={list.pool?"check":"close"} />
+        <Text>pool</Text>
+      </View>
+       <View style={{backgroundColor:'lightgray',marginRight:25,width:aminitieSsize,
+      height:aminitieSsize,justifyContent:'center',alignItems:'center',
+      borderRadius:10}}>
+       <AntDesign  name={list.wifi?"check":"close"} />
+        <Text>wifi</Text>
       </View>
       <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
       height:aminitieSsize,justifyContent:'center',alignItems:'center',
       borderRadius:10}}>
-       
-        <MaterialIcons name={list.pool?"pool":"no-food"} size={20}/>
-      </View>
-       <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
-      height:aminitieSsize,justifyContent:'center',alignItems:'center',
-      borderRadius:10}}>
-       
-        <MaterialIcons name={list.wifi?"wifi":"wifi-off"} size={20}/>
-      </View>
-      <View style={{backgroundColor:'lightgray',marginRight:10,width:aminitieSsize,
-      height:aminitieSsize,justifyContent:'center',alignItems:'center',
-      borderRadius:10}}>
-       
-        <MaterialIcons name={list.gym?"tv-off":"tv"} size={20}/>
+       <AntDesign  name={list.food?"check":"close"} />
+        <Text>TV</Text>
       </View>
       
       </View>
         
-         <Text style={{fontSize:15,fontWeight:'bold',}}>Gallery</Text>
+         <Text style={{fontSize:16,fontWeight:'bold',top:-5, color:'#032B7A', marginTop:10}}>Gallery</Text>
         <FlatList
           keyExtractor={(_, key) => key.toString()}
           horizontal
@@ -394,7 +366,7 @@ opacity: 0.7,width:30,
         />
         
         </View>
-              <View style={{marginLeft:70,top:60,}}>
+              <View style={{marginLeft:70,top:10,}}>
         <Flatbutton  text='Check Availability'style={{top:10,}} 
         onPress={()=>{toggleAnimation()}}/>
 </View>
@@ -562,4 +534,20 @@ inputBox: {
 },
 
 map:{...StyleSheet.absoluteFillObject},
+buttonstyle:{
+  borderRadius:10,
+  paddingVertical:10,
+  width:200,
+  backgroundColor:'#4A1DD6',
+  
+
+},
+buttonText:{
+  color:'#fff',
+  fontWeight:'normal',
+  // textTransform:'uppercase',
+  fontSize:20,
+  fontStyle:'normal',
+  textAlign:'center'
+},
 });

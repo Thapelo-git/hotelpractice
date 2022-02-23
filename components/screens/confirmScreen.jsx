@@ -13,12 +13,13 @@ const ConfirmScreen = ({navigation,route}) => {
           const [roomnumber,setRoomnumber]=useState(0)  
           const hotelinfor=route.params.hotelinfor
           const diff=route.params.diff
-          const adultPlus=route.params.adultPlus
-          const childPlus=route.params.childPlus
+          
           const checkin=route.params.checkin
           const checkout=route.params.checkout
           
-        
+          const [adultPlus,setAdultPlus]=useState(1)
+
+          const [childPlus,setChildPlus]=useState(0)
     return (
         
       <SafeAreaView >
@@ -36,45 +37,77 @@ const ConfirmScreen = ({navigation,route}) => {
                 
              
               <View style={{
-                  flexDirection:'row',alignItems:'center',justifyContent:'space-around',}} >
+                  flexDirection:'row',paddingHorizontal:20,justifyContent:'space-between'}} >
                     <View>
-                    <Text style={{color:'grey'}}>Room Type</Text>
+                    <Text style={{color:'#0225A1', fontWeight:'bold', fontSize:18}}>Room Type</Text>
                     <View style={{paddingVertical:10}}>
-                    <Text>{room.bedType}</Text>
+                    <Text style={{color:'gray'}}>{room.bedType}</Text>
                     </View>
               </View>
               <View>
-              <Text style={{color:'grey'}}>Capacity</Text>
+              <Text style={{color:'#0225A1', fontWeight:'bold', fontSize:18,marginRight:40}}>Capacity</Text>
               <View style={{paddingVertical:10}}>
                   
-                  <Text>{room.roomname}</Text>
+                  <Text style={{color:'gray'}}>{room.roomname}</Text>
+              </View>
+              </View>
+               
+               </View>
+               <View style={{
+                  flexDirection:'row',paddingHorizontal:20,justifyContent:'space-between',}} >
+                    <View>
+                    <Text style={{color:'#0225A1', fontWeight:'bold', fontSize:18 }}>Check In</Text>
+                    <View style={{paddingVertical:10}}>
+                    <Text style={{color:'gray'}}>{checkin}</Text>
+                    </View>
+              </View>
+              <View>
+              <Text style={{color:'#0225A1', fontWeight:'bold', fontSize:18, marginRight:30}}>Check Out</Text>
+              <View style={{paddingVertical:10}}>
+                  
+                  <Text style={{color:'gray'}}>{checkout}</Text>
               </View>
               </View>
                
                </View>
               
                    
-                  <View style={{
-                  flexDirection:'row',alignItems:'center',justifyContent:'space-around'}} >
-                    <View>
-                    <Text style={{color:'grey'}}>Your Reservation</Text>
-                    <Text>Check In {checkin}</Text>
-                    <Text>Check Out {checkout}</Text>
-              </View>
-              <View>
-              <Text style={{color:'grey'}}>Guests</Text>
-              <Text>Adults {adultPlus}</Text>
-              <Text>Children {childPlus}</Text>
-              </View>
-               
-               </View>
-               <View style={{flexDirection:'row' ,alignItems:'stretch',
-               justifyContent:'space-between',padding:30}}>
+                  
+               <View style={{flexDirection:'row' ,paddingHorizontal:20, justifyContent:'space-between'}}>
                <View>
-               <Text style={{fontSize:21,color:'gray'}}>No of Room needed</Text>
-      <View style={{flexDirection:'row',justifyContent:'space-between',
+               <Text style={{color:'#0225A1', fontWeight:'bold', fontSize:18}}>No of Rooms </Text>
+      <View style={{flexDirection:'row',justifyContent:'space-around',
     borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
-    elevation:2,}}>
+    elevation:2, marginTop:10}}>
+                <Pressable style={[
+                  styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                ] }
+              onPress={()=>setRoomnumber(Math.max(0,roomnumber+1))}>
+                <Feather
+                       name="plus" size={22}
+                       color='black'
+                       />
+            
+                </Pressable>
+                <Text style={{fontSize:21}}> {roomnumber} </Text>
+                <Pressable style={[
+                  styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+                ] }
+              onPress={()=>setRoomnumber(Math.max(0,roomnumber-1))}>
+                <Feather
+                       name="minus" size={22}
+                       color='black'
+                       />
+            
+                </Pressable>
+                </View>
+                </View>
+
+                <View>
+               <Text style={{color:'#0225A1', fontWeight:'bold', fontSize:18}}> No. Of Guests</Text>
+      <View style={{flexDirection:'row',justifyContent:'space-around',
+    borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+    elevation:2, marginTop:10}}>
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
@@ -100,15 +133,77 @@ const ConfirmScreen = ({navigation,route}) => {
                 </View>
                
                 </View>
-                <View style={{paddingVertical:18,paddingHorizontal:18}}>
-                <Text style={{fontSize:21,fontWeight:'bold'}}>PRICE   R</Text>
-                <View style={{justifyContent:'space-between',
+                {/* <View style={{flexDirection:'row' ,alignItems:'stretch',
+           justifyContent:'center',padding:10}}>
+           <View>
+           <Text>No of Adults</Text>
+  <View style={{flexDirection:'row',justifyContent:'space-between',
+borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+elevation:2,}}>
+            <Pressable style={[
+              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+            ] }
+          onPress={()=>setAdultPlus(Math.max(1,adultPlus+1))}>
+            <Feather
+                   name="plus" size={22}
+                   color='black'
+                   />
+        
+            </Pressable>
+            <Text style={{fontSize:21}}> {adultPlus} </Text>
+            <Pressable style={[
+              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+            ] }
+          onPress={()=>setAdultPlus(Math.max(1,adultPlus-1))}>
+            <Feather
+                   name="minus" size={22}
+                   color='black'
+                   />
+        
+            </Pressable>
+            </View>
+            </View> */}
+            {/* <View>
+            <Text>No of Children</Text>
+  <View style={{flexDirection:'row',justifyContent:'space-between',
+borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
+elevation:2,}}>
+            <Pressable style={[
+              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+            ] }
+          onPress={()=>setChildPlus(Math.max(0,childPlus+1))}>
+            <Feather
+                   name="plus" size={22}
+                   color='black'
+                   />
+        
+            </Pressable>
+           
+            <Text style={{fontSize:21}}> {childPlus} </Text>
+            <Pressable style={[
+              styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
+            ] }
+          onPress={()=>setChildPlus(Math.max(0,childPlus-1))}>
+            <Feather
+                   name="minus" size={22}
+                   color='black'
+                   />
+        
+            </Pressable>
+            </View>
+            </View>
+            </View> */}
+                <View style={{paddingVertical:10,paddingHorizontal:18,flexDirection:'row',
+           justifyContent:'space-between',padding:20,borderWidth:3, marginTop:20, borderColor:'#0225A1',}}>
+                <Text style={{fontSize:21}}>Total    </Text>
+                <Text style={{fontSize:20}}>R  {room.beds * roomnumber}</Text>
+                {/* <View style={{justifyContent:'space-between',
     borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
     elevation:2,}}>
       <Text style={{fontSize:25}}>{room.beds * roomnumber}</Text>
+    </View> */}
     </View>
-    </View>
-                <View style={{left:50}}>
+                <View style={{left:70, marginTop:50}}>
                 <Flatbutton text='Book Now'
                    onPress={()=>navigation.navigate('PaymentScreen')}/>
                 </View>

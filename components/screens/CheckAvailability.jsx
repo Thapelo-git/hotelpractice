@@ -3,6 +3,7 @@ import React,{useEffect, useState,useRef} from 'react'
 import { SafeAreaView,FlatList, StyleSheet, Text, View ,Picker,ScrollView,
   Pressable,TextInput, Image,TouchableOpacity,Animated} from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Hotels from '../onbording/Hotels'
@@ -46,17 +47,17 @@ const count1=0
         <SafeAreaView >
             <View style={styles.header}>
             <View style={{
-            marginTop:20,
+            marginTop:10,
             flexDirection:'row',
             justifyContent:'space-between',
             alignItems:'stretch',
-            paddingHorizontal:20,
+            // paddingHorizontal:20,
         }}>
            <Feather name="arrow-left" size={20} color='#fff'
              onPress={()=>navigation.goBack()} /> 
-             <Text style={{color:'#fff'}}> Rooms</Text>
+      
         </View>
-                
+        
                 </View>
           
              {/* <View style={{flexDirection:'row',
@@ -92,12 +93,12 @@ const count1=0
          
           </View>
           <View style={{flexDirection:'row'}}>
-            <View style={{padding:10}}>
-          <Image source={{uri:item.roomurl}} style={{height:120,width:120,borderRadius:10}}/>
+            <View style={{paddingHorizontal:15}}>
+          <Image source={{uri:item.roomurl}} style={{height:120,width:160,borderRadius:10}}/>
           </View>
-          <View style={{marginTop:20,}}>
+          <View style={{}}>
           <Text
-            style={{color:'#032B7A',fontWeight:'bold'}}
+            style={{color:'#0225A1',fontWeight:'bold', fontSize:18}}
             >
               
               {item.roomname.toUpperCase()}
@@ -105,17 +106,25 @@ const count1=0
           </Text>
             <View style={{flexDirection:'row'}}>
               {/* <Ionicons name='location-sharp' size={21}/> */}
-          <Text>{item.bedType}</Text>
+          <Text style={{color:'gray', fontSize:18}}>{item.bedType}</Text>
           </View>
           {/* <Text>Successfully paid booking</Text> */}
        
               
-          <Text>Price  {item.beds}</Text>
-          <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
-          alignItems:'center',}}  onPress={()=>navigation.navigate('confirmScreen',{room:item,
+          <Text style={{color:'gray', fontSize:18}}>R{item.beds}</Text>
+          <View style={{flexDirection:'row', alignContent:'flex-end'}}>
+                      <Text></Text>
+
+                      
+                    
+                    
+          </View>
+          <TouchableOpacity   onPress={()=>navigation.navigate('confirmScreen',{room:item,
           hotelinfor:hotelinfor,diff:diff,adultPlus:adultPlus,childPlus:childPlus,checkin:checkin,
           checkout:checkout})}>
-          <Text style={{color:'#fff'}}>Add number of rooms</Text>
+
+
+        <AntDesign name='rightcircleo' size={30} color='#0225A1' style={{marginLeft:120, marginBottom:10}}/>
           </TouchableOpacity>
           
           </View>
@@ -248,16 +257,16 @@ cardItemContainer:{
 },
 header: {
   width:'100%',
-  height:50,
-  paddingVertical: 10,
+  height:90,
+  // paddingVertical: 10,
   // borderRadius:10,
-  alignItems:'center',
+  // alignItems:'center',
   backgroundColor: '#0225A1',
   borderBottomLeftRadius: 10,
   borderBottomRightRadius: 10,
   marginBottom:12,
-  justifyContent:'center',
-  flexDirection:'row',
+  // justifyContent:'center',
+  // flexDirection:'row',
   
 
  

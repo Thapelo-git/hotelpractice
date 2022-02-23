@@ -57,16 +57,16 @@ const HomeScreen = ({navigation}) => {
       const [searchtext,setSearchtext] = useState('');
       const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-      useEffect(()=>{
+    //   useEffect(()=>{
       
-        setFilteredDataSource(Hotels);
-        setMasterDataSource(Hotels);
+    //     setFilteredDataSource(location);
+    //     setMasterDataSource(location);
         
-      },[])
+    //   },[])
       const searchFilterFunction =(text)=>{
         if(text){
             const newData = masterDataSource.filter(function(item){
-                const itemData = item.name ? item.name.toUpperCase()
+                const itemData = item.location ? item.location.toUpperCase()
                 :''.toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf( textData)>-1;
@@ -224,7 +224,7 @@ opacity: 0.7,width:'90%',height:55,
             horizontal 
              showsHorizontalScrollIndicator={false}
             contentContainerStyle={{paddingLeft:20,}}
-            data={filteredDataSource}
+            data={Hotels}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
             </View>
