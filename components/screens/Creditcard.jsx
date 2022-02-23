@@ -6,7 +6,7 @@ import { SafeAreaView, StyleSheet, Text, View,Dimensions,TextInput,Image,
 import { db,auth } from './firebase'
 
 const screenwidth=Dimensions.get('screen').width
-const Creditcard = () => {
+const Creditcard = ({navigation,route}) => {
     const ReviewSchem=yup.object({
         cardNumber:yup.string().required().min(16).max(16),
         cardName:yup.string().required().min(2),
@@ -21,11 +21,21 @@ const Creditcard = () => {
             cardName:cardName,cardNumber:cardNumber,CVV:CVV,Expiry:Expiry
           })
     }
+
+    const hotelinfor=route.params.hotelinfor
+    const diff=route.params.diff
+    const checkin=route.params.checkin
+    const checkout=route.params.checkout
+   const  adultPlus=route.params.adultPlus
+   const roomnumber=route.params.roomnumber
+   const totPrice=route.params.totPrice
+   const room=route.params.room
     const addBooking=()=>{
         
         const userid= auth.currentUser.uid
         db.ref(`/Booking`).push({
             userid,Status:'Pending',
+            description:'Successfully paid booking',
             
           })
     }
