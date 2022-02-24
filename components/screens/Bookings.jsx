@@ -6,7 +6,7 @@ import { SearchBar } from 'react-native-elements';
 import Hotels from '../onbording/Hotels.jsx'
 import NearHotels from '../onbording/NearHotels.jsx';
 import { COLORS } from '../styles/Colors'
-
+import { db,auth } from './firebase.jsx';
 import Entypo from 'react-native-vector-icons/Entypo'
 import { } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -26,13 +26,36 @@ const Bookings = () => {
     }).start()
     setAnimationValue(val)
   }
+  const [Booking,setBooking]=useState([])
+  useEffect(()=>{
+    
+    
+    db.ref('/Booking').on('value',snap=>{
+          
+      const Booking=[]
+         snap.forEach(action=>{
+             const key=action.key
+             const data =action.val()
+             Booking.push({
+                 key:key,
+                 hotelimg:data.hotelimg,
+                 totPrice:data.totPrice,
+                 
+             })
+             setBooking(Booking)
+             setFilteredDataSource(Booking);
+             setMasterDataSource(Booking);
+             console.log(Booking)
+         })
+     })
+  },[])
     const [searchtext,setSearchtext] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-    useEffect(() => {
-        setFilteredDataSource(NearHotels);
-        setMasterDataSource(NearHotels);
-    }, [])
+    // useEffect(() => {
+    //     setFilteredDataSource(Booking);
+    //     setMasterDataSource(Booking);
+    // }, [])
 
     const searchFilterFunction =(text)=>{
         if(text){
@@ -67,24 +90,24 @@ const Bookings = () => {
           </View>
           <View style={{flexDirection:'row'}}>
             <View style={{padding:10}}>
-          <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
+          <Image source={{uri:item.hotelimg}} style={{height:120,width:120,borderRadius:10}}/>
           </View>
           <View style={{marginTop:20,}}>
           <Text
             style={{color:'#032B7A',fontWeight:'bold'}}
             onPress={() => getItem(item)}>
               
-              {item.hotelname.toUpperCase()}
+              {/* {item.hotelname.toUpperCase()} */}
 
           </Text>
             <View style={{flexDirection:'row'}}>
               <Ionicons name='location-sharp' size={21}/>
           <Text>{item._location}</Text>
           </View>
-          <Text>Successfully paid booking</Text>
+          <Text>{item.Status}</Text>
        
               
-          <Text>Price  {item._price}</Text>
+          <Text>Price  {item.totPrice}</Text>
           <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
           alignItems:'center',}}  onPress={()=>{toggleAnimation()}}>
           <Text style={{color:'#fff'}}>Cancel</Text>

@@ -113,7 +113,7 @@ const count1=0
               
           <Text style={{color:'gray', fontSize:18}}>R{item.beds}</Text>
           <View style={{flexDirection:'row', alignContent:'flex-end'}}>
-                      <Text></Text>
+                      <Text>{hotelinfor.size} Available rooms</Text>
 
                       
                     

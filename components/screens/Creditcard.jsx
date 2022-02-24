@@ -7,6 +7,10 @@ import { db,auth } from './firebase'
 
 const screenwidth=Dimensions.get('screen').width
 const Creditcard = ({navigation,route}) => {
+    const [name,setName]=useState('')
+    const [email,setEmail]=useState('')
+   const datetoday=new Date()
+    const user = auth.currentUser.uid;
     const ReviewSchem=yup.object({
         cardNumber:yup.string().required().min(16).max(16),
         cardName:yup.string().required().min(2),
@@ -23,6 +27,7 @@ const Creditcard = ({navigation,route}) => {
     }
 
     const hotelinfor=route.params.hotelinfor
+    const hotelimg=hotelinfor.url
     const diff=route.params.diff
     const checkin=route.params.checkin
     const checkout=route.params.checkout
@@ -30,13 +35,25 @@ const Creditcard = ({navigation,route}) => {
    const roomnumber=route.params.roomnumber
    const totPrice=route.params.totPrice
    const room=route.params.room
+   const roomT=route.params.roomT
+   useEffect(()=>{
+    db.ref('/users/'+ user).on('value',snap=>{
+      
+      setName(snap.val() && snap.val().name);
+  setPhonenumber(snap.val().Phonenumber)
+  setPhonenumber(snap.val().email)
+    })
+  
+    
+  },[])
     const addBooking=()=>{
         
         const userid= auth.currentUser.uid
         db.ref(`/Booking`).push({
             userid,Status:'Pending',
             description:'Successfully paid booking',
-            
+            diff,checkin,checkout,adultPlus,roomnumber,totPrice,roomT,hotelimg,
+            datetoday,name,email
           })
     }
     return (
@@ -118,7 +135,7 @@ const Creditcard = ({navigation,route}) => {
                        <TouchableOpacity onPress={props.handleSubmit}>
                            <Text>Add Card</Text>
                        </TouchableOpacity>
-                       <TouchableOpacity>
+                       <TouchableOpacity onPress={addBooking()}>
                        <Text>Add Card</Text>
                        </TouchableOpacity>
                    </View>

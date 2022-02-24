@@ -19,7 +19,7 @@ const ConfirmScreen = ({navigation,route}) => {
           const checkout=route.params.checkout
           
           const [adultPlus,setAdultPlus]=useState(1)
-
+          const roomT=room.bedType
           const [childPlus,setChildPlus]=useState(0)
           const userid= auth.currentUser.uid
           const Handlebooking=()=>{
@@ -90,7 +90,7 @@ const ConfirmScreen = ({navigation,route}) => {
                 <Pressable style={[
                   styles.buttonAdding,{backgroundColor: '#fff',flexDirection:"row"}
                 ] }
-              onPress={()=>setRoomnumber(Math.max(0,roomnumber+1))}>
+              onPress={()=>setRoomnumber(Math.min(hotelinfor.size,roomnumber+1))}>
                 <Feather
                        name="plus" size={22}
                        color='black'
@@ -188,7 +188,7 @@ const ConfirmScreen = ({navigation,route}) => {
                         hotelinfor:hotelinfor,diff:diff,
                         checkin:checkin,checkout:checkout,
                         adultPlus:adultPlus,roomnumber:roomnumber,
-                        totPrice:totPrice,room:room
+                        totPrice:totPrice,room:room,roomT:roomT
                       })}  >
                     <View style={styles.buttonstyle}>
                     <Text style={styles.buttonText}>Book Now</Text>

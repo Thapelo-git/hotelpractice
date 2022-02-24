@@ -30,6 +30,7 @@ const HomeScreen = ({navigation}) => {
                     name:data.name,
                     url:data.url,
                     price:data.price,
+                    size:data.size,
                     food:data.food,
                     gym:data.gym,
                     wifi:data.wifi,
@@ -38,6 +39,8 @@ const HomeScreen = ({navigation}) => {
                     room2:data.room2
                 })
                 setAddHotels(Hotels)
+                       setFilteredDataSource(Hotels);
+        setMasterDataSource(Hotels);
                 console.log(Hotels)
             })
         })
@@ -224,7 +227,7 @@ opacity: 0.7,width:'90%',height:55,
             horizontal 
              showsHorizontalScrollIndicator={false}
             contentContainerStyle={{paddingLeft:20,}}
-            data={Hotels}
+            data={filteredDataSource}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
             </View>
