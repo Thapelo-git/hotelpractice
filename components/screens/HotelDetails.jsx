@@ -100,7 +100,7 @@ const HotelDetails = ({ navigation, route }) => {
     const [date,setDate]=useState( new Date())
   
       const [checkin,setCheckin]=useState(new Date())
-      const [checkout,setCheckout]=useState(new Date())
+      const [checkout,setCheckout]=useState(moment().add(1,'days'))
       
       const setToastMsg =msg=>{
         ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
@@ -110,7 +110,7 @@ const HotelDetails = ({ navigation, route }) => {
       var given=moment("2022-01-15","YYYY-MM-DD")
      var diff=0
         var datetoday= new Date()
-        var morr =moment().add(1,'days').calendar()
+        var morr =moment().add(1,'days')
     return(
       <Animated.View style={{
         width:screenWidth,
@@ -169,7 +169,7 @@ const HotelDetails = ({ navigation, route }) => {
         mode="date"
         placeholder="CHECK OUT"
         format="YYYY/MM/DD"
-         minDate={datetoday}
+         minDate={morr}
         // maxDate={datetoday}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"

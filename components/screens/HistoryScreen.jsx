@@ -40,20 +40,21 @@ const HistoryScreen = () => {
              })
              let tempDate = new Date()
             let today = tempDate.getFullYear()+'/0'+(tempDate.getMonth()+ 1)+'/'+tempDate.getDate()
-            console.log(today)
-             if(today){
+            console.log(moment().add(0, 'days'))
+            // moment(checkin).isBefore(checkout)
+            //  if(today){
               const newData = Booking.filter(function(item){
-                  const itemData = item.checkout ? item.checkout
+                  const itemData = moment(item.checkout).isBefore(moment().add(0, 'days'))? item.checkout
                   :'';
                   const textData = today;
-                  return itemData.indexOf( textData)>-1;
+                  return itemData;
   
               })
               setBooking(newData)
               setFilteredDataSource(newData);
              setMasterDataSource(newData);
              console.log(newData)
-            }
+            // }
           
              
          })
