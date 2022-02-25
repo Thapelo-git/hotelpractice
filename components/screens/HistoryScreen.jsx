@@ -44,8 +44,10 @@ const HistoryScreen = () => {
             // moment(checkin).isBefore(checkout)
             //  if(today){
               const newData = Booking.filter(function(item){
-                  const itemData = moment(item.checkout).isBefore(moment().add(0, 'days'))? item.checkout
-                  :'';
+                  const itemData = moment(moment().add(0, 'days')).isAfter(item.checkout)?
+         
+    (  item.checkout)
+                  :   ( '')
                   const textData = today;
                   return itemData;
   
@@ -60,6 +62,16 @@ const HistoryScreen = () => {
          })
      })
   },[])
+
+  const onClick=(key)=>{
+    db.ref('Booking').child(key).update({Status:'Completed'})
+    .then(()=>db.ref('Booking').once('value'))
+    .then(snapshot=>snapshot.val())
+    .catch(error => ({
+      errorCode: error.code,
+      errorMessage: error.message
+    }))
+  }
 
     const searchFilterFunction =(text)=>{
         if(text){
@@ -93,7 +105,7 @@ const HistoryScreen = () => {
 
         </Text>
         </View> */}
-        <View style={{flexDirection:'row'}}>
+        <TouchableOpacity onPress={onClick(item.key)} style={{flexDirection:'row'}}>
           <View style={{padding:10}}>
         <Image source={{uri:item.hotelimg}} style={{height:120,width:120,borderRadius:10}}/>
         </View>
@@ -116,7 +128,7 @@ const HistoryScreen = () => {
         
         
         </View>
-        </View>
+        </TouchableOpacity>
         </ScrollView>
         </View>
         );

@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { SafeAreaView, StyleSheet, Text, View,ImageBackground ,TextInput} from 'react-native'
+import { SafeAreaView, StyleSheet,Alert,ToastAndroid , Text, View,ImageBackground ,TextInput} from 'react-native'
 import { COLORS } from '../styles/Colors'
 import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'

@@ -204,7 +204,7 @@ opacity: 0.7,width:'90%',height:55,
             horizontal 
              showsHorizontalScrollIndicator={false}
              contentContainerStyle={{ paddingLeft:20}}
-            data={Hotels}
+            data={filteredDataSource}
             renderItem={({item,index})=><Card Hotels={item} index={index}/>}
             />
         {/* ):(

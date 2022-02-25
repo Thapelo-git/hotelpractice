@@ -22,17 +22,10 @@ const ProfileScreen = ({navigation}) => {
       
         
       },[])
-      const [hotelimage,setSelectedImage]=useState('')
-      useEffect(()=>{
-        db.ref(`/HotelBooking`).on('value',snap=>{
-          
-          
-      setSelectedImage(snap.val().hotelimage)
-  
-        })
+     
       
         
-      },[])
+      
 
     const onSignout =()=>{
         

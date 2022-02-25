@@ -1,12 +1,13 @@
 import React ,{useState} from 'react'
-import { SafeAreaView, StyleSheet, Text, View,ImageBackground,TextInput,} from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View,ImageBackground,TextInput,
+    Alert,ToastAndroid } from 'react-native'
 import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { FONTS } from '../styles/Font'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Checkbox } from 'react-native-paper'
 import { COLORS } from '../styles/Colors'
-import * as yup from 'yup'
+import * as yup from 'yup' 
 import { Formik } from 'formik'
 import { auth } from './firebase';
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -36,11 +37,11 @@ const SignIn = ({navigation}) => {
                 console.log('no data')
               }
             })
-          Alert.alert(
-            'succesfully logged in'
-          )
+        //   Alert.alert(
+        //     'succesfully logged in'
+        //   )
     
-          setToastMsg('succesfully logged in')
+        //   setToastMsg('succesfully logged in')
         }
         catch (error) {
     

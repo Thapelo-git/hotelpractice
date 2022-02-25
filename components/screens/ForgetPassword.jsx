@@ -1,11 +1,24 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet, Text, View ,ImageBackground,TextInput} from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View 
+    ,ImageBackground,TextInput,Alert} from 'react-native'
 import { COLORS } from '../styles/Colors'
 import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { FONTS } from '../styles/Font'
+import { auth,db } from './firebase';
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const ForgetPassword = () => {
+    const [email,setEmail]=useState();
+    const reset =async()=>{
+        try{
+            await auth
+            .sendPasswordResetEmail(email)
+            setEmail('')
+        }catch(error){
+            Alert.alert(error.message)
+        }
+    }
     return (
         <SafeAreaView>
              <ImageBackground style={styles.imageBackground} source={require('../images/hotel.jpg')}>
@@ -26,12 +39,14 @@ const ForgetPassword = () => {
              style={styles.inputs}
              placeholder='Enter Email'
              keyboardType='email-address'
+             value={email}
+             onChangeText={(e)=>(setEmail(e))}
              />
         
         </View>
        
         <View style={{marginTop:40,alignItems:'center',justifyContent:'center'}}>
-            <Flatbutton text='CONTINUE' />
+            <Flatbutton text='CONTINUE' onPress={()=>reset()} />
            </View>
             </KeyboardAwareScrollView>
         </View>

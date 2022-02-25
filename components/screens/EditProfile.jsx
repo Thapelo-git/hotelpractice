@@ -46,6 +46,33 @@ const EditProfile = ({navigation,route}) => {
       
           setSelectedImage({ localUri: pickerResult.uri });
       }
+      const [url,setUrl]=useState()
+      const [progress, setProgress] = useState(0);
+      const handleUpload = () => {
+        const uploadTask = storage.ref(`images/${selectedImage.name}`).put(selectedImage)
+          ;
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progress);
+          },
+          error => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(selectedImage.name)
+              .getDownloadURL()
+              .then(url => {
+                setUrl(url);
+              });
+          }
+        );
+      };
       const uploadImage = async () => {
         const { uri } = selectedImage;
         const filename = uri.substring(uri.lastIndexOf('/') + 1);
@@ -237,7 +264,7 @@ const EditProfile = ({navigation,route}) => {
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
             {/* onPress={()=>{uploadImage()}} */}
-            <Flatbutton text='UPDATE' onPress={()=>{editprofile()}}  />
+            <Flatbutton text='UPDATE' onPress={()=>{handleUpload()}}  />
       
             </View>
             </KeyboardAwareScrollView>

@@ -99,8 +99,8 @@ const HotelDetails = ({ navigation, route }) => {
   const BottomSheet =({onCancel,animation})=>{
     const [date,setDate]=useState( new Date())
   
-      const [checkin,setCheckin]=useState(new Date())
-      const [checkout,setCheckout]=useState(moment().add(1,'days'))
+      const [checkin,setCheckin]=useState(moment(new Date()).format('YYYY/MM/DD'))
+      const [checkout,setCheckout]=useState(moment().add(1,'days').format('YYYY/MM/DD'))
       
       const setToastMsg =msg=>{
         ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
