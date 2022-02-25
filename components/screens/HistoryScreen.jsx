@@ -5,7 +5,7 @@ import { SearchBar } from 'react-native-elements';
 
 import NearHotels from '../onbording/NearHotels.jsx';
 import { COLORS } from '../styles/Colors'
-
+import { db,auth } from './firebase.jsx';
 import Entypo from 'react-native-vector-icons/Entypo'
 import { } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -14,12 +14,51 @@ import moment from 'moment'
 
 const HistoryScreen = () => {
     const [searchtext,setSearchtext] = useState('');
+    const [Booking,setBooking]=useState([])
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-    useEffect(() => {
-        setFilteredDataSource(NearHotels);
-        setMasterDataSource(NearHotels);
-    }, [])
+  useEffect(()=>{
+    
+    
+    db.ref('/Booking/').on('value',snap=>{
+          
+      const Booking=[]
+         snap.forEach(action=>{
+             const key=action.key
+             const data =action.val()
+             Booking.push({
+                 key:key,
+                 hotelimg:data.hotelimg,
+                 totPrice:data.totPrice,
+                 checkin:data.checkin,
+                 checkout:data.checkout,
+                 description:data.description,
+                 hotelname:data.hotelname,
+                 Status:data.Status,
+
+                 
+             })
+             let tempDate = new Date()
+            let today = tempDate.getFullYear()+'/0'+(tempDate.getMonth()+ 1)+'/'+tempDate.getDate()
+            console.log(today)
+             if(today){
+              const newData = Booking.filter(function(item){
+                  const itemData = item.checkout ? item.checkout
+                  :'';
+                  const textData = today;
+                  return itemData.indexOf( textData)>-1;
+  
+              })
+              setBooking(newData)
+              setFilteredDataSource(newData);
+             setMasterDataSource(newData);
+             console.log(newData)
+            }
+          
+             
+         })
+     })
+  },[])
 
     const searchFilterFunction =(text)=>{
         if(text){
@@ -55,24 +94,24 @@ const HistoryScreen = () => {
         </View> */}
         <View style={{flexDirection:'row'}}>
           <View style={{padding:10}}>
-        <Image source={item._image} style={{height:120,width:120,borderRadius:10}}/>
+        <Image source={{uri:item.hotelimg}} style={{height:120,width:120,borderRadius:10}}/>
         </View>
         <View style={{marginTop:20,}}>
         <Text
           style={{color:'#032B7A',fontWeight:'bold'}}
           onPress={() => getItem(item)}>
             
-            {item.hotelname.toUpperCase()}
+            {item.hotelname}
 
         </Text>
           <View style={{flexDirection:'row'}}>
             <Ionicons name='location-sharp' size={21}/>
-        <Text>{item._location}</Text>
+        <Text>{item.checkin} {item.checkout}</Text>
         </View>
-        <Text>Successfully paid booking</Text>
+        <Text>{item.description}</Text>
      
             
-        <Text>Price  {item._price}</Text>
+        <Text>Price  {item.totPrice}</Text>
         
         
         </View>
