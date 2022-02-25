@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { SafeAreaView, StyleSheet, Text, View,Dimensions,TextInput,Image,
     TouchableOpacity } from 'react-native'
     import { Formik } from 'formik'
@@ -28,6 +28,7 @@ const Creditcard = ({navigation,route}) => {
 
     const hotelinfor=route.params.hotelinfor
     const hotelimg=hotelinfor.url
+    const hotelname=hotelinfor.name
     const diff=route.params.diff
     const checkin=route.params.checkin
     const checkout=route.params.checkout
@@ -36,25 +37,29 @@ const Creditcard = ({navigation,route}) => {
    const totPrice=route.params.totPrice
    const room=route.params.room
    const roomT=route.params.roomT
-   useEffect(()=>{
-    db.ref('/users/'+ user).on('value',snap=>{
+//    useEffect(()=>{
+//     db.ref('/users/'+ user).on('value',snap=>{
       
-      setName(snap.val() && snap.val().name);
-  setPhonenumber(snap.val().Phonenumber)
-  setPhonenumber(snap.val().email)
-    })
+//       setName(snap.val() && snap.val().name);
+  
+//   setEmail(snap.val().email)
+//     })
   
     
-  },[])
+//   },[])
     const addBooking=()=>{
         
         const userid= auth.currentUser.uid
-        db.ref(`/Booking`).push({
+
+        // db.ref('/users').child(userid).push({
+        //     Booking:[{
+        db.ref('Booking').push({
             userid,Status:'Pending',
-            description:'Successfully paid booking',
+            description:'Successfully paid booking',hotelname,
             diff,checkin,checkout,adultPlus,roomnumber,totPrice,roomT,hotelimg,
-            datetoday,name,email
-          })
+            datetoday
+        //   }]
+        })
     }
     return (
         <SafeAreaView>

@@ -27,10 +27,11 @@ const Bookings = () => {
     setAnimationValue(val)
   }
   const [Booking,setBooking]=useState([])
+  const user =auth.currentUser.uid
   useEffect(()=>{
     
     
-    db.ref('/Booking').on('value',snap=>{
+    db.ref('/Booking/').on('value',snap=>{
           
       const Booking=[]
          snap.forEach(action=>{
@@ -40,12 +41,30 @@ const Bookings = () => {
                  key:key,
                  hotelimg:data.hotelimg,
                  totPrice:data.totPrice,
+                 checkin:data.checkin,
+                 checkout:data.checkout,
+                 description:data.description,
+                 hotelname:data.hotelname,
+                 Status:data.Status,
+
                  
              })
-             setBooking(Booking)
-             setFilteredDataSource(Booking);
-             setMasterDataSource(Booking);
-             console.log(Booking)
+             const text='Pending'
+             if(text){
+              const newData = Booking.filter(function(item){
+                  const itemData = item.Status ? item.Status
+                  :'';
+                  const textData = text;
+                  return itemData.indexOf( textData)>-1;
+  
+              })
+              setBooking(newData)
+              setFilteredDataSource(newData);
+             setMasterDataSource(newData);
+             console.log(newData)
+            }
+          
+             
          })
      })
   },[])
@@ -57,6 +76,18 @@ const Bookings = () => {
     //     setMasterDataSource(Booking);
     // }, [])
 
+    const updateBooking = (key, status) => {
+
+      db.ref('Booking').child(key).update({Status:status})
+      .then(()=>db.ref('BookEvent').once('value'))
+      .then(snapshot=>snapshot.val())
+      .catch(error => ({
+        errorCode: error.code,
+        errorMessage: error.message
+      }));
+   
+      
+    };
     const searchFilterFunction =(text)=>{
         if(text){
             const newData = masterDataSource.filter(function(item){
@@ -97,19 +128,19 @@ const Bookings = () => {
             style={{color:'#032B7A',fontWeight:'bold'}}
             onPress={() => getItem(item)}>
               
-              {/* {item.hotelname.toUpperCase()} */}
+              {item.hotelname}
 
           </Text>
             <View style={{flexDirection:'row'}}>
               <Ionicons name='location-sharp' size={21}/>
           <Text>{item._location}</Text>
           </View>
-          <Text>{item.Status}</Text>
+          <Text>{item.description}</Text>
        
               
           <Text>Price  {item.totPrice}</Text>
           <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
-          alignItems:'center',}}  onPress={()=>{toggleAnimation()}}>
+          alignItems:'center',}}  onPress={()=>{updateBooking(item.key,'Cancelled')}}>
           <Text style={{color:'#fff'}}>Cancel</Text>
           </TouchableOpacity>
           

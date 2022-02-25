@@ -4,7 +4,7 @@ ScrollView,Pressable,Dimensions,SafeAreaView,TextInput, Image} from 'react-nativ
 import Feather from 'react-native-vector-icons/Feather'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Flatbutton from "../styles/button"
-import { db,auth } from './firebase'
+
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
@@ -21,12 +21,8 @@ const ConfirmScreen = ({navigation,route}) => {
           const [adultPlus,setAdultPlus]=useState(1)
           const roomT=room.bedType
           const [childPlus,setChildPlus]=useState(0)
-          const userid= auth.currentUser.uid
-          const Handlebooking=()=>{
-            db.ref(`/user/`+userid).push({
-
-            })
-          }
+          
+  
           var totPrice=0
     return (
         

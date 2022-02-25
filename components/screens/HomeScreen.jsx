@@ -38,8 +38,8 @@ const HomeScreen = ({navigation}) => {
                     room:data.room,
                     room2:data.room2
                 })
-                setAddHotels(Hotels)
-                       setFilteredDataSource(Hotels);
+         setAddHotels(Hotels)
+         setFilteredDataSource(Hotels);
         setMasterDataSource(Hotels);
                 console.log(Hotels)
             })
@@ -60,12 +60,7 @@ const HomeScreen = ({navigation}) => {
       const [searchtext,setSearchtext] = useState('');
       const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-    //   useEffect(()=>{
-      
-    //     setFilteredDataSource(location);
-    //     setMasterDataSource(location);
-        
-    //   },[])
+
       const searchFilterFunction =(text)=>{
         if(text){
             const newData = masterDataSource.filter(function(item){
