@@ -1,14 +1,16 @@
 import React,{useState,useEffect} from 'react'
 import { SafeAreaView, StyleSheet, Text, View,Dimensions,TextInput,Image,
-    TouchableOpacity } from 'react-native'
+   Button, TouchableOpacity } from 'react-native'
     import { Formik } from 'formik'
     import * as yup from 'yup'
 import { db,auth } from './firebase'
+import * as SMS from 'expo-sms';
 
 const screenwidth=Dimensions.get('screen').width
 const Creditcard = ({navigation,route}) => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
+    const [phoneNumber, setPhoneNumber] = React.useState('');
    const datetoday=new Date()
     const user = auth.currentUser.uid;
     const ReviewSchem=yup.object({
@@ -27,16 +29,22 @@ const Creditcard = ({navigation,route}) => {
     }
 
     const hotelinfor=route.params.hotelinfor
-    const hotelimg=hotelinfor.url
+    // const hotelimg=hotelinfor.url
     const hotelname=hotelinfor.name
     const diff=route.params.diff
-    const checkin=route.params.checkin
-    const checkout=route.params.checkout
+    // const checkin=route.params.checkin
+    // const checkout=route.params.checkout
    const  adultPlus=route.params.adultPlus
    const roomnumber=route.params.roomnumber
    const totPrice=route.params.totPrice
    const room=route.params.room
    const roomT=route.params.roomT
+
+   const [checkin,setCheckin]=useState(route.params.checkin)
+   const [checkout,setCheckout]=useState(route.params.checkout)
+    const [hotelimg,setHotelimg]=useState(hotelinfor.url)
+   const [Status,setStatus]=useState('Pending')
+   const [description,setDescription]=useState('Successfully paid booking')
 //    useEffect(()=>{
 //     db.ref('/users/'+ user).on('value',snap=>{
       
@@ -47,6 +55,14 @@ const Creditcard = ({navigation,route}) => {
   
     
 //   },[])
+const con =[]
+con.push(description,checkin,checkout)
+const onComposeSms = async () => {
+    // smsServiceAvailable &&
+    if ( phoneNumber && con) {
+      await SMS.sendSMSAsync(phoneNumber.toString(), con);
+    }
+  };
     const addBooking=()=>{
         
         const userid= auth.currentUser.uid
@@ -54,8 +70,8 @@ const Creditcard = ({navigation,route}) => {
         // db.ref('/users').child(userid).push({
         //     Booking:[{
         db.ref('Booking').push({
-            userid,Status:'Pending',
-            description:'Successfully paid booking',hotelname,
+            userid,Status,
+            description,hotelname,
             diff,checkin,checkout,adultPlus,roomnumber,totPrice,roomT,hotelimg,
             datetoday
         //   }]
@@ -135,14 +151,25 @@ const Creditcard = ({navigation,route}) => {
                <Text style={{color:'red',marginTop:-15,paddingVertical:10}}>{props.touched.CVV && props.errors.CVV}</Text>
                </View>
                    </View>
-
+                   <TextInput
+    style={styles.input}
+    value={phoneNumber}
+    onChangeText={text => setPhoneNumber(text)}
+    keyboardType='number-pad'
+    placeholder='Enter phone number here'
+  />
                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',padding:30}}>
                        <TouchableOpacity onPress={props.handleSubmit}>
                            <Text>Add Card</Text>
                        </TouchableOpacity>
-                       <TouchableOpacity onPress={addBooking()}>
+                       <Button
+    title='Pay Booking'
+    onPress={onComposeSms}
+    // disabled={!smsServiceAvailable}
+  />
+                       {/* <TouchableOpacity onPress={addBooking()}>
                        <Text>Add Card</Text>
-                       </TouchableOpacity>
+                       </TouchableOpacity> */}
                    </View>
                    
            </View>
@@ -182,4 +209,11 @@ const styles = StyleSheet.create({
         justifyContent:'center',
        
         },
+        input: {
+            height: 40,
+            width: '100%',
+            margin: 12,
+            borderWidth: 1,
+            paddingHorizontal: 10
+          }
 })

@@ -1,71 +1,78 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import * as AddCalendarEvent from 'react-native-add-calendar-event';
-import moment from 'moment';
-const utcDateToString = (momentInUTC) => {
-  let s = moment.utc(momentInUTC).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-  // console.warn(s);
-  return s;
-};
-export default class EventDemo extends Component {
-  render() {
-    const eventTitle = 'Lunch';
-    const nowUTC = moment.utc();
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Event title: {eventTitle}</Text>
-        <Text>
-          date:{' '}
-          {moment
-            .utc(nowUTC)
-            .local()
-            .format('lll')}
-        </Text>
-        <Button
-          onPress={() => {
-            EventDemo.addToCalendar(eventTitle, nowUTC);
-          }}
-          title="Add to calendar"
-        />
-      </View>
-    );
-  }
-  static addToCalendar = (title, startDateUTC) => {
-    const eventConfig = {
-      title,
-      startDate: utcDateToString(startDateUTC),
-      endDate: utcDateToString(moment.utc(startDateUTC).add(1, 'hours')),
-    };
-    AddCalendarEvent.presentNewCalendarEventDialog(eventConfig)
-      .then(eventId => {
-        //handle success (receives event id) or dismissing the modal (receives false)
-        if (eventId) {
-          console.warn(eventId);
-        } else {
-          console.warn('dismissed');
-        }
-      })
-      .catch((error) => {
-        // handle error such as when user rejected permissions
-        console.warn(error);
-      });
+import * as React from 'react';
+import { View, StyleSheet, Button, TextInput, Text } from 'react-native';
+import * as SMS from 'expo-sms';
+
+const SmsScreen=()=> {
+  const [smsServiceAvailable, setSmsServiceAvailable] = React.useState(false);
+  const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [message, setMessage] = React.useState('');
+
+  // trigger the handler method as soon as the function component
+  // SmsScreen is mounted
+  React.useEffect(() => {
+    checkIfServiceAvailable();
+  }, []);
+
+  // define a handler method to check if SMS service is available or not
+
+  const checkIfServiceAvailable = async () => {
+    const isAvailable = await SMS.isAvailableAsync();
+    if (isAvailable) {
+      setSmsServiceAvailable(true);
+    }
   };
+  const onComposeSms = async () => {
+    if (smsServiceAvailable && phoneNumber && message) {
+      await SMS.sendSMSAsync(phoneNumber.toString(), message);
+    }
+  };
+  return (
+    <View style={{ flex: 1, paddingVertical: 50 }}>
+      {smsServiceAvailable ? (
+        <Text>SMS service available.</Text>
+      ) : (
+        <Text>No SMS service available.</Text>
+      )}
+      <View style={styles.formController}>
+  <TextInput
+    style={styles.input}
+    value={phoneNumber}
+    onChangeText={text => setPhoneNumber(text)}
+    keyboardType='number-pad'
+    placeholder='Enter phone number here'
+  />
+  <TextInput
+    style={styles.input}
+    value={message}
+    onChangeText={text => setMessage(text)}
+    keyboardType='default'
+    placeholder='Enter message here'
+  />
+  <Button
+    title='Send SMS'
+    onPress={onComposeSms}
+    disabled={!smsServiceAvailable}
+  />
+</View>
+    </View>
+  );
 }
+export default SmsScreen
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    paddingVertical: 50
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  formController: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    alignItems: 'center'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  input: {
+    height: 40,
+    width: '100%',
+    margin: 12,
+    borderWidth: 1,
+    paddingHorizontal: 10
+  }
 });
