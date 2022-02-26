@@ -21,7 +21,7 @@ const ConfirmScreen = ({navigation,route}) => {
           const [adultPlus,setAdultPlus]=useState(1)
           const roomT=room.bedType
           const [childPlus,setChildPlus]=useState(0)
-          
+           
   
           var totPrice=0
     return (
