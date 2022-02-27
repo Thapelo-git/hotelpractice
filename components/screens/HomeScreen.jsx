@@ -11,7 +11,7 @@ const cardWidth =width/1.8
 const HomeScreen = ({navigation}) => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
-    const [Phonenumber,setPhonenumber]=useState('')
+    const [phonenumber,setPhonenumber]=useState('')
     const [location,setLocation]=useState(false)
     const [images,setImage]=useState('')
     const [url,setUrl]=useState('')
@@ -44,19 +44,15 @@ const HomeScreen = ({navigation}) => {
                 console.log(Hotels)
             })
         })
-      
-        
-      },[])
-      useEffect(()=>{
         db.ref('/users/'+ user).on('value',snap=>{
           
-          setName(snap.val() && snap.val().name);
-      setPhonenumber(snap.val().Phonenumber)
-      setPhonenumber(snap.val().email)
-        })
-      
+            setName(snap.val() && snap.val().name);
+        setPhonenumber(snap.val().phonenumber)
+        setEmail(snap.val().email)
+          })
         
       },[])
+      
       const [searchtext,setSearchtext] = useState('');
       const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -112,7 +108,8 @@ const HomeScreen = ({navigation}) => {
     
     const Card =({Hotels,index})=>{
         return(
-        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index})}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,index:index,
+        phonenumber:phonenumber})}>
         {/* <View style={styles.cardContainer}> */}
         <ImageBackground style={styles.cardImage} source={{uri:Hotels.url}}>
             <View style={{height:100,alignItems:'center'}}>
@@ -142,7 +139,7 @@ opacity: 0.7,width:'90%',height:55,
     }
     const CardNear =({Hotels})=>{
         return(
-        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels})}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Hotel Details',{data:Hotels,phonenumber:phonenumber})}>
         <View style={styles.cardNearContainer}>
            
                 <Image source={{uri:Hotels.url}}
@@ -167,7 +164,7 @@ opacity: 0.7,width:'90%',height:55,
         <View style={styles.header}>
             <View style={{flexDirection:'row'}}>
             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
-                 email:email,name:name,Phonenumber:Phonenumber
+                 email:email,name:name,phonenumber:phonenumber
             })}>
                 <Image source={{ uri: 'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fprojectpractice-33924af9-34b0-4480-a99c-e0f2c39544c6/ImagePicker/8014fb40-f6ac-45b9-a200-a648118a1add.jpg'}}
                 style={{height:50,width:50,borderRadius:25}}/>

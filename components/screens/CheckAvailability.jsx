@@ -25,7 +25,7 @@ const CheckAvailability = ({navigation,route}) => {
     const adultPlus=route.params.adultPlus
     const checkin=route.params.checkin
     const checkout=route.params.checkout
-const count1=0
+const Phonenumber=route.params.Phonenumber
     const hotelinfor=route.params.hotelinfor
    const roominfor=hotelinfor.room
    const roominfor2=hotelinfor.room2
@@ -121,7 +121,7 @@ const count1=0
           </View>
           <TouchableOpacity   onPress={()=>navigation.navigate('confirmScreen',{room:item,
           hotelinfor:hotelinfor,diff:diff,adultPlus:adultPlus,childPlus:childPlus,checkin:checkin,
-          checkout:checkout})}>
+          checkout:checkout,Phonenumber:Phonenumber})}>
 
 
         <AntDesign name='rightcircleo' size={30} color='#0225A1' style={{marginLeft:120, marginBottom:10}}/>

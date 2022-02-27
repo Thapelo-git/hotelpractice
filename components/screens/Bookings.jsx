@@ -26,7 +26,8 @@ const Bookings = () => {
     }).start()
     setAnimationValue(val)
   }
-  const [Booking,setBooking]=useState([])
+  const [name,setName]=useState('')
+  const [Booking,setBooking]=useState()
   const user =auth.currentUser.uid
   useEffect(()=>{
     
@@ -46,12 +47,29 @@ const Bookings = () => {
                  description:data.description,
                  hotelname:data.hotelname,
                  Status:data.Status,
+                 userid:data.userid,
 
                  
              })
+            })
+    // db.ref('/users/'+ user).on('value',snap=>{
+    //  setBooking(snap.val().Booking)
+    
+    // })
+    if(user){
+      const userinfor = Booking.filter(function(item){
+       const itemData = item.userid?
+
+(  item.userid)
+       :   ( '')
+       const textData = user;
+       return itemData.indexOf( textData)>-1;
+
+   })
+          console.log(userinfor,'ytrtdyrhtd')
              const text='Pending'
              if(text){
-              const newData = Booking.filter(function(item){
+              const newData = userinfor.filter(function(item){
                   const itemData = item.Status ? item.Status
                   :'';
                   const textData = text;
@@ -63,31 +81,29 @@ const Bookings = () => {
              setMasterDataSource(newData);
              console.log(newData)
             }
+          }
           
              
-         })
+        
      })
   },[])
     const [searchtext,setSearchtext] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-    // useEffect(() => {
-    //     setFilteredDataSource(Booking);
-    //     setMasterDataSource(Booking);
-    // }, [])
+   
 
-    const updateBooking = (key, status) => {
+    // const updateBooking = (key, status) => {
 
-      db.ref('Booking').child(key).update({Status:status})
-      .then(()=>db.ref('BookEvent').once('value'))
-      .then(snapshot=>snapshot.val())
-      .catch(error => ({
-        errorCode: error.code,
-        errorMessage: error.message
-      }));
+    //   db.ref('Booking').child(key).update({Status:status})
+    //   .then(()=>db.ref('BookEvent').once('value'))
+    //   .then(snapshot=>snapshot.val())
+    //   .catch(error => ({
+    //     errorCode: error.code,
+    //     errorMessage: error.message
+    //   }));
    
       
-    };
+    // };
     const searchFilterFunction =(text)=>{
         if(text){
             const newData = masterDataSource.filter(function(item){

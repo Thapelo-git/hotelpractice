@@ -8,7 +8,7 @@ import { auth,db } from './firebase';
 const ProfileScreen = ({navigation}) => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
-    const [Phonenumber,setPhonenumber]=useState('')
+    const [phonenumber,setPhonenumber]=useState('')
     const [img,setImg]=useState('')
     const user = auth.currentUser.uid;
     useEffect(()=>{
@@ -16,7 +16,7 @@ const ProfileScreen = ({navigation}) => {
           
           setName(snap.val() && snap.val().name);
       setEmail(snap.val().email)
-      setPhonenumber(snap.val().Phonenumber)
+      setPhonenumber(snap.val().phonenumber)
       setImg(snap.val().img)
         })
       
@@ -60,7 +60,7 @@ const ProfileScreen = ({navigation}) => {
         paddingRight:20}}>
             <Text></Text>
             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
-                   email:email,name:name,Phonenumber:Phonenumber
+                   email:email,name:name,phonenumber:phonenumber
              })}>
             
              <Ionicons name='pencil' size={20}/>

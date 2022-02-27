@@ -39,7 +39,7 @@ const HotelDetails = ({ navigation, route }) => {
     const [pool,setPool]=useState(false)
     const [wifi,setWifi]=useState(false)
    const [currentkey,setCurrentkey]=useState('')
-   
+   const [Phonenumber,setPhonenumber]=useState(route.params.phonenumber)
    const hotel= [require('../images/bed2.jpg'),require('../images/sitting1.jpg'),
    require('../images/bathroom1.jpg'),require('../images/balcony4.jpg')]
   
@@ -222,7 +222,7 @@ const HotelDetails = ({ navigation, route }) => {
                        
                         hotelinfor:hotelinfor,
                         diff:diff,
-                       
+                        Phonenumber:Phonenumber,
                         checkin:checkin,
                         checkout:checkout
                         })}>
@@ -238,7 +238,7 @@ const HotelDetails = ({ navigation, route }) => {
                        
                         hotelinfor:hotelinfor,
                         diff:diff,
-                       
+                        Phonenumber:Phonenumber,
                         checkin:checkin,
                         checkout:checkout
                         })}>

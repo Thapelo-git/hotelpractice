@@ -19,7 +19,7 @@ const EditProfile = ({navigation,route}) => {
     
     const name=route.params.name
     const email=route.params.email
-    const Phonenumber=route.params.Phonenumber
+    const phonenumber=route.params.phonenumber
     const user = auth.currentUser.uid;
     const itemRef= db.ref(`/users/`)
     const [selectedImage, setSelectedImage] = useState(null);

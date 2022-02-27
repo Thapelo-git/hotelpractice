@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { SafeAreaView, StyleSheet, Text, View,Dimensions,TextInput,Image,
-   Button, TouchableOpacity } from 'react-native'
+   Button, TouchableOpacity,Alert } from 'react-native'
     import { Formik } from 'formik'
     import * as yup from 'yup'
 import { db,auth } from './firebase'
@@ -10,7 +10,7 @@ const screenwidth=Dimensions.get('screen').width
 const Creditcard = ({navigation,route}) => {
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
-    const [phoneNumber, setPhoneNumber] = React.useState('');
+    
    const datetoday=new Date()
     const user = auth.currentUser.uid;
     const ReviewSchem=yup.object({
@@ -43,8 +43,11 @@ const Creditcard = ({navigation,route}) => {
    const [checkin,setCheckin]=useState(route.params.checkin)
    const [checkout,setCheckout]=useState(route.params.checkout)
     const [hotelimg,setHotelimg]=useState(hotelinfor.url)
+    const [Phonenumber,setPhonenumber]=useState(route.params.Phonenumber)
+    // const Phonenumber=route.params.Phonenumber
    const [Status,setStatus]=useState('Pending')
    const [description,setDescription]=useState('Successfully paid booking')
+   const [statement,setStatement]=useState('Successfully paid booking'+checkin+' '+checkout)
 //    useEffect(()=>{
 //     db.ref('/users/'+ user).on('value',snap=>{
       
@@ -59,15 +62,20 @@ const con =[]
 con.push(description,checkin,checkout)
 const onComposeSms = async () => {
     // smsServiceAvailable &&
-    if ( phoneNumber && con) {
-      await SMS.sendSMSAsync(phoneNumber.toString(), con);
+    if ( Phonenumber && statement) {
+        try{
+            await SMS.sendSMSAsync(Phonenumber.toString(), statement);
+        }catch{(e)=>
+            console.log(e)
+        }
+     
     }
   };
     const addBooking=()=>{
         
         const userid= auth.currentUser.uid
 
-        // db.ref('/users').child(userid).push({
+        // db.ref('/users').child(userid).update({
         //     Booking:[{
         db.ref('Booking').push({
             userid,Status,
@@ -76,6 +84,14 @@ const onComposeSms = async () => {
             datetoday
         //   }]
         })
+        // .then(res=>
+        //     Alert.alert('Confirm','Clear all Todos?',[
+        //         {text:'Yes',
+        //        onPress:()=>itemRef.remove(),
+        //       },
+        //       {text:'No'},
+        //       ])
+        //     )
     }
     return (
         <SafeAreaView>
@@ -153,18 +169,20 @@ const onComposeSms = async () => {
                    </View>
                    <TextInput
     style={styles.input}
-    value={phoneNumber}
-    onChangeText={text => setPhoneNumber(text)}
+    value={Phonenumber}
+    onChangeText={text => setPhonenumber(text)}
     keyboardType='number-pad'
     placeholder='Enter phone number here'
   />
                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',padding:30}}>
-                       <TouchableOpacity onPress={props.handleSubmit}>
-                           <Text>Add Card</Text>
-                       </TouchableOpacity>
+                       <Button 
+                       title='Add Card'
+                       onPress={props.handleSubmit}/>
+                           
+                       
                        <Button
     title='Pay Booking'
-    onPress={onComposeSms}
+    onPress={onComposeSms,addBooking}
     // disabled={!smsServiceAvailable}
   />
                        {/* <TouchableOpacity onPress={addBooking()}>

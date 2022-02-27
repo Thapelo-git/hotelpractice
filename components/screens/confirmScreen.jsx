@@ -14,7 +14,7 @@ const ConfirmScreen = ({navigation,route}) => {
           const [roomnumber,setRoomnumber]=useState(0)  
           const hotelinfor=route.params.hotelinfor
           const diff=route.params.diff
-          
+          const Phonenumber=route.params.Phonenumber
           const checkin=route.params.checkin
           const checkout=route.params.checkout
           
@@ -184,7 +184,8 @@ const ConfirmScreen = ({navigation,route}) => {
                         hotelinfor:hotelinfor,diff:diff,
                         checkin:checkin,checkout:checkout,
                         adultPlus:adultPlus,roomnumber:roomnumber,
-                        totPrice:totPrice,room:room,roomT:roomT
+                        totPrice:totPrice,room:room,roomT:roomT,
+                        Phonenumber:Phonenumber
                       })}  >
                     <View style={styles.buttonstyle}>
                     <Text style={styles.buttonText}>Book Now</Text>

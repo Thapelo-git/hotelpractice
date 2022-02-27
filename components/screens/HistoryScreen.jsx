@@ -14,9 +14,11 @@ import moment from 'moment'
 
 const HistoryScreen = () => {
     const [searchtext,setSearchtext] = useState('');
-    const [Booking,setBooking]=useState([])
+    const [Booking,setBooking]=useState()
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const user = auth.currentUser.uid;
+  const [userid,setUserid]=useState()
   useEffect(()=>{
     
     
@@ -35,20 +37,35 @@ const HistoryScreen = () => {
                  description:data.description,
                  hotelname:data.hotelname,
                  Status:data.Status,
+                 userid:data.userid,
 
                  
              })
-             let tempDate = new Date()
-            let today = tempDate.getFullYear()+'/0'+(tempDate.getMonth()+ 1)+'/'+tempDate.getDate()
-            console.log(moment().add(0, 'days'))
+            })
+    // db.ref('/users/'+ user).on('value',snap=>{
+    //   setBooking(snap.val().Booking)
+     
+    //  })
+   
+            console.log(user)
             // moment(checkin).isBefore(checkout)
-            //  if(today){
-              const newData = Booking.filter(function(item){
+           
+             if(user){
+               const userinfor = Booking.filter(function(item){
+                const itemData = item.userid?
+       
+  (  item.userid)
+                :   ( '')
+                const textData = user;
+                return itemData.indexOf( textData)>-1;
+
+            })
+              const newData = userinfor.filter(function(item){
                   const itemData = moment(moment().add(0, 'days')).isAfter(item.checkout)?
          
     (  item.checkout)
                   :   ( '')
-                  const textData = today;
+                  
                   return itemData;
   
               })
@@ -56,11 +73,12 @@ const HistoryScreen = () => {
               setFilteredDataSource(newData);
              setMasterDataSource(newData);
              console.log(newData)
-            // }
+            }
           
              
-         })
+        //  })
      })
+     
   },[])
 
   const onClick=(key)=>{
