@@ -20,6 +20,7 @@ import SearchScreen from './components/screens/SearchScreen';
 import HomeScreen from './components/screens/HomeScreen';
 import { auth } from './components/screens/firebase';
 import SmsScreen from './components/screens/Event';
+import Notification from './components/screens/Notification';
 
 const Stack = createNativeStackNavigator();
 export default function App({navigation}) {
@@ -62,7 +63,7 @@ export default function App({navigation}) {
       <Stack.Screen name="EditProfile" options = {{headerShown :false}} component={EditProfile} />
       <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
       <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
-    
+      <Stack.Screen name="Notification" options = {{headerShown :false}} component={Notification} />
       {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
     </Stack.Navigator>
     </>

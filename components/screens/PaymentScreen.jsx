@@ -191,10 +191,10 @@ const PaymentScreen = ({route}) => {
   return (
     <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#2471A3" />
-        {/* <Image 
-        source={{uri:'https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Stripe_logo%2C_revised_2016.png/1200px-Stripe_logo%2C_revised_2016.png'}}
+        <Image 
+        source={require('../images/pay.png')}
         style={styles.ImgStyle}
-        /> */}
+        />
         <CreditCardInput 
         inputContainerStyle={styles.inputContainerStyle}
         inputStyle={styles.inputStyle}

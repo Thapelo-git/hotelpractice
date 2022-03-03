@@ -50,6 +50,28 @@ const HomeScreen = ({navigation}) => {
         setPhonenumber(snap.val().phonenumber)
         setEmail(snap.val().email)
           })
+        //   db.ref('/Booking/').on('value',snap=>{
+          
+        //     const Booking=[]
+        //        snap.forEach(action=>{
+        //            const key=action.key
+        //            const data =action.val()
+        //            Booking.push({
+        //                key:key,
+        //                hotelimg:data.hotelimg,
+        //                totPrice:data.totPrice,
+        //                checkin:data.checkin,
+        //                checkout:data.checkout,
+        //                description:data.description,
+        //                hotelname:data.hotelname,
+        //                Status:data.Status,
+        //                userid:data.userid,
+        //                diff:data.diff
+      
+                       
+        //            })
+        //           })
+        //         })
         
       },[])
       
@@ -172,7 +194,7 @@ opacity: 0.7,width:'90%',height:55,
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
             marginTop:18}}>{name}</Text>
             </View>
-            <TouchableOpacity onPress={navigation.navigate('SearchScreen')}>
+            <TouchableOpacity onPress={navigation.navigate('Notification')}>
           <Ionicons name="notifications" size={24}/>
           </TouchableOpacity>
         </View>
