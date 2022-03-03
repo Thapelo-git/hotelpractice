@@ -33,7 +33,11 @@ const TabScreen = () => {
     return (
         <Tab.Navigator
         initialRouteName="HomeScreen"
-        activeColor="#fff">
+        activeColor="#0225A2"
+        barStyle={{
+            backgroundColor:'#fff',
+              borderRadius: 15, elevation: 6, alignItems:'center', justifyContent: 'center', position:'absolute', marginVertical:-10,marginHorizontal:25, height:65,paddingBottom:10, paddingLeft:10, paddingRight:10,bottom:20, paddingTop:10
+          }}>
             <Tab.Screen name="HomeScreen" component={HomeScreen}
             options={{
                 tabBarLabel:'Home',

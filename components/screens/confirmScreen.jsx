@@ -4,7 +4,8 @@ ScrollView,Pressable,Dimensions,SafeAreaView,TextInput, Image} from 'react-nativ
 import Feather from 'react-native-vector-icons/Feather'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Flatbutton from "../styles/button"
-
+import { db,auth } from './firebase'
+import moment from 'moment'
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
@@ -17,13 +18,31 @@ const ConfirmScreen = ({navigation,route}) => {
           const Phonenumber=route.params.Phonenumber
           const checkin=route.params.checkin
           const checkout=route.params.checkout
-          
+          const hotelname=hotelinfor.name
           const [adultPlus,setAdultPlus]=useState(1)
           const roomT=room.bedType
+          const hotelimg=hotelinfor.url
           const [childPlus,setChildPlus]=useState(0)
-           
+          const [Status,setStatus]=useState('Pending')
+          const [description,setDescription]=useState('Successfully paid booking')
+          const [statement,setStatement]=useState('Successfully paid booking'+checkin+' '+checkout)
   
           var totPrice=0
+          const datetoday=moment(new Date()).format('YYYY/MM/DD')
+          const addBooking=()=>{
+        
+            const userid= auth.currentUser.uid
+    
+            
+            db.ref('Booking').push({
+                userid,Status,
+                description,hotelname,
+                diff,checkin,checkout,adultPlus,roomnumber,totPrice,roomT,hotelimg,
+                datetoday
+           
+            })
+      
+        }
     return (
         
       <SafeAreaView >
@@ -139,14 +158,14 @@ const ConfirmScreen = ({navigation,route}) => {
                 </View>
                 {
                   ( roomnumber > adultPlus  ) ?(
-                    <Text>Only 1 or 2 guests per room</Text>
+                    <Text style={{color:'red'}}>Only 1 or 2 guests per room</Text>
                   ):(
                     <></>
                   )
                 }
                 {
                   (roomnumber+roomnumber) < adultPlus?(
-                    <Text>Only 1 or 2 guests per room</Text>
+                    <Text style={{color:'red'}}>Only 1 or 2 guests per room</Text>
                   ):(
                     <></>
                   )
@@ -158,7 +177,7 @@ const ConfirmScreen = ({navigation,route}) => {
                 <Text style={{fontSize:20}}>R  {totPrice=(room.beds * roomnumber)*diff}</Text>
                 {/* <View style={{justifyContent:'space-between',
     borderRadius:10,padding:10,alignItems:'center',backgroundColor:'#EDEDED',
-    elevation:2,}}>
+    elevation:2,}}>88648132230
       <Text style={{fontSize:25}}>{room.beds * roomnumber}</Text>
     </View> */}
     </View>
@@ -180,12 +199,13 @@ const ConfirmScreen = ({navigation,route}) => {
                     </View>
                 </TouchableOpacity>
                     ):(
-                      <TouchableOpacity onPress={()=>navigation.navigate('Creditcard',{
+                      <TouchableOpacity  onPress={()=>navigation.navigate('PaymentScreen',{
                         hotelinfor:hotelinfor,diff:diff,
                         checkin:checkin,checkout:checkout,
                         adultPlus:adultPlus,roomnumber:roomnumber,
                         totPrice:totPrice,room:room,roomT:roomT,
-                        Phonenumber:Phonenumber
+                        Phonenumber:Phonenumber,
+                        
                       })}  >
                     <View style={styles.buttonstyle}>
                     <Text style={styles.buttonText}>Book Now</Text>

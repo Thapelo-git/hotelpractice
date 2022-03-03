@@ -48,6 +48,7 @@ const Bookings = () => {
                  hotelname:data.hotelname,
                  Status:data.Status,
                  userid:data.userid,
+                 diff:data.diff
 
                  
              })
@@ -92,18 +93,18 @@ const Bookings = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
    
 
-    // const updateBooking = (key, status) => {
+    const updateBooking = (key, status) => {
 
-    //   db.ref('Booking').child(key).update({Status:status})
-    //   .then(()=>db.ref('BookEvent').once('value'))
-    //   .then(snapshot=>snapshot.val())
-    //   .catch(error => ({
-    //     errorCode: error.code,
-    //     errorMessage: error.message
-    //   }));
+      db.ref('Booking').child(key).update({Status:status})
+      .then(()=>db.ref('BookEvent').once('value'))
+      .then(snapshot=>snapshot.val())
+      .catch(error => ({
+        errorCode: error.code,
+        errorMessage: error.message
+      }));
    
       
-    // };
+    };
     const searchFilterFunction =(text)=>{
         if(text){
             const newData = masterDataSource.filter(function(item){
@@ -139,7 +140,7 @@ const Bookings = () => {
             <View style={{padding:10}}>
           <Image source={{uri:item.hotelimg}} style={{height:120,width:120,borderRadius:10}}/>
           </View>
-          <View style={{marginTop:20,}}>
+          <View style={{marginTop:5}}>
           <Text
             style={{color:'#032B7A',fontWeight:'bold'}}
             onPress={() => getItem(item)}>
@@ -147,16 +148,17 @@ const Bookings = () => {
               {item.hotelname}
 
           </Text>
+          <Text >{item.diff} nights</Text>
             <View style={{flexDirection:'row'}}>
-              <Ionicons name='location-sharp' size={21}/>
-          <Text>{item._location}</Text>
+          
+          <Text>{item.checkin}  -  {item.checkout}</Text>
           </View>
           <Text>{item.description}</Text>
        
               
           <Text>Price  {item.totPrice}</Text>
           <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
-          alignItems:'center',}}  onPress={()=>{updateBooking(item.key,'Cancelled')}}>
+          alignItems:'center',}}  onPress={()=>updateBooking(item.key,'Cancelled')}>
           <Text style={{color:'#fff'}}>Cancel</Text>
           </TouchableOpacity>
           

@@ -9,6 +9,7 @@ import { db,auth } from './firebase.jsx';
 import Entypo from 'react-native-vector-icons/Entypo'
 import { } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Cancellation from './Cancellation.jsx';
 import moment from 'moment'
 
@@ -80,7 +81,10 @@ const HistoryScreen = () => {
      })
      
   },[])
+  const handleDelete=(key)=>{
+    db.ref('Booking').child(key).remove()
 
+    }
   const onClick=(key)=>{
     db.ref('Booking').child(key).update({Status:'Completed'})
     .then(()=>db.ref('Booking').once('value'))
@@ -128,6 +132,7 @@ const HistoryScreen = () => {
         <Image source={{uri:item.hotelimg}} style={{height:120,width:120,borderRadius:10}}/>
         </View>
         <View style={{marginTop:20,}}>
+        <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
         <Text
           style={{color:'#032B7A',fontWeight:'bold'}}
           onPress={() => getItem(item)}>
@@ -135,8 +140,10 @@ const HistoryScreen = () => {
             {item.hotelname}
 
         </Text>
-          <View style={{flexDirection:'row'}}>
-            <Ionicons name='location-sharp' size={21}/>
+      
+        </View>
+          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+            
         <Text>{item.checkin} {item.checkout}</Text>
         </View>
         <Text>{item.description}</Text>
@@ -144,7 +151,18 @@ const HistoryScreen = () => {
             
         <Text>Price  {item.totPrice}</Text>
         
-        
+        <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
+        <Text
+          style={{color:'#032B7A',fontWeight:'bold'}}
+          onPress={() => getItem(item)}>
+            
+            
+
+        </Text>
+        <TouchableOpacity onPress={()=>handleDelete(item.key)}>
+        <MaterialIcons name='delete' size={20} color='red'/>
+        </TouchableOpacity>
+        </View>
         </View>
         </TouchableOpacity>
         </ScrollView>

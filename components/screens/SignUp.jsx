@@ -40,7 +40,7 @@ const SignUp = ({navigation}) => {
         catch(error){
           if(error.code === 'auth/email-already-in-use'){
             Alert.alert(
-              'That email adress is already inuse'
+              'That email address is already inuse'
             )
           }
           if(error.code === 'auth/invalid-email'){
