@@ -1,5 +1,7 @@
-import { StyleSheet, Text, View ,Button,SafeAreaView} from 'react-native'
+import { StyleSheet, Text, View ,Button,SafeAreaView, TouchableOpacity} from 'react-native'
 import React from 'react'
+import LottieView from 'lottie-react-native';
+import { StatusBar } from 'expo-status-bar';
 
 const PaySucc = ({navigation}) => {
   return (
@@ -12,10 +14,15 @@ const PaySucc = ({navigation}) => {
    
    <LottieView style={styles.hotel}
 source={require('../onbording/animation2.json')} autoPlay loop/>
-    <Button style={{with:100}}
-                       title='Add Card'
-                       onPress={()=>navigation.navigate('HomeTap')}/>
+  
  </View>
+ <TouchableOpacity style={{ marginTop:250,justifyContent:'center',alignItems:'center',borderRadius:10,
+        marginLeft:160,backgroundColor:'#4A1DD6',width:80,height:30}} onPress={()=>navigation.navigate('HomeTap')}>
+       <Text style={{color:'#fff'}}>OK</Text>
+   </TouchableOpacity>
+                {/* <Button style={{width:100}}
+                       title='Add Card'
+                       onPress={()=>navigation.navigate('HomeTap')}/> */}
 </SafeAreaView>
   )
 }
@@ -25,13 +32,13 @@ export default PaySucc
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        padding:90,
-        marginTop:110,
-        
+        padding:80,
+        marginTop:100,
+        marginLeft:-150
       },
       hotel: {
-        width:150,
-        height:150,
+        width:300,
+        height:300,
         
       },
 })
