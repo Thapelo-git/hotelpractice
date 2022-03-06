@@ -188,16 +188,16 @@ opacity: 0.7,width:'90%',height:55,
             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
                  email:email,name:name,phonenumber:phonenumber
             })}>
-                <Image source={{ uri: 'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fprojectpractice-33924af9-34b0-4480-a99c-e0f2c39544c6/ImagePicker/8014fb40-f6ac-45b9-a200-a648118a1add.jpg'}}
+                <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
                 style={{height:50,width:50,borderRadius:25}}/>
                 </TouchableOpacity>
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
             marginTop:18}}>{name}</Text>
             </View>
-            <TouchableOpacity onPress={navigation.navigate('Notification')}>
+            {/* <TouchableOpacity onPress={navigation.navigate('Notification')}>
           <Ionicons name="notifications" size={24}/>
-          </TouchableOpacity>
-        </View>
+          </TouchableOpacity> */}
+        </View> 
         <View style={{
             marginTop:20,
             flexDirection:'row',

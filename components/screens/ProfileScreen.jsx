@@ -48,7 +48,7 @@ const ProfileScreen = ({navigation}) => {
             }}>{email}</Text>
              </View>
              <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
-                   email:email,name:name,Phonenumber:Phonenumber
+                   email:email,name:name,phonenumber:phonenumber
              })}>
                 
             <Image source={{url:img}}
@@ -75,7 +75,7 @@ const ProfileScreen = ({navigation}) => {
             </View>
         <View>
         <Text>{name}</Text>
-        <Text>0745823169</Text>
+        <Text>{phonenumber}</Text>
         <Text>{email}</Text>
         </View>
         </View>
@@ -83,10 +83,13 @@ const ProfileScreen = ({navigation}) => {
         <View style={{top:30}}>
         <View style={styles.pagelist}>
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-            <Icon name="heart" size={20}  /> 
-            <Text>     Favorites</Text>
+            <Ionicons name="notifications" size={24}/>
+            <Text>     notifications</Text>
             </View>
+            <TouchableOpacity onPress={()=>navigation.navigate('Notification'
+            )}>
             <Icon name="chevron-right" size={15}  />
+            </TouchableOpacity>
         </View>
        
         <View style={styles.pagelist}>

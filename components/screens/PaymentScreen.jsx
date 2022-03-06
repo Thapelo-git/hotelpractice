@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
+  ScrollView,Alert
 } from 'react-native';
 import { db,auth } from './firebase'
 import * as SMS from 'expo-sms';
@@ -84,7 +85,7 @@ const PaymentScreen = ({route}) => {
  const datetoday=moment(new Date()).format('YYYY/MM/DD')
   const [CardInput, setCardInput] = React.useState({})
   const userid= auth.currentUser.uid
-  const addBooking=()=>{
+  const addBooking=({navigation})=>{
         
     const userid= auth.currentUser.uid
 
@@ -111,7 +112,10 @@ const PaymentScreen = ({route}) => {
       creditCardToken = await getCreditCardToken(CardInput);
       // console.log("creditCardToken", creditCardToken)
       if (creditCardToken.error) {
-        alert("creditCardToken error");
+        Alert.alert(
+          "creditCardToken error"
+        )
+        //alert("creditCardToken error");
         return;
       }
     } catch (e) {
@@ -132,12 +136,18 @@ const PaymentScreen = ({route}) => {
      
        
         addBooking();
+        // Alert.alert(
+        //   "Payment Successfully"
+        // )
         alert("Payment Successfully");
         onComposeSms()
-   
+        navigation.navigate('Homescreen')
       }
       else{
-        alert('Payment failed');
+        Alert.alert(
+          "Payment failed"
+        )
+        //alert('Payment failed');
       }
     }
   };
@@ -195,6 +205,7 @@ const PaymentScreen = ({route}) => {
         source={require('../images/pay.png')}
         style={styles.ImgStyle}
         />
+        <ScrollView>
         <CreditCardInput 
         inputContainerStyle={styles.inputContainerStyle}
         inputStyle={styles.inputStyle}
@@ -212,6 +223,7 @@ const PaymentScreen = ({route}) => {
           Pay Now
         </Text>
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };

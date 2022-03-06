@@ -28,71 +28,40 @@ const Creditcard = ({navigation,route}) => {
           })
     }
 
-    const hotelinfor=route.params.hotelinfor
-    // const hotelimg=hotelinfor.url
-    const hotelname=hotelinfor.name
-    const diff=route.params.diff
-    // const checkin=route.params.checkin
-    // const checkout=route.params.checkout
-   const  adultPlus=route.params.adultPlus
-   const roomnumber=route.params.roomnumber
-   const totPrice=route.params.totPrice
-   const room=route.params.room
-   const roomT=route.params.roomT
-
-   const [checkin,setCheckin]=useState(route.params.checkin)
-   const [checkout,setCheckout]=useState(route.params.checkout)
-    const [hotelimg,setHotelimg]=useState(hotelinfor.url)
-    const [Phonenumber,setPhonenumber]=useState(route.params.Phonenumber)
+   
+   // const [Phonenumber,setPhonenumber]=useState(route.params.Phonenumber)
     // const Phonenumber=route.params.Phonenumber
    const [Status,setStatus]=useState('Pending')
-   const [description,setDescription]=useState('Successfully paid booking')
-   const [statement,setStatement]=useState('Successfully paid booking'+checkin+' '+checkout)
-//    useEffect(()=>{
-//     db.ref('/users/'+ user).on('value',snap=>{
+   const [cardName,setCardName]=useState('')
+   const [cardNumber,setCardNumber]=useState('')
+   const [CVV,setCVV]=useState('')
+   const [Expiry,setExpiry]=useState('')
+   useEffect(()=>{
+    db.ref('/users/'+ user).on('value',snap=>{
       
-//       setName(snap.val() && snap.val().name);
+      setCardName(snap.val() && snap.val().cardName);
   
-//   setEmail(snap.val().email)
-//     })
+  setCardNumber(snap.val().cardNumber)
+  setCVV(snap.val().CVV)
+  setExpiry(snap.val().Expiry)
+    })
   
-    
+}) 
 //   },[])
-const con =[]
-con.push(description,checkin,checkout)
-const onComposeSms = async () => {
-    // smsServiceAvailable &&
-    if ( Phonenumber && statement) {
-        try{
-            await SMS.sendSMSAsync(Phonenumber.toString(), statement);
-        }catch{(e)=>
-            console.log(e)
-        }
+// const con =[]
+// con.push(description,checkin,checkout)
+// const onComposeSms = async () => {
+//     // smsServiceAvailable &&
+//     if ( Phonenumber && statement) {
+//         try{
+//             await SMS.sendSMSAsync(Phonenumber.toString(), statement);
+//         }catch{(e)=>
+//             console.log(e)
+//         }
      
-    }
-  };
-    const addBooking=()=>{
-        
-        const userid= auth.currentUser.uid
-
-        // db.ref('/users').child(userid).update({
-        //     Booking:[{
-        db.ref('Booking').push({
-            userid,Status,
-            description,hotelname,
-            diff,checkin,checkout,adultPlus,roomnumber,totPrice,roomT,hotelimg,
-            datetoday
-        //   }]
-        })
-        // .then(res=>
-        //     Alert.alert('Confirm','Clear all Todos?',[
-        //         {text:'Yes',
-        //        onPress:()=>itemRef.remove(),
-        //       },
-        //       {text:'No'},
-        //       ])
-        //     )
-    }
+//     }
+//   };
+    
     return (
         <SafeAreaView>
              <View style={styles.header}>
@@ -103,11 +72,11 @@ const onComposeSms = async () => {
         <Image source={require('../images/MasterCard.png')}
                 style={{height:40,width:80,position:'absolute',top:20,right:20}}/>
                 <View style={{position:'absolute',bottom:10,left:0,right:0,paddingHorizontal:20}}>
-                    {/* <Text style={{fontSize:20}}>{cardName}</Text>
+                    <Text style={{fontSize:30}}>{cardName}</Text>
                     <View style={{flexDirection:'row'}}>
                     <Text style={{flex:1}}>{cardNumber}</Text>
                     <Text>{Expiry}</Text>
-                    </View> */}
+                    </View>
                 </View>
         </View> 
         <Formik
@@ -167,24 +136,24 @@ const onComposeSms = async () => {
                <Text style={{color:'red',marginTop:-15,paddingVertical:10}}>{props.touched.CVV && props.errors.CVV}</Text>
                </View>
                    </View>
-                   <TextInput
+                   {/* <TextInput
     style={styles.input}
     value={Phonenumber}
     onChangeText={text => setPhonenumber(text)}
     keyboardType='number-pad'
     placeholder='Enter phone number here'
-  />
+  /> */}
                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',padding:30}}>
-                       <Button 
+                       <Button style={{with:100}}
                        title='Add Card'
                        onPress={props.handleSubmit}/>
                            
-                       
+{/*                        
                        <Button
     title='Pay Booking'
-    onPress={onComposeSms,addBooking}
+    onPress={addBooking}
     // disabled={!smsServiceAvailable}
-  />
+  /> */}
                        {/* <TouchableOpacity onPress={addBooking()}>
                        <Text>Add Card</Text>
                        </TouchableOpacity> */}
