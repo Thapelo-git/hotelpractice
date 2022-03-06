@@ -61,7 +61,7 @@ function getCreditCardToken(creditCardData){
   });
 };
 
-const PaymentScreen = ({route}) => {
+const PaymentScreen = ({navigation,route}) => {
   const hotelinfor=route.params.hotelinfor
   // const hotelimg=hotelinfor.url
   const hotelname=hotelinfor.name
@@ -85,7 +85,7 @@ const PaymentScreen = ({route}) => {
  const datetoday=moment(new Date()).format('YYYY/MM/DD')
   const [CardInput, setCardInput] = React.useState({})
   const userid= auth.currentUser.uid
-  const addBooking=({navigation})=>{
+  const addBooking=()=>{
         
     const userid= auth.currentUser.uid
 
@@ -97,6 +97,7 @@ const PaymentScreen = ({route}) => {
         datetoday
    
     })
+    navigation.navigate('PaySucc')
 
 }
   const onSubmit = async () => {
@@ -141,7 +142,7 @@ const PaymentScreen = ({route}) => {
         // )
         alert("Payment Successfully");
         onComposeSms()
-        navigation.navigate('Homescreen')
+        
       }
       else{
         Alert.alert(
@@ -216,7 +217,7 @@ const PaymentScreen = ({route}) => {
 
       <TouchableOpacity 
   
-    onPress={onSubmit}
+    onPress={addBooking}
       style={styles.button}>
         <Text
           style={styles.buttonText}>

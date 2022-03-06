@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { SafeAreaView, StyleSheet, Text, View 
     ,ImageBackground,TextInput,Alert} from 'react-native'
 import { COLORS } from '../styles/Colors'
@@ -25,7 +25,7 @@ const ForgetPassword = () => {
              <View style={styles.container}>
             <Text style={{fontFamily:FONTS.extraBold,fontWeight:'bold',fontSize:30,
         color:COLORS.theme}}>Forget Password</Text>
-        <Text style={{fontFamily:FONTS.Regular}}>Please Enter your password to reset your Password</Text>
+        {/* <Text style={{fontFamily:FONTS.Regular}}>Please Enter your password to reset your Password</Text> */}
          <KeyboardAwareScrollView
              style={styles.innerContainer}>
         <View style={styles.inputContainer}>
@@ -66,15 +66,16 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         padding:20,
         width:'100%',
-        height:'90%',
+        height:'60%',
         marginTop:220,
         borderTopRightRadius:50,
         borderTopLeftRadius:50,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        bottom:-100
     },
     innerContainer:{
-        marginTop:20,
+        marginTop:40,
     },
     inputs:{
         borderBottomColor:'black',

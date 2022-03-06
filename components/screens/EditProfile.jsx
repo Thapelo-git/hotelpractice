@@ -16,10 +16,15 @@ import { storage } from './firebase'
 
 
 const EditProfile = ({navigation,route}) => {
+  const [name,setName]=useState(route.params.name)
+  const [email,setEmail]=useState(route.params.email)
+  const [phonenumber,setphonenumber]=useState(route.params.phonenumber)
+  const [uid,setUid]=useState(route.params.uid)
+  
+  
     
-    const name=route.params.name
-    const email=route.params.email
-    const phonenumber=route.params.phonenumber
+    
+    
     const user = auth.currentUser.uid;
     const itemRef= db.ref(`/users/`)
     const [selectedImage, setSelectedImage] = useState(null);
@@ -100,8 +105,8 @@ const EditProfile = ({navigation,route}) => {
         setImage(null);
       };
       const editprofile=()=>{
-        itemRef.child(user).update({img:selectedImage.localUri})
-      }
+        // itemRef.child(uid).update({name,email,phonenumber})
+      
     //   if (selectedImage !== null) {
     //     return (
     //       <View style={styles.container}>
@@ -118,7 +123,14 @@ const EditProfile = ({navigation,route}) => {
     //       </View>
     //     );
     //   }
-      
+    db.ref('users').child(uid).update({name,email,phonenumber})
+        .then(()=>db.ref('societyUser').once('value'))
+        .then(snapshot=>snapshot.val())
+        .catch(error => ({
+          errorCode: error.code,
+          errorMessage: error.message
+        }));
+      }
     return (
         <SafeAreaView>
              <StatusBar
@@ -155,7 +167,7 @@ const EditProfile = ({navigation,route}) => {
            
             <View style={{padding:20}}>
             <Formik
-        initialValues={{name:name,phonenumber:Phonenumber,email:email,password:'',confirmpassword:''}}
+        initialValues={{name:name,phonenumber:phonenumber,email:email,password:'',confirmpassword:''}}
         validationSchema={ReviewSchem}
         >
 
@@ -172,8 +184,9 @@ const EditProfile = ({navigation,route}) => {
             <TextInput
              style={styles.inputs}
              placeholder='Enter Last Name'
-             onChangeText={props.handleChange('name')}
-             value={props.values.name}
+             value={name}
+             onChangeText={(text)=>setName(text)}
+            
              onBlur={props.handleBlur('name')}
              />
         
@@ -190,8 +203,9 @@ const EditProfile = ({navigation,route}) => {
              style={styles.inputs}
              placeholder='Enter Phone Number'
              keyboardType='numeric'
-             onChangeText={props.handleChange('phonenumber')}
-             value={props.values.Phonenumber}
+             value={phonenumber}
+             onChangeText={(text)=>setphonenumber(text)}
+             
              onBlur={props.handleBlur('phonenumber')}
              />
         
@@ -208,8 +222,9 @@ const EditProfile = ({navigation,route}) => {
              style={styles.inputs}
              placeholder='Enter Email'
              keyboardType='email-address'
-             onChangeText={props.handleChange('email')}
-             value={props.values.email}
+             value={email}
+             onChangeText={(text)=>setEmail(text)}
+            
              onBlur={props.handleBlur('email')}
              />
         
@@ -264,7 +279,7 @@ const EditProfile = ({navigation,route}) => {
         
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
             {/* onPress={()=>{uploadImage()}} */}
-            <Flatbutton text='UPDATE' onPress={()=>{handleUpload()}}  />
+            <Flatbutton text='UPDATE' onPress={editprofile()}  />
       
             </View>
             </KeyboardAwareScrollView>

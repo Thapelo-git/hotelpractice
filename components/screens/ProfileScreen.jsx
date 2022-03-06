@@ -10,6 +10,7 @@ const ProfileScreen = ({navigation}) => {
     const [email,setEmail]=useState('')
     const [phonenumber,setPhonenumber]=useState('')
     const [img,setImg]=useState('')
+    const [uid,setUid]=useState('')
     const user = auth.currentUser.uid;
     useEffect(()=>{
         db.ref(`/users/`+ user).on('value',snap=>{
@@ -17,7 +18,8 @@ const ProfileScreen = ({navigation}) => {
           setName(snap.val() && snap.val().name);
       setEmail(snap.val().email)
       setPhonenumber(snap.val().phonenumber)
-      setImg(snap.val().img)
+    //   setImg(snap.val().img)
+    setUid(snap.val().uid)
         })
       
         
@@ -48,7 +50,7 @@ const ProfileScreen = ({navigation}) => {
             }}>{email}</Text>
              </View>
              <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
-                   email:email,name:name,phonenumber:phonenumber
+                   email:email,name:name,phonenumber:phonenumber,uid:uid
              })}>
                 
             <Image source={{url:img}}
@@ -60,7 +62,7 @@ const ProfileScreen = ({navigation}) => {
         paddingRight:20}}>
             <Text></Text>
             <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
-                   email:email,name:name,phonenumber:phonenumber
+                   email:email,name:name,phonenumber:phonenumber,uid:uid
              })}>
             
              <Ionicons name='pencil' size={20}/>

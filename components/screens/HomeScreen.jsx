@@ -147,7 +147,7 @@ opacity: 0.7,width:'90%',height:55,
                     <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels.location}</Text>
                     </View>
                     <View style={{flexDirection:'row'}}>
-                        <Ionicons name='star' size={16} color='orange'/>
+                        {/* <Ionicons name='star' size={16} color='orange'/> */}
                     {/* <Text style={{marginHorizontal:10,marginStart:0}}>{Hotels.rating}</Text> */}
                     </View>
                     </View>

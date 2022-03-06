@@ -29,12 +29,14 @@ const SignUp = ({navigation}) => {
   await auth.createUserWithEmailAndPassword(
       email.trim().toLowerCase(),password
     ).then(res =>{
+       
           db.ref(`/users`).child(res.user.uid).set({
             name:name,
             email:email.trim().toLowerCase(),
             phonenumber:phonenumber,
             uid:res.user.uid
           })
+          res.user.sendEmailVerification()
           })
         }
         catch(error){

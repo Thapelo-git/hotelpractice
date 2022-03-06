@@ -28,7 +28,9 @@ const SignIn = ({navigation}) => {
             )
             
             .then(async res => {
+                
               try {
+                  
                 const jsonValue = JSON.stringify(res.user)
                 await AsyncStorage.setItem("user", res.user.uid)
                 navigation.navigate('HomeTap')
@@ -37,6 +39,7 @@ const SignIn = ({navigation}) => {
                 console.log('no data')
               }
             })
+            
         //   Alert.alert(
         //     'succesfully logged in'
         //   )
