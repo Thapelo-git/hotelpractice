@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { SafeAreaView, StyleSheet, Text, View,Dimensions,TextInput,Image,
-   Button, TouchableOpacity,Alert } from 'react-native'
+   Button, TouchableOpacity,Alert, ScrollView } from 'react-native'
     import { Formik } from 'formik'
     import * as yup from 'yup'
 import { db,auth } from './firebase'
@@ -17,7 +17,7 @@ const Creditcard = ({navigation,route}) => {
         cardNumber:yup.string().required().min(16).max(16),
         cardName:yup.string().required().min(2),
         CVV:yup.string().required().min(3).max(3),
-        Expiry:yup.string().required().min(4).max(4),
+        Expiry:yup.string().required().min(5).max(5),
    
     })
     const addCard=(data)=>{
@@ -64,6 +64,7 @@ const Creditcard = ({navigation,route}) => {
     
     return (
         <SafeAreaView>
+            
              <View style={styles.header}>
                 <Text style={{color:'#fff'}}>My Cards</Text>
                 </View>
@@ -88,6 +89,7 @@ const Creditcard = ({navigation,route}) => {
         }}
         >
             {(props)=>(
+                <ScrollView>
            <View style={{padding:10}}>
                <Text>Card Number</Text>
                <TextInput
@@ -143,8 +145,8 @@ const Creditcard = ({navigation,route}) => {
     keyboardType='number-pad'
     placeholder='Enter phone number here'
   /> */}
-                   <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',padding:30}}>
-                       <Button style={{with:100}}
+                   <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',paddingLeft:50}}>
+                       <Button 
                        title='Add Card'
                        onPress={props.handleSubmit}/>
                            
@@ -160,8 +162,9 @@ const Creditcard = ({navigation,route}) => {
                    </View>
                    
            </View>
-           )}</Formik>
+           </ScrollView> )}</Formik>
         </View>
+        
         </SafeAreaView>
     )
 }
