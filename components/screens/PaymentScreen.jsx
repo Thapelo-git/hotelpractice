@@ -65,6 +65,7 @@ const PaymentScreen = ({navigation,route}) => {
   const hotelinfor=route.params.hotelinfor
   // const hotelimg=hotelinfor.url
   const hotelname=hotelinfor.name
+  
   const diff=route.params.diff
   // const checkin=route.params.checkin
   // const checkout=route.params.checkout
@@ -81,7 +82,7 @@ const PaymentScreen = ({navigation,route}) => {
   // const Phonenumber=route.params.Phonenumber
  const [Status,setStatus]=useState('Pending')
  const [description,setDescription]=useState('Successfully paid booking')
- const [statement,setStatement]=useState('Successfully paid booking'+checkin+' '+checkout+''+hotelname+''+diff+'nights')
+ const [statement,setStatement]=useState('Successfully paid booking   '+checkin+' to  '+checkout+''+hotelname+'   '+diff+'nights')
  const datetoday=moment(new Date()).format('YYYY/MM/DD')
   const [CardInput, setCardInput] = React.useState({})
   const userid= auth.currentUser.uid
@@ -217,7 +218,7 @@ const PaymentScreen = ({navigation,route}) => {
 
       <TouchableOpacity 
   
-    onPress={addBooking}
+    onPress={onSubmit}
       style={styles.button}>
         <Text
           style={styles.buttonText}>
