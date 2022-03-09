@@ -2,6 +2,7 @@ import React ,{useEffect,useState}from 'react'
 import { StyleSheet, Text, View ,StatusBar,Image,SafeAreaView,TouchableOpacity} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ListItem from 'react-native-elements'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo'
 import { auth,db } from './firebase';
@@ -42,22 +43,31 @@ const ProfileScreen = ({navigation}) => {
             barStyle="light-content"
             />
         <View style={styles.header}>
-            
-                <View>
-                <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
-            marginTop:18}}>{name}</Text>
-             <Text style={{fontSize:18,marginLeft:10,
-            }}>{email}</Text>
-             </View>
+        {/* <Ionicons name='chevron-back' size={20}/> */}
+        <Text></Text>
+                 <Text style={{fontSize:20}}>Profile</Text>
+                
              <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
                    email:email,name:name,phonenumber:phonenumber,uid:uid
              })}>
-                
-            <Image source={{url:img}}
-                style={{height:80,width:80,borderRadius:40}}/>
+                 <View style={{borderColor:'grey',borderBottomWidth:1.5,}}>
+                 <MaterialCommunityIcons name='pen' size={25}/>
+                 </View>
+            {/* <Image source={{url:img}}
+                style={{height:80,width:80,borderRadius:40}}/> */}
                 </TouchableOpacity>
         </View>
-        <View style={styles.editBox}>
+          <View style={styles.editBox}>
+        <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
+                style={{height:120,width:120,borderRadius:60}}/>
+                <View>
+                <Text style={{fontSize:18,fontWeight:'bold',marginLeft:25,
+            marginTop:5}}>{name}</Text>
+             {/* <Text style={{fontSize:18,marginLeft:10,
+            }}>{email}</Text> */}
+             </View>
+             </View>
+       {/*
             <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',
         paddingRight:20}}>
             <Text></Text>
@@ -81,30 +91,31 @@ const ProfileScreen = ({navigation}) => {
         <Text>{email}</Text>
         </View>
         </View>
-        </View>
+        </View> */}
         <View style={{top:30}}>
-        <View style={styles.pagelist}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Notification'
+            )} style={styles.pagelist}>
+        
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Ionicons name="notifications" size={24}/>
             <Text>     notifications</Text>
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Notification'
-            )}>
+            
             <Icon name="chevron-right" size={15}  />
             </TouchableOpacity>
-        </View>
        
-        <View style={styles.pagelist}>
+       
         
+        <TouchableOpacity onPress={()=>navigation.navigate('Creditcard'
+            )}  style={styles.pagelist}>
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Icon name="credit-card-alt" size={15}  /> 
             <Text>     My Cards</Text>
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Creditcard'
-            )}>
+            
             <Icon name="chevron-right" size={15}  />
             </TouchableOpacity>
-        </View>
+       
         
         <View style={styles.pagelist}>
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
@@ -113,15 +124,15 @@ const ProfileScreen = ({navigation}) => {
             </View>
             <Icon name="chevron-right" size={15}  />
         </View>
-        <View style={styles.pagelist}>
-            <TouchableOpacity  onPress={()=>onSignout() }>
+        
+            <TouchableOpacity  onPress={()=>onSignout() } style={styles.pagelist}>
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Entypo name="log-out" size={15}  /> 
             <Text>     Log Out</Text>
             </View>
-            </TouchableOpacity>
+            
             <Icon name="chevron-right" size={15}  />
-        </View>
+            </TouchableOpacity>
         </View>
         </SafeAreaView>
     )
@@ -138,24 +149,24 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         // paddingHorizontal:10,
-        borderColor:'grey',
-        borderBottomWidth:1.5,
+        
+        
         
     },
     editBox:{
-        borderWidth:1,
+        // borderWidth:1,
         borderRadius:10,
         height:110,
-        top:40
+        top:20,
+        left:130
         
     },
     pagelist:{
         justifyContent:'space-between',
         padding:15,
         flexDirection:'row',
-        borderTopWidth:1,
-        borderBottomWidth:1,
-        borderColor:'grey',
+        
+        
         top:70
     }
 })

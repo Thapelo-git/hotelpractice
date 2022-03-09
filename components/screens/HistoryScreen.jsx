@@ -134,7 +134,7 @@ const HistoryScreen = () => {
         <View style={{marginTop:20,}}>
         <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
         <Text
-          style={{color:'#032B7A',fontWeight:'bold'}}
+          style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
           onPress={() => getItem(item)}>
             
             {item.hotelname}
@@ -160,7 +160,7 @@ const HistoryScreen = () => {
 
         </Text>
         <TouchableOpacity onPress={()=>handleDelete(item.key)}>
-        <MaterialIcons name='delete' size={20} color='red'/>
+        <MaterialIcons name='delete' size={25} color='red'/>
         </TouchableOpacity>
         </View>
         </View>

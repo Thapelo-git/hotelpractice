@@ -11,6 +11,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import { } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Cancellation from './Cancellation.jsx';
+import moment from 'moment';
 const Notification = () => {
   const [animationValue,setAnimationValue]=useState(-1000)
   const showAnimation= useRef(new Animated.Value(animationValue)).current
@@ -48,7 +49,8 @@ const Notification = () => {
                  hotelname:data.hotelname,
                  Status:data.Status,
                  userid:data.userid,
-                 diff:data.diff
+                 diff:data.diff,
+                 datetoday:data.datetoday
 
                  
              })
@@ -138,13 +140,17 @@ const Notification = () => {
           <Image source={{uri:item.hotelimg}} style={{height:120,width:120,borderRadius:10}}/>
           </View>
           <View style={{marginTop:5}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
           <Text
-            style={{color:'#032B7A',fontWeight:'bold'}}
+            style={{color:'#032B7A',fontWeight:'bold',fontSize:18}}
             onPress={() => getItem(item)}>
               
               {item.hotelname}
 
           </Text>
+          <Text>                           </Text>
+          <Text>{moment(item.datetoday).fromNow()}</Text>
+          </View>
           <Text >{item.diff} nights</Text>
             <View style={{flexDirection:'row'}}>
           
@@ -154,10 +160,7 @@ const Notification = () => {
        
               
           <Text>Price  {item.totPrice}</Text>
-          <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
-          alignItems:'center',}}  onPress={()=>updateBooking(item.key,'Cancelled')}>
-          <Text style={{color:'#fff'}}>Cancel</Text>
-          </TouchableOpacity>
+         
           
           </View>
           </View>

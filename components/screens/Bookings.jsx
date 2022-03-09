@@ -140,9 +140,12 @@ const Bookings = () => {
             <View style={{padding:10}}>
           <Image source={{uri:item.hotelimg}} style={{height:120,width:120,borderRadius:10}}/>
           </View>
+          <View>
+            <Text></Text>
+          </View>
           <View style={{marginTop:5}}>
           <Text
-            style={{color:'#032B7A',fontWeight:'bold'}}
+            style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
             onPress={() => getItem(item)}>
               
               {item.hotelname}
@@ -154,14 +157,16 @@ const Bookings = () => {
           <Text>{item.checkin}  -  {item.checkout}</Text>
           </View>
           <Text>{item.description}</Text>
-       
-              
+       {/* backgroundColor:'#AA0303', style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end',}}*/}
+            <View > 
           <Text>Price  {item.totPrice}</Text>
-          <TouchableOpacity style={{backgroundColor:'#AA0303',height:30,width:70,justifyContent:'center',
+          <View style={{flexDirection:'row',alignItems:'flex-end',justifyContent:'flex-end'}}>
+          <TouchableOpacity style={{height:30,width:70,justifyContent:'center',
           alignItems:'center',}}  onPress={()=>updateBooking(item.key,'Cancelled')}>
-          <Text style={{color:'#fff'}}>Cancel</Text>
+          <Text style={{color:'red'}}>Cancel</Text>
           </TouchableOpacity>
-          
+          </View>
+          </View> 
           </View>
           </View>
           </ScrollView>
