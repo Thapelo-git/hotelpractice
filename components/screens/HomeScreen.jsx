@@ -41,7 +41,7 @@ const HomeScreen = ({navigation}) => {
          setAddHotels(Hotels)
          setFilteredDataSource(Hotels);
         setMasterDataSource(Hotels);
-                console.log(Hotels)
+              
             })
         })
         db.ref('/users/'+ user).on('value',snap=>{
@@ -50,6 +50,21 @@ const HomeScreen = ({navigation}) => {
         setPhonenumber(snap.val().phonenumber)
         setEmail(snap.val().email)
           })
+
+          const text='Polokwane'
+          if(text){
+           const newData = Hotels.filter(function(item){
+               const itemData = item.location ? item.location
+               :'';
+               const textData = text;
+               return itemData.indexOf( textData)>-1;
+
+           })
+        
+           setFilteredNear(newData);
+           setMasterNear(newData);
+          console.log(newData)
+         }
         //   db.ref('/Booking/').on('value',snap=>{
           
         //     const Booking=[]
@@ -78,6 +93,8 @@ const HomeScreen = ({navigation}) => {
       const [searchtext,setSearchtext] = useState('');
       const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const [filteredNear, setFilteredNear] = useState([]);
+  const [masterNear, setMasterNear] = useState([]);
 
       const searchFilterFunction =(text)=>{
         if(text){
@@ -100,8 +117,8 @@ const HomeScreen = ({navigation}) => {
     const [ selectedHotelIndex,setSelectedHotelIndex] = useState(0);
     const Btn =[
         {id:'1',name:'Recomended'},
-        {id:'2',name:'Popular'},
-        {id:'3',name:'Top Ratings'},
+        // {id:'2',name:'Popular'},
+        // {id:'3',name:'Top Ratings'},
         
     ]
     
@@ -243,7 +260,7 @@ opacity: 0.7,width:'90%',height:55,
             horizontal 
              showsHorizontalScrollIndicator={false}
             contentContainerStyle={{paddingLeft:20,}}
-            data={filteredDataSource}
+            data={filteredNear}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
             </View>
@@ -274,7 +291,8 @@ const styles = StyleSheet.create({
         paddingHorizontal:20, 
     },
     btnListContainer:{
-        marginLeft:-20,
+        marginLeft:-10,
+
         paddingHorizontal:20,
         paddingVertical:30,
         // alignItems:'center'

@@ -295,10 +295,10 @@ opacity: 0.7,width:30,
       <Text
           style={{color:'#032B7A',fontWeight:'bold',fontSize:20, marginBottom:5}}
           >{list.name}</Text>
-        <View style={{flexDirection:'row'}}>
+        <TouchableOpacity onPress={()=>navigation.navigate('MapScreen')} style={{flexDirection:'row'}}>
           <MaterialIcons name='location-pin' size={20}/>
       <Text style={{marginBottom:5, color:'gray'}}>{list.location}</Text>
-      </View>
+      </TouchableOpacity>
       <View style={{flexDirection:'row'}}>
                         <Ionicons name='star' size={16} color='orange'/>
                         <Ionicons name='star' size={16} color='orange'/>

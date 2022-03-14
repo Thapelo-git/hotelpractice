@@ -22,6 +22,7 @@ import { auth } from './components/screens/firebase';
 import SmsScreen from './components/screens/Event';
 import Notification from './components/screens/Notification';
 import PaySucc from './components/screens/PaySucc';
+import MapScreen from './components/screens/MapScreen';
 
 const Stack = createNativeStackNavigator();
 export default function App({navigation}) {
@@ -65,6 +66,7 @@ export default function App({navigation}) {
       <Stack.Screen name="Creditcard" options = {{headerShown :false}} component={Creditcard} />
       <Stack.Screen name="PaymentScreen" options = {{headerShown :false}} component={PaymentScreen} />
       <Stack.Screen name="PaySucc" options={{headerShown:false}} component={PaySucc}/>
+      <Stack.Screen name="MapScreen" options={{headerShown:false}} component={MapScreen}/>
       {/* <Stack.Screen name="SearchScreen" options = {{headerShown :false}} component={SearchScreen} /> */}
     </Stack.Navigator>
     </>
