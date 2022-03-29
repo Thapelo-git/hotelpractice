@@ -16,6 +16,7 @@ import moment from 'moment'
 const HistoryScreen = () => {
     const [searchtext,setSearchtext] = useState('');
     const [Booking,setBooking]=useState()
+    const [cancelled,setCancelled]=useState()
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
   const user = auth.currentUser.uid;
@@ -56,13 +57,31 @@ const HistoryScreen = () => {
                 const itemData = item.userid?
        
   (  item.userid)
-                :   ( '')
+                :   ( '') 
                 const textData = user;
                 return itemData.indexOf( textData)>-1;
 
             })
+            const text='Cancelled'
+            // if(text){
+            //   const Data = userinfor.filter(function(item){
+            //     const itemData = item.Status ? item.Status
+            //     :'';
+            //     const textData = text;
+            //     return itemData.indexOf( textData)>-1;
+
+            // })
+            // setCancelled(Data)
+            
+            // }
               const newData = userinfor.filter(function(item){
-                  const itemData = moment(moment().add(0, 'days')).isAfter(item.checkout)?
+                // return(
+                //   item.Status === text ||
+                //   moment(moment().add(0, 'days')).isAfter(item.checkout) 
+                
+                  
+                // )
+                  const itemData =  moment(moment().add(0, 'days')).isAfter(item.checkout)?
          
     (  item.checkout)
                   :   ( '')
@@ -73,7 +92,7 @@ const HistoryScreen = () => {
               setBooking(newData)
               setFilteredDataSource(newData);
              setMasterDataSource(newData);
-             console.log(newData)
+             
             }
           
              
@@ -81,8 +100,15 @@ const HistoryScreen = () => {
      })
      
   },[])
+  
   const handleDelete=(key)=>{
-    db.ref('Booking').child(key).remove()
+    Alert.alert('Confirm','Are you sure?',[
+      {text:'Yes',
+     onPress:()=>db.ref('Booking').child(key).remove(),
+    },
+    {text:'No'},
+    ]);
+    
 
     }
   const onClick=(key)=>{
@@ -140,13 +166,18 @@ const HistoryScreen = () => {
             {item.hotelname}
 
         </Text>
-      
+     
         </View>
           <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
             
-        <Text>{item.checkin} {item.checkout}</Text>
+          <Text>{item.checkin}  -  {item.checkout}</Text>
         </View>
-        <Text>{item.description}</Text>
+        {
+        item.description == 'Cancelled'?(
+          <Text style={{color:'red'}}>{item.description}</Text>
+        ):(<Text>{item.description}</Text>)
+      }
+        {/* <Text>{item.description}</Text> */}
      
             
         <Text>Price  {item.totPrice}</Text>

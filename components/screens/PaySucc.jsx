@@ -17,7 +17,7 @@ source={require('../onbording/animation2.json')} autoPlay loop/>
   
  </View>
  <TouchableOpacity style={{ marginTop:250,justifyContent:'center',alignItems:'center',borderRadius:10,
-        marginLeft:160,backgroundColor:'#4A1DD6',width:80,height:30}} onPress={()=>navigation.navigate('HomeTap')}>
+        marginLeft:130,backgroundColor:'#4A1DD6',width:120,height:50}} onPress={()=>navigation.navigate('HomeTap')}>
        <Text style={{color:'#fff'}}>OK</Text>
    </TouchableOpacity>
                 {/* <Button style={{width:100}}

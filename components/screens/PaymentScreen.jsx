@@ -142,7 +142,7 @@ const PaymentScreen = ({navigation,route}) => {
         //   "Payment Successfully"
         // )
         alert("Payment Successfully");
-        onComposeSms()
+        //onComposeSms()
         
       }
       else{

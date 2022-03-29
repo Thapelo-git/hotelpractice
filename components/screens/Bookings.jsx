@@ -1,7 +1,7 @@
 
 import React,{useState,useEffect,useRef} from 'react'
 import { StyleSheet, Text, View,FlatList,TextInput, Image, ScrollView ,
-  Animated, TouchableOpacity} from 'react-native'
+  Animated, TouchableOpacity,Alert} from 'react-native'
 import { SearchBar } from 'react-native-elements';
 import Hotels from '../onbording/Hotels.jsx'
 import NearHotels from '../onbording/NearHotels.jsx';
@@ -11,6 +11,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import { } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Cancellation from './Cancellation.jsx';
+import moment from 'moment';
 const Bookings = () => {
   const [animationValue,setAnimationValue]=useState(-1000)
   const showAnimation= useRef(new Animated.Value(animationValue)).current
@@ -67,7 +68,7 @@ const Bookings = () => {
        return itemData.indexOf( textData)>-1;
 
    })
-          console.log(userinfor,'ytrtdyrhtd')
+         
              const text='Pending'
              if(text){
               const newData = userinfor.filter(function(item){
@@ -80,7 +81,7 @@ const Bookings = () => {
               setBooking(newData)
               setFilteredDataSource(newData);
              setMasterDataSource(newData);
-             console.log(newData)
+             console.log(newData,'booooking')
             }
           }
           
@@ -92,16 +93,21 @@ const Bookings = () => {
     const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
    
-
+const day=moment(new Date()).format('YYYY/MM/DD')
     const updateBooking = (key, status) => {
-
-      db.ref('Booking').child(key).update({Status:status})
-      .then(()=>db.ref('BookEvent').once('value'))
-      .then(snapshot=>snapshot.val())
-      .catch(error => ({
-        errorCode: error.code,
-        errorMessage: error.message
-      }));
+      Alert.alert('Confirm','your booking will be cancelled?',[
+        {text:'Yes',
+       onPress:()=>db.ref('Booking').child(key).update({Status:status,description:status,checkout:day})
+       .then(()=>db.ref('BookEvent').once('value'))
+       .then(snapshot=>snapshot.val())
+       .catch(error => ({
+         errorCode: error.code,
+         errorMessage: error.message
+       })),
+      },
+      {text:'No'},
+      ]);
+      
    
       
     };
@@ -162,7 +168,7 @@ const Bookings = () => {
           <Text>Price  {item.totPrice}</Text>
           <View style={{flexDirection:'row',alignItems:'flex-end',justifyContent:'flex-end'}}>
           <TouchableOpacity style={{height:30,width:70,justifyContent:'center',
-          alignItems:'center',}}  onPress={()=>updateBooking(item.key,'Cancelled')}>
+          alignItems:'center',}}  onPress={()=>updateBooking(item.key,'Cancelled',item.checkout)}>
           <Text style={{color:'red'}}>Cancel</Text>
           </TouchableOpacity>
           </View>

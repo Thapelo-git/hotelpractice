@@ -16,6 +16,8 @@ const HomeScreen = ({navigation}) => {
     const [images,setImage]=useState('')
     const [url,setUrl]=useState('')
     const [Hotels,setAddHotels]=useState([])
+    const [filteredNear, setFilteredNear] = useState([]);
+  const [masterNear, setMasterNear] = useState([]);
     const user = auth.currentUser.uid;
     useEffect(()=>{
         db.ref('/hotels').on('value',snap=>{
@@ -51,19 +53,19 @@ const HomeScreen = ({navigation}) => {
         setEmail(snap.val().email)
           })
 
-          const text='Polokwane'
+          const text='Polokwane 15 bicard'
           if(text){
            const newData = Hotels.filter(function(item){
                const itemData = item.location ? item.location
                :'';
-               const textData = text;
-               return itemData.indexOf( textData)>-1;
+              // const textData = text;
+               return itemData.indexOf(text)>-1;
 
            })
         
            setFilteredNear(newData);
            setMasterNear(newData);
-          console.log(newData)
+         
          }
         //   db.ref('/Booking/').on('value',snap=>{
           
@@ -89,12 +91,11 @@ const HomeScreen = ({navigation}) => {
         //         })
         
       },[])
-      
+      console.log(Hotels,'polokwane')
       const [searchtext,setSearchtext] = useState('');
       const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-  const [filteredNear, setFilteredNear] = useState([]);
-  const [masterNear, setMasterNear] = useState([]);
+  
 
       const searchFilterFunction =(text)=>{
         if(text){
@@ -202,12 +203,12 @@ opacity: 0.7,width:'90%',height:55,
             />
         <View style={styles.header}>
             <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-            {/* <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
+            <TouchableOpacity onPress={()=>navigation.navigate('EditProfile',{
                  email:email,name:name,phonenumber:phonenumber
             })}>
                 <Image source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
                 style={{height:50,width:50,borderRadius:25}}/>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
                 <Text style={{fontSize:18,fontWeight:'bold',marginLeft:10,
             marginTop:18}}>Welcome </Text>
             <Text style={{fontSize:18,marginLeft:10,

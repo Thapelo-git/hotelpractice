@@ -43,7 +43,8 @@ opacity: 0.7,width:30,
     headerContainer:{
       top:10,
       flexDirection:'row',justifyContent:'space-between',
-      alignContent:'center'
+      alignContent:'center',
+      height:60,
       
   
     },
