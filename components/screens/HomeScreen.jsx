@@ -261,7 +261,7 @@ opacity: 0.7,width:'90%',height:55,
             horizontal 
              showsHorizontalScrollIndicator={false}
             contentContainerStyle={{paddingLeft:20,}}
-            data={filteredNear}
+            data={filteredDataSource}
             renderItem={({item,id})=><CardNear Hotels={item} index={id}/>}
             />
             </View>
