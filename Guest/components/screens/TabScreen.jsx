@@ -10,24 +10,24 @@ import Bookings from './Bookings';
 import ProfileScreen from './ProfileScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HotelDetails from './HotelDetails';
 import GalleryScreen from './GalleryScreen';
 import SearchScreen from './SearchScreen';
 const Tab = createMaterialBottomTabNavigator();
-const Stack = createNativeStackNavigator();
-function combineHotel(){
-  return (
+// const Stack = createNativeStackNavigator();
+// function combineHotel(){
+//   return (
     
     
-    <Stack.Navigator
-    >
-    <Stack.Screen name="HomeScreen" options = {{headerShown :false}} component={HomeScreen} />
-      <Stack.Screen name="Hotel Details" options = {{headerShown :false}} component={HotelDetails} />
-      <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
-    </Stack.Navigator>
+    // <Stack.Navigator
+    // >
+    // <Stack.Screen name="HomeScreen" options = {{headerShown :false}} component={HomeScreen} />
+    //   <Stack.Screen name="Hotel Details" options = {{headerShown :false}} component={HotelDetails} />
+    //   <Stack.Screen name="GalleryScreen" options = {{headerShown :false}} component={GalleryScreen} />
+    // </Stack.Navigator>
   
-  )}
+//   )}
     
 const TabScreen = () => {
     return (

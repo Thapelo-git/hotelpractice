@@ -22,7 +22,7 @@ import { AuthProvider } from './components/contexts/AuthContext';
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <AuthProvider>
+    <AuthProvider> 
     <NavigationContainer>
     <Stack.Navigator initialRouteName="">
       {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
