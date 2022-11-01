@@ -5,7 +5,6 @@ import Flatbutton from '../styles/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const ForgetPassword = () => {
     // const {resetPassword}=useAuth()
     // const [email,setEmail]=useState();
@@ -24,8 +23,7 @@ const ForgetPassword = () => {
             <Text style={{fontWeight:'bold',fontSize:30,
         color:'#4A1DD6'}}>Forget Password</Text>
         <Text >Please Enter your email to reset your Password</Text>
-         <KeyboardAwareScrollView
-             style={styles.innerContainer}>
+         
         <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='email'
@@ -46,7 +44,7 @@ const ForgetPassword = () => {
         <View style={{marginTop:40,alignItems:'center',justifyContent:'center'}}>
             <Flatbutton text='CONTINUE' onPress={()=>reset()} />
            </View>
-            </KeyboardAwareScrollView>
+            
         </View>
         </ImageBackground>
         </SafeAreaView>
